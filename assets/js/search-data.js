@@ -32,14 +32,14 @@ ninja.data = [{
           },
         },{id: "nav-repositories",
           title: "repositories",
-          description: "Edit the `_data/repositories.yml` and change the `github_users` and `github_repos` lists to include your own GitHub profile and repositories.",
+          description: "",
           section: "Navigation",
           handler: () => {
             window.location.href = "/repositories/";
           },
         },{id: "nav-cv",
           title: "cv",
-          description: "This is a description of the page. You can modify it in &#39;_pages/cv.md&#39;. You can also change or remove the top pdf download button.",
+          description: "",
           section: "Navigation",
           handler: () => {
             window.location.href = "/cv/";
@@ -440,16 +440,19 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/the_godfather/";
-            },},{id: "news-a-simple-inline-announcement",
-          title: 'A simple inline announcement.',
-          description: "",
-          section: "News",},{id: "news-a-long-announcement-with-details",
-          title: 'A long announcement with details',
+            },},{id: "news-thrilled-to-share-our-latest-publication-in-the-journal-𝘚𝘤𝘪𝘦𝘯𝘤𝘦",
+          title: 'Thrilled to share our latest publication, in the journal 𝘚𝘤𝘪𝘦𝘯𝘤𝘦.',
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/announcement_2/";
-            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
-          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
+            },},{id: "news-congratulations-to-dr-benjamin-van-mooy-my-postdoctoral-supervisor-and-mentor-on-his-award-of-a-prestigious-macarthur-fellowship-informally-known-as-the-genius-grant",
+          title: 'Congratulations to Dr. Benjamin Van Mooy, my postdoctoral supervisor and mentor on his...',
+          description: "",
+          section: "News",},{id: "news-take-a-look-at-my-case-study-metabolomics-data-processing-pipeline-including-modern-methods-such-as-deep-learning-based-peak-filtering-neatms-and-gpu-accelerated-spectral-database-searching-simms",
+          title: 'Take a look at my case study metabolomics data processing pipeline including modern...',
+          description: "",
+          section: "News",},{id: "news-i-am-delighted-to-announce-i-have-joined-the-proteomics-amp-amp-metabolomics-team-at-the-european-bioinformatics-institute-embl-ebi-as-a-scientific-database-curator",
+          title: 'I am delighted to announce I have joined the Proteomics &amp;amp;amp; Metabolomics team...',
           description: "",
           section: "News",},{id: "projects-project-1",
           title: 'project 1',
@@ -501,35 +504,49 @@ ninja.data = [{
         title: 'email',
         section: 'Socials',
         handler: () => {
-          window.open("mailto:%79%6F%75@%65%78%61%6D%70%6C%65.%63%6F%6D", "_blank");
+          window.open("mailto:%77%65%62-%65%6E%71@%68%75%6E%74%65%72.%70%68%64", "_blank");
         },
       },{
-        id: 'social-inspire',
-        title: 'Inspire HEP',
+        id: 'social-github',
+        title: 'GitHub',
         section: 'Socials',
         handler: () => {
-          window.open("https://inspirehep.net/authors/1010907", "_blank");
+          window.open("https://github.com/jonathan-hunter", "_blank");
         },
       },{
-        id: 'social-rss',
-        title: 'RSS Feed',
+        id: 'social-gitlab',
+        title: 'GitLab',
         section: 'Socials',
         handler: () => {
-          window.open("/feed.xml", "_blank");
+          window.open("https://gitlab.com/jonathan-hunter", "_blank");
+        },
+      },{
+        id: 'social-kaggle',
+        title: 'Kaggle',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.kaggle.com/jonathanehunter", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/jonathan-hunter-a75540a3", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0000-0003-3830-1055", "_blank");
         },
       },{
         id: 'social-scholar',
         title: 'Google Scholar',
         section: 'Socials',
         handler: () => {
-          window.open("https://scholar.google.com/citations?user=qc6CJjYAAAAJ", "_blank");
-        },
-      },{
-        id: 'social-custom_social',
-        title: 'Custom_social',
-        section: 'Socials',
-        handler: () => {
-          window.open("https://www.alberteinstein.com/", "_blank");
+          window.open("https://scholar.google.com/citations?user=qIGWQdwAAAAJ", "_blank");
         },
       },{
       id: 'light-theme',
