@@ -472,20 +472,6 @@ ninja.data = [{
           window.open("https://github.com/jonathan-hunter", "_blank");
         },
       },{
-        id: 'social-gitlab',
-        title: 'GitLab',
-        section: 'Socials',
-        handler: () => {
-          window.open("https://gitlab.com/jonathan-hunter", "_blank");
-        },
-      },{
-        id: 'social-kaggle',
-        title: 'Kaggle',
-        section: 'Socials',
-        handler: () => {
-          window.open("https://www.kaggle.com/jonathanehunter", "_blank");
-        },
-      },{
         id: 'social-linkedin',
         title: 'LinkedIn',
         section: 'Socials',
