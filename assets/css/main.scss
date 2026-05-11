@@ -37,3 +37,8 @@
 @use "font-awesome/brands";
 @use "font-awesome/solid";
 @use "font-awesome/regular";
+
+// User-owned overrides (keep last so they win over theme styles).
+// See _sass/_custom.scss and _sass/_mass-spectrum-styles.scss.
+@use "custom";
+@use "mass-spectrum-styles";

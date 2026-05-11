@@ -1,9 +1,23 @@
-"AJP":
-  url: https://aapt.scitation.org/journal/ajp
-  color: "#00369f"
+"Science":
+  url: https://www.science.org/journal/science
+  color: "#ca2015"
 
-"PhysRev":
-  url: https://journals.aps.org/
+"Nat. Microbiol.":
+  url: https://www.nature.com/nmicrobiol/
+  color: "#7c51a1"
 
-"Vision":
-  color: "#009f36"
+"Environ. Sci. Technol.":
+  url: https://pubs.acs.org/journal/esthag
+  color: "#538936"
+
+"Appl. Environ. Micro.":
+  url: https://journals.asm.org/journal/aem
+  color: "#c9442d"
+
+"Front. Mar. Sci.":
+  url: https://www.frontiersin.org/journals/marine-science
+  color: "#ffc426"
+
+"Ph. D. Thesis":
+  url: https://www.southampton.ac.uk/
+  color: "#002e3b"

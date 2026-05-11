@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2016-01-15 07:59:00-0400
+date: 2025-02-28 12:00:00-0000
 inline: true
 related_posts: false
 ---
 
-A simple inline announcement with Markdown emoji! :sparkles: :smile:
+Take a look at my case study <a href="https://github.com/jonathan-hunter/Metabolomics-Pipeline">metabolomics data processing pipeline</a> including modern methods such as deep learning based peak filtering (NeatMS) and GPU accelerated spectral database searching (SimMS).

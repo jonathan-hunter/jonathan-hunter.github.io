@@ -1,0 +1,40 @@
+@use "variables" as v;
+
+// Mass Spectrum Background Styles
+// The element lives at the top of the about layout. We break it out of the
+// Bootstrap `.container` so it spans the full window width, and let the canvas
+// fill that area. The spectrum data is rendered inside a centred zone by the
+// accompanying JS (assets/js/mass-spectrum-background.js); outside that zone
+// only the baseline line is drawn so it extends to the viewport edges.
+
+// Expose the SCSS max-content-width as a CSS custom property so the JS can
+// read it and size the spectrum data zone relative to the page's text column.
+:root {
+  --max-content-width: #{v.$max-content-width};
+}
+
+#mass-spectrum-background {
+  // Break out of the parent `.container` and stretch edge-to-edge.
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  height: 300px;
+  overflow: hidden;
+
+  // Match the page background so the dark slab disappears in light mode.
+  background: var(--global-bg-color);
+
+  canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+// Smaller height for narrow viewports
+@media (max-width: 768px) {
+  #mass-spectrum-background {
+    height: 200px;
+  }
+}

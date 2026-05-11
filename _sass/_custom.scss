@@ -1,0 +1,122 @@
+// User-owned style overrides — keep all customizations here so theme files
+// can be updated cleanly from upstream al-folio without merge conflicts.
+//
+// Imported once from assets/css/main.scss (last, so these win over theme styles).
+
+// Make profile picture smaller.
+.profile img {
+  max-width: 200px;
+  height: auto;
+  border: none;
+  box-shadow: none !important; // Disable drop shadow/outline
+}
+
+// Center align profile on mobile
+@media (max-width: 575px) {
+  .profile {
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center;
+  }
+}
+
+// Highlight individual link-table cells on hover. Scoped to .link-table so
+// the effect doesn't leak into the news table or any markdown-rendered tables.
+table.link-table td {
+  transition: background-color 0.2s ease;
+  border-radius: 8px;
+}
+
+table.link-table td:hover {
+  background-color: var(--global-hover-color, rgba(127, 127, 127, 0.1));
+}
+
+// Stack link-table cells vertically when viewport is too narrow for the 2x2
+// image grid. Only applies to .link-table — leaves news/CV tables alone.
+@media (max-width: 700px) {
+  table.link-table tr {
+    display: flex;
+    flex-direction: column;
+  }
+
+  table.link-table td {
+    display: block !important;
+    width: 100% !important;
+    padding: 15px 0 !important;
+    margin: 0 !important;
+  }
+
+  table.link-table td:hover {
+    background-color: var(--global-hover-color, rgba(127, 127, 127, 0.1));
+  }
+}
+
+// Make social icons smaller.
+.social .contact-icons {
+  font-size: 1.75rem;
+  a {
+    img {
+      width: 1.7rem;
+      height: 1.7rem;
+      margin-bottom: 0.5rem;
+    }
+
+    svg {
+      width: 1.7rem;
+      height: 1.7rem;
+      margin-bottom: 0.5rem;
+
+      image {
+        width: 1.7rem;
+        height: 1.7rem;
+      }
+    }
+  }
+}
+
+// Match footer background to current theme background (works in light + dark).
+footer.sticky-bottom {
+  background-color: var(--global-bg-color);
+}
+
+// Remove grey line below header/navbar
+.navbar {
+  border-bottom: none !important;
+}
+
+// GitHub OpenGraph repo preview cards at the bottom of /repositories/. Each
+// card is GitHub's social-preview image (~1280×640) so cap the width and let
+// them wrap on narrow viewports.
+.repo-og-cards {
+  gap: 1rem;
+  margin-top: 1.5rem;
+
+  a {
+    flex: 0 1 480px;
+    max-width: 100%;
+    display: block;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid var(--global-divider-color);
+    transition: transform 0.2s ease;
+  }
+
+  a:hover img {
+    transform: translateY(-2px);
+  }
+}
+
+// Tone the OG cards' bright-white background down in dark mode so they sit
+// less jarringly on the dark page. Avoids inverting logo colours.
+// Same treatment applied to the GitHub summary stats SVG at the top of the
+// repositories page (white-card-on-dark-page problem).
+html[data-theme="dark"] .repo-og-cards img,
+html[data-theme="dark"] .github-summary-stats {
+  filter: brightness(0.85) contrast(1.05);
+  opacity: 0.92;
+}

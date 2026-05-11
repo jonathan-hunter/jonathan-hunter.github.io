@@ -2,20 +2,20 @@
 layout: page
 permalink: /repositories/
 title: repositories
-description: Edit the `_data/repositories.yml` and change the `github_users` and `github_repos` lists to include your own GitHub profile and repositories.
+description:
 nav: true
 nav_order: 4
 ---
 
 {% if site.data.repositories.github_users %}
 
-## GitHub users
-
-<div class="repositories d-flex flex-wrap flex-md-row flex-column justify-content-between align-items-center">
+<!-- <div class="repositories d-flex flex-wrap flex-md-row flex-column justify-content-between align-items-center">
   {% for user in site.data.repositories.github_users %}
     {% include repository/repo_user.liquid username=user %}
   {% endfor %}
-</div>
+</div> -->
+
+<img class="github-summary-stats" src="https://raw.githubusercontent.com/jonathan-hunter/jonathan-hunter/main/profile/stats.svg" alt="GitHub Stats" />
 
 ---
 
@@ -37,11 +37,18 @@ nav_order: 4
 
 {% if site.data.repositories.github_repos %}
 
-## GitHub Repositories
-
 <div class="repositories d-flex flex-wrap flex-md-row flex-column justify-content-between align-items-center">
   {% for repo in site.data.repositories.github_repos %}
     {% include repository/repo.liquid repository=repo %}
   {% endfor %}
 </div>
 {% endif %}
+
+<div class="repo-og-cards d-flex flex-wrap justify-content-start align-items-center">
+  <a href="https://github.com/jonathan-hunter/Metabolomics-Pipeline" target="_blank" rel="noopener noreferrer">
+    <img src="https://opengraph.githubassets.com/1/jonathan-hunter/Metabolomics-Pipeline" alt="jonathan-hunter/Metabolomics-Pipeline">
+  </a>
+  <a href="https://github.com/HUPO-PSI/psi-ms-CV" target="_blank" rel="noopener noreferrer">
+    <img src="https://opengraph.githubassets.com/1/HUPO-PSI/psi-ms-CV" alt="HUPO-PSI/psi-ms-CV">
+  </a>
+</div>

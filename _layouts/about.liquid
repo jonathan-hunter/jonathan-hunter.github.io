@@ -1,6 +1,15 @@
 ---
 layout: default
 ---
+<!-- Mass-spectrum animated banner. All assets are user-owned:
+     - _sass/_mass-spectrum-styles.scss (imported from assets/css/main.scss)
+     - assets/js/mass-spectrum-background.js
+     Placed above the page title so it sits below the navbar/link toolbar. -->
+<div id="mass-spectrum-background" data-max-height="33.333" data-min-height="8.333">
+  <canvas id="mass-spectrum-canvas"></canvas>
+</div>
+<script defer src="{{ '/assets/js/mass-spectrum-background.js' | relative_url }}"></script>
+
 <div class="post">
   <header class="post-header">
     <h1 class="post-title">

@@ -12,15 +12,44 @@
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
       "packages": "build-essential,imagemagick,inotify-tools,jupyter-nbconvert,procps,ruby-full,zlib1g-dev"
     },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    },
     "ghcr.io/devcontainers-extra/features/prettier:1.0.2": {}
   },
+
+  // Install Claude Code CLI + Playwright browsers, then fetch the plugins
+  // listed below from the anthropics/claude-plugins-official marketplace.
+  // Plugin names are positional args to the inline bash script so they
+  // read line-by-line like the vscode extensions array.
+  "postCreateCommand": [
+    "bash",
+    "-c",
+    "set -e; npm install -g @anthropic-ai/claude-code @playwright/test; npx --yes playwright install --with-deps chromium firefox webkit; (claude plugin marketplace add anthropics/claude-plugins-official --scope user || true); for p in \"$@\"; do claude plugin install \"$p@claude-plugins-official\" --scope user && claude plugin enable \"$p@claude-plugins-official\" --scope user || true; done",
+    "claude-plugins",
+    "frontend-design",
+    "code-simplifier",
+    "github",
+    "playwright",
+    "superpowers",
+    "code-review",
+    "feature-dev",
+    "claude-md-management",
+    "context7"
+  ],
 
   // Optionally: run jekyll serve automatically on container entering using the Docker entrypoint
   "postAttachCommand": "./bin/entry_point.sh",
 
   "customizations": {
     "vscode": {
-      "extensions": ["esbenp.prettier-vscode", "sissel.shopify-liquid", "yzhang.markdown-all-in-one"],
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "sissel.shopify-liquid",
+        "yzhang.markdown-all-in-one",
+        "anthropic.claude-code",
+        "ms-playwright.playwright"
+      ],
       "settings": {
         // use prettier code formatter as default formatter
         "editor.defaultFormatter": "esbenp.prettier-vscode",
