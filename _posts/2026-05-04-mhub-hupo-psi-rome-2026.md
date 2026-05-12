@@ -1,9 +1,9 @@
 ---
 layout: distill
-title: "International data exchange and data representation standards for metabolomics"
-description: Digital poster presented at the HUPO-PSI Spring Meeting, Rome (4–8 May 2026). MetabolomicsHub's contributions to a Common Data Model and to PSI-MS-CV.
-tags: metabolomics open-data standards hupo-psi metabolomicshub metabolights fair 
-date: 2026-05-04
+title: "HUPO-PSI Spring Meeting, Rome"
+description: 5–8<sup>th</sup> May 2026, Thoughts, Run-tourism, & MetabolomicsHub Poster
+tags: metabolomics open-data standards hupo-psi metabolomicshub metabolights fair poster
+date: 2026-05-12
 featured: false
 
 authors:
@@ -13,11 +13,10 @@ authors:
       name: EMBL-EBI
 
 toc:
-  - name: Overview
-  - name: 01 — Title and authors
-  - name: 02 — Standardising open data practices
-  - name: 03 — Common Data Model (MHD) and ontologies
-  - name: 04 — PSI-MS-CV contributions and conclusions
+  - name: Title, Authors & Summary
+  - name: Introduction & Central Search Portal
+  - name: Common Data Model & Chemical Identifiers
+  - name: Contributions to PSI-MS-CV & Conclusions
   - name: Full poster
 
 _styles: >
@@ -55,15 +54,28 @@ _styles: >
   }
 ---
 
-## Overview
+Last week, I attended the <a href="https://www.psidev.info">HUPO-PSI</a> Spring Workshop at the National Research Council of Italy (CNR) in Rome. 
 
-This post embeds the digital poster I co-authored and presented at the **HUPO-PSI Spring Meeting** in Rome (4–8 May 2026). It covers MetabolomicsHub's contributions to the field's data exchange and representation standards — a Common Data Model rooted in authoritative ontologies, and additions to the PSI-MS controlled vocabulary.
+It was a pleasure to meet colleagues including Eric Deutsch and Joshua Klein that I have worked with extensively online through my contributions
+to the <a href="https://www.ebi.ac.uk/ols4/ontologies/ms">PSI-MS Controlled Vocabulary</a>.
 
-Each section below contains a single poster page rendered live from the source HTML. Use the **Expand** link under each panel to open that page full-size in a new tab; the **Full poster** link at the bottom of this post opens all four pages stacked.
+The main auditorium, Sala Marconi, had a striking wrap-around mural reflecting Italian science. To me, this evoked thoughts of the Scientific Revolution and Age of Enlightenment and was an inspiring environment for discussion.
+
+{% include figure.liquid path="assets/img/posts/2026-hupo-psi/Marconi_2.jpg" caption="Sala Marconi at CNR Italy, Image Source - <a href=\"https://www.cnr.it/\">https://www.cnr.it/</a>" %}
+
+Another key focus, personally, were the <a href="https://www.psidev.info/mztab-specifications">mzTab-M</a> working group sessions, led by Nils Hoffmann & Philippine Louail. mzTab-M is an open data standard for the sharing of mass spectrometric metabolimics results, with much potential to streamline the data processing to open data repository workflow for researchers. I hope to continue to become more familiar with mzTab-M and contribute to this project in the future, alongside my EMBL-EBI Metabolomics colleague Ozgur Yurekten, who is already involved.
+
+I gave a presentation in the 'Metabolomics Education' session, giving a brief introduction on MetaboLights study content and submission - rooted in the underlying ISA-Tab data model. This served as a prelude to Ozgur's hands-on workshop on 'mzTab-M to ISA-Tab to MetaboLights' study submission.
+
+I also presented the below four page digital poster on the MetabolomicsHub, and was encouraged by the interest and discussion from the other attendees.
+
+Last but not least, I snuck off Wednesday night to have a gentle run around Rome exploring many of the tourist hotspots:
+{% include figure.liquid path="assets/img/posts/2026-hupo-psi/IMG_0862.jpeg" caption="Rome tourism run, Wednesday night!" %}
+
 
 ---
 
-## 01 — Title and authors {#01-title-and-authors}
+## Title, Authors & Summary {#title-authors-summary}
 
 <div class="poster-page-iframe">
   <iframe src="{{ '/assets/html/mhub-hupo-psi-2026/index.html#p1' | relative_url }}" loading="lazy" title="Poster page 1: Title and authors"></iframe>
@@ -72,11 +84,9 @@ Each section below contains a single poster page rendered live from the source H
   <a href="{{ '/assets/html/mhub-hupo-psi-2026/index.html#p1' | relative_url }}" target="_blank" rel="noopener noreferrer">Expand ↗</a>
 </div>
 
-The opening page introduces the work and lists the international author team across EMBL-EBI (UK), UCSD (US), Chan Zuckerberg Biohub (US) and Forschungszentrum Jülich (DE).
-
 ---
 
-## 02 — Standardising open data practices {#02-standardising-open-data-practices}
+## Introduction & Central Search Portal {#introduction-central-search-portal}
 
 <div class="poster-page-iframe">
   <iframe src="{{ '/assets/html/mhub-hupo-psi-2026/index.html#p2' | relative_url }}" loading="lazy" title="Poster page 2: Introduction and data flow"></iframe>
@@ -85,11 +95,9 @@ The opening page introduces the work and lists the international author team acr
   <a href="{{ '/assets/html/mhub-hupo-psi-2026/index.html#p2' | relative_url }}" target="_blank" rel="noopener noreferrer">Expand ↗</a>
 </div>
 
-How MetabolomicsHub harmonises submissions from MetaboLights, Workbench, GNPS/MassIVE and Metabolomics Workbench into a single discovery surface — including the Central Search Portal with unified search, visual highlights, and an open API.
-
 ---
 
-## 03 — Common Data Model (MHD) and ontologies {#03-common-data-model-mhd-and-ontologies}
+## Common Data Model & Chemical Identifiers {#common-data-model-chemical-identifiers}
 
 <div class="poster-page-iframe">
   <iframe src="{{ '/assets/html/mhub-hupo-psi-2026/index.html#p3' | relative_url }}" loading="lazy" title="Poster page 3: Portal CDM and ontology"></iframe>
@@ -98,11 +106,9 @@ How MetabolomicsHub harmonises submissions from MetaboLights, Workbench, GNPS/Ma
   <a href="{{ '/assets/html/mhub-hupo-psi-2026/index.html#p3' | relative_url }}" target="_blank" rel="noopener noreferrer">Expand ↗</a>
 </div>
 
-The graph-based Common Data Model (MHD) underlying the portal, with chemical-identifier enrichment from ChEBI and other authoritative sources making cross-repository study comparison tractable.
-
 ---
 
-## 04 — PSI-MS-CV contributions and conclusions {#04-psi-ms-cv-contributions-and-conclusions}
+## Contributions to PSI-MS-CV & Conclusions {#contributions-to-psi-ms-cv-conclusions}
 
 <div class="poster-page-iframe">
   <iframe src="{{ '/assets/html/mhub-hupo-psi-2026/index.html#p4' | relative_url }}" loading="lazy" title="Poster page 4: PSI-MS-CV contributions and conclusions"></iframe>
@@ -110,8 +116,6 @@ The graph-based Common Data Model (MHD) underlying the portal, with chemical-ide
 <div class="poster-page-controls">
   <a href="{{ '/assets/html/mhub-hupo-psi-2026/index.html#p4' | relative_url }}" target="_blank" rel="noopener noreferrer">Expand ↗</a>
 </div>
-
-The contributions back to the HUPO-PSI mass-spectrometry controlled vocabulary that this work has motivated, and a summary of where the project goes next.
 
 ---
 
