@@ -1,0 +1,1602 @@
+<!DOCTYPE html><html lang="en" data-lt-installed="true"><head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta charset="utf-8">
+<title>MetabolomicsHub — HUPO-PSI Spring Meeting Rome 2026 Digital Poster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Serif:ital,wght@1,400&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#12ADB5;
+    --green:#7CB342;
+    --lime:#9AB743;
+    --orange:#F5A623;
+    --pink:#CF719D;
+    --blue:#7795CD;
+    --purple:#8E7BB8;
+    --gray:#707372;
+    --dark:#1F2D3A;
+    --ink:#0E1A24;
+    --paper:#FFFFFF;
+    --soft:#F4F7F8;
+    --soft2:#EEF3F4;
+    --rule:#D9E0E2;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#1a1d22;font-family:'IBM Plex Sans',sans-serif;color:var(--ink)}
+  .stage{display:flex;flex-direction:column;align-items:center;gap:32px;padding:40px 16px 80px}
+  .page{
+    width:1080px;height:1830px;
+    background:var(--paper);
+    position:relative;overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,.45),0 4px 10px rgba(0,0,0,.2);
+  }
+  /* ============ shared chrome ============ */
+  .hubline{
+    position:absolute;left:0;right:0;top:0;height:6px;
+    background:linear-gradient(90deg,
+      var(--teal) 0%, var(--teal) 16.66%,
+      var(--green) 16.66%, var(--green) 33.33%,
+      var(--lime) 33.33%, var(--lime) 50%,
+      var(--orange) 50%, var(--orange) 66.66%,
+      var(--pink) 66.66%, var(--pink) 83.33%,
+      var(--blue) 83.33%, var(--blue) 100%);
+  }
+  .hubline.bottom{top:auto;bottom:0}
+  .footer{
+    position:absolute;left:60px;right:60px;bottom:24px;
+    display:flex;align-items:center;justify-content:space-between;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--gray);
+    letter-spacing:.04em;
+  }
+  .footer .pg{font-weight:500;color:var(--dark)}
+  .footer .meta{display:flex;gap:24px;align-items:center}
+  .footer .credit{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    display:inline-flex;align-items:center;gap:8px;
+    color:var(--gray);font-weight:500;letter-spacing:.04em;
+    text-transform:uppercase;font-size:10px;white-space:nowrap;
+  }
+  .footer .credit img{height:14px;width:auto;display:block;opacity:.85}
+  .footer img.logo-mhub{height:22px}
+  .footer img.logo-ebi{height:22px;opacity:.8}
+  .corner-mark{
+    position:absolute;left:60px;top:38px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:.18em;color:var(--gray);text-transform:uppercase;
+  }
+  .corner-mark b{color:var(--teal);font-weight:600}
+  .p1 .corner-mark{color:rgba(255,255,255,.78)}
+  .p1 .corner-mark b{color:#FFE15E}
+
+  /* ============ PAGE 1 — title ============ */
+  .p1{
+    background:
+      radial-gradient(60% 50% at 18% 90%, rgba(143,123,184,.12), transparent 60%),
+      radial-gradient(70% 50% at 90% 10%, rgba(18,173,181,.10), transparent 60%),
+      var(--paper);
+  }
+  .p1 .hero{
+    position:absolute;left:0;right:0;top:0;height:920px;
+    background:
+      radial-gradient(120% 80% at 100% 100%, rgba(124,179,66,.55), transparent 65%),
+      linear-gradient(135deg,#0E8A92 0%, #12ADB5 35%, #2BB89A 65%, #7CB342 100%);
+    color:#fff;
+    overflow:hidden;
+  }
+  .p1 .hex{
+    position:absolute;inset:0;opacity:.18;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,.6) 1px, transparent 1.5px);
+    background-size:14px 14px;
+    mask-image:radial-gradient(80% 60% at 50% 60%, #000 30%, transparent 80%);
+  }
+  .p1 .hero svg.lines{position:absolute;inset:0;width:100%;height:100%;opacity:.25}
+  .p1 .hero-inner{
+    position:relative;z-index:2;
+    padding:120px 80px 0;
+    height:100%;display:flex;flex-direction:column;
+  }
+  .p1 .conf-tag{
+    display:inline-flex;align-items:center;gap:14px;
+    align-self:flex-start;
+    padding:10px 18px;border:1px solid rgba(255,255,255,.55);
+    border-radius:999px;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+    background:rgba(255,255,255,.08);backdrop-filter:blur(4px);
+  }
+  .conf-tag .dot{width:8px;height:8px;border-radius:50%;background:#FFE15E;box-shadow:0 0 0 4px rgba(255,225,94,.25)}
+  .p1 .logo-row{
+    margin-top:40px;display:flex;align-items:center;gap:24px;
+  }
+  .p1 .logo-row .qr-quick{
+    position:absolute;top:44px;right:60px;z-index:5;
+    display:flex;align-items:center;
+    padding:6px;border:1px solid rgba(255,255,255,.35);border-radius:10px;
+    background:#fff;box-shadow:0 6px 24px rgba(0,0,0,.18);
+  }
+  .p1 .logo-row .qr-quick img{
+    height:126px;width:126px;display:block;border-radius:4px;
+    filter:none;
+  }
+  .p1 .logo-row .qr-quick .qr-cap{
+    display:flex;flex-direction:column;gap:4px;line-height:1;
+  }
+  .p1 .logo-row .qr-quick .qr-cap .lbl{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--gray);font-weight:500;
+  }
+  .p1 .logo-row .qr-quick .qr-cap .url{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink);font-weight:600;
+  }
+  .p1 .logo-row .qr-quick .qr-cap .hint{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray);
+  }
+  .p1 .logo-row > img{height:88px;filter:drop-shadow(0 6px 24px rgba(0,0,0,.18))}
+  .p1 .logo-row .wordmark{
+    font-weight:300;font-size:56px;letter-spacing:-.02em;line-height:1;
+  }
+  .p1 .logo-row .wordmark b{font-weight:700}
+  .p1 h1{
+    font-weight:300;font-size:82px;line-height:1.02;letter-spacing:-.025em;
+    margin:32px 0 0;max-width:920px;
+    text-wrap:balance;
+  }
+  .p1 h1 em{font-style:normal;font-weight:600;color:#FFE15E;}
+  .p1 .lede{
+    margin-top:24px;font-size:21px;line-height:1.5;font-weight:300;
+    color:rgba(255,255,255,.92);
+    text-align:justify;text-wrap:pretty;hyphens:auto;
+  }
+  .p1 .lede b{font-weight:600;color:#fff}
+  .authors{
+    position:absolute;left:80px;right:80px;top:960px;
+  }
+  .authors .label{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gray);margin-bottom:14px;
+  }
+  .authors .names{
+    font-size:14px;line-height:1.6;color:var(--gray);font-weight:400;
+    text-wrap:pretty;text-align:justify;
+  }
+  .authors .names sup{color:var(--teal);font-weight:600;font-size:.75em;margin:0 .12em}
+  .authors .names .pres{
+    font-size:19px;color:var(--dark);font-weight:600;
+    background:linear-gradient(180deg,transparent 60%, rgba(245,166,35,.35) 60%);
+    padding:0 2px;
+  }
+  .affil{
+    margin-top:16px;font-size:12.5px;line-height:1.25;color:var(--gray);
+    columns:2;column-gap:40px;
+  }
+  .affil p{break-inside:avoid;margin:0}
+  .affil sup{color:var(--teal);font-weight:700}
+  .stat-strip{
+    position:absolute;left:80px;right:80px;top:1210px;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .stat-group{
+    position:relative;
+    border:1px dashed var(--rule);border-radius:16px;
+    padding:18px 12px 10px;
+    background:linear-gradient(180deg,rgba(244,247,248,.55),rgba(244,247,248,0));
+  }
+  .stat-group .group-lbl{
+    position:absolute;top:-9px;left:18px;
+    display:inline-flex;align-items:center;gap:8px;
+    padding:2px 10px;background:var(--bg,#fff);
+    font-family:'IBM Plex Mono',monospace;font-size:10px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--gray);
+    border:1px solid var(--rule);border-radius:999px;
+  }
+  .stat-group .group-lbl .group-dot{
+    width:7px;height:7px;border-radius:50%;background:var(--teal);
+  }
+  .stat-group .group-lbl b{font-weight:700;color:var(--dark);letter-spacing:0;margin-left:-.18em}
+  .stat-group.g-open .group-dot{background:var(--blue)}
+  .stat-group.g-mhd .group-dot{background:var(--orange)}
+  .stat-group .group-row{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  }
+  .stat{
+    border:1px solid var(--rule);border-radius:14px;padding:14px 18px 14px;
+    background:#fff;position:relative;
+  }
+  .stat .ico{
+    position:absolute;top:12px;right:12px;width:30px;height:30px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:8px;background:#F4F7F8;color:var(--teal);
+  }
+  .stat .ico svg{width:16px;height:16px;display:block}
+  .stat.tone-orange .ico{color:var(--orange);background:#FFF1E8}
+  .stat.tone-blue .ico{color:var(--blue);background:#EAF1F8}
+  .stat.tone-green .ico{color:var(--green);background:#EEF7E5}
+  .stat.tone-pink .ico{color:var(--pink);background:#FBEDF3}
+  .stat.tone-teal .ico{color:var(--teal);background:#E5F4F5}
+  .stat .num{
+    font-size:32px;font-weight:600;letter-spacing:-.02em;
+    background:linear-gradient(135deg,var(--teal),var(--green));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    line-height:1;
+  }
+  .stat .num.num-text{font-size:20px;letter-spacing:-.01em;line-height:1.1}
+  .stat .lbl{
+    margin-top:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--gray);
+  }
+  .stat .sub{margin-top:4px;font-size:11.5px;color:var(--dark);line-height:1.35}
+  .repos{
+    position:absolute;left:80px;right:80px;top:1530px;
+  }
+  .ml-mark{
+    position:absolute;left:80px;right:80px;bottom:54px;
+    display:flex;align-items:center;gap:18px;
+    padding-top:18px;border-top:1px solid var(--rule);
+  }
+  .ml-mark img{height:46px}
+  .ml-mark img.ebi{height:34px;opacity:.85;margin-left:auto}
+  .ml-mark .txt{
+    display:flex;flex-direction:column;gap:2px;
+  }
+  .ml-mark .lbl{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--gray);
+  }
+  .ml-mark .url{font-size:14px;color:var(--dark);font-weight:500}
+  .ml-mark .url b{color:var(--teal)}
+  .repos .row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .repos .h{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--gray);margin-bottom:18px;
+  }
+  /* repos chips horizontal */
+  .chip{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:8px 14px;border-radius:999px;border:1px solid var(--rule);
+    background:#fff;font-size:14px;color:var(--dark);font-weight:500;
+  }
+  .chip .sw{width:9px;height:9px;border-radius:50%}
+  .chip .future{font-size:14px;color:var(--gray);font-weight:500;font-family:inherit;letter-spacing:0;text-transform:none}
+  /* Repository logos row */
+  /* Founding-repository logo+pill columns */
+  .repos .repo-row{
+    position:static;
+    display:flex;align-items:flex-end;gap:18px;flex-wrap:nowrap;margin-top:6px;
+    grid-template-columns:none;
+  }
+  .repos .repo-col{
+    display:flex;flex-direction:column;align-items:center;gap:14px;flex:0 0 auto;
+  }
+  .repos .repo-col.future-col{flex:1 1 auto;align-items:flex-end}
+  .repos .logo-cell{
+    height:60px;display:flex;align-items:center;justify-content:center;gap:14px;
+  }
+  .repos .logo-cell .lg{width:auto;display:block;object-fit:contain}
+  .repos .logo-cell .wm{
+    font-weight:300;font-size:22px;letter-spacing:-.015em;color:var(--dark);
+    line-height:1;white-space:nowrap;
+  }
+  .repos .logo-cell .wm b{font-weight:600;color:var(--teal)}
+  .repos .logo-cell .lg.ml{max-height:56px}
+  .repos .logo-cell .lg.wb{max-height:58px}
+  .repos .logo-cell .lg.gnps{max-height:42px}
+  .repos .logo-cell .lg.massive{max-height:46px}
+
+  /* ============ PAGE 2 — mission & model ============ */
+  .h-eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--teal);font-weight:500;
+  }
+  .h-section{
+    font-weight:600;font-size:42px;letter-spacing:-.02em;line-height:1.05;
+    color:var(--dark);margin:8px 0 0;
+  }
+  .h-rule{
+    width:60px;height:3px;background:var(--teal);margin:18px 0 22px;border-radius:2px;
+  }
+  .body-l{font-size:17px;line-height:1.55;color:#2a3744;text-wrap:pretty}
+  .body-l b{color:var(--green);font-weight:600}
+  .body-l em{color:var(--dark);font-style:italic}
+
+  .p2 .header,.p3 .header,.p4 .header{
+    padding:96px 80px 0;
+  }
+  .two-col{
+    margin-top:36px;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;
+    padding:0 80px;
+  }
+  .pull-quote{
+    border-left:4px solid var(--orange);
+    padding:14px 0 14px 22px;
+    margin:24px 0 0;
+    font-family:'IBM Plex Serif',serif;font-style:italic;
+    font-size:20px;line-height:1.45;color:var(--dark);
+  }
+  .pull-quote.pq-full{
+    margin:28px 80px 0;
+    padding:18px 26px;
+    font-size:22px;line-height:1.4;
+    border-left-width:5px;
+    text-wrap:pretty;
+  }
+  /* Data flow overview diagram (system) */
+  .data-flow{
+    margin:24px 80px 0;
+    border:1px solid var(--rule);border-radius:18px;
+    padding:18px 22px 18px;background:#fff;
+  }
+  .data-flow .ttl-bar{
+    display:flex;align-items:baseline;justify-content:space-between;
+    padding-bottom:12px;margin-bottom:14px;
+    border-bottom:1px solid var(--rule);
+  }
+  .data-flow .ttl-bar .lhs{display:flex;flex-direction:column;gap:2px}
+  .data-flow .ttl-bar .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--gray);font-weight:500;
+  }
+  .data-flow .ttl-bar h3{
+    margin:0;font-size:18px;font-weight:500;letter-spacing:-.012em;color:var(--dark);
+  }
+  .data-flow .ttl-bar h3 b{font-weight:700;color:var(--teal-d, #0E7378)}
+  .data-flow .ttl-bar .k{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--gray);
+  }
+  .data-flow-fig{margin:0;display:flex;flex-direction:column;gap:10px;align-items:center}
+  .data-flow-fig img{
+    width:100%;max-width:880px;height:auto;display:block;
+    border:1px solid var(--rule);border-radius:10px;background:#fafbfc;
+  }
+  .data-flow-fig figcaption{
+    font-size:13px;line-height:1.5;color:var(--gray);max-width:880px;
+    text-align:left;font-style:normal;
+  }
+
+  /* Common Data Model diagram (CDM I) */
+  .cdm{
+    margin:14px 80px 0;
+    border:1px solid var(--rule);border-radius:18px;
+    padding:24px 28px 26px;
+    background:#fff;
+    position:relative;
+  }
+  .cdm .ttl-bar{
+    display:flex;align-items:baseline;justify-content:space-between;
+    padding-bottom:14px;margin-bottom:18px;
+    border-bottom:1px solid var(--rule);
+  }
+  .cdm .ttl-bar .lhs{display:flex;align-items:baseline;gap:14px}
+  .cdm .ttl-bar .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--teal);font-weight:500;
+  }
+  .cdm .ttl-bar h3{
+    margin:0;font-weight:600;font-size:19px;letter-spacing:-.01em;color:var(--dark);
+  }
+  .cdm .ttl-bar h3 b{font-weight:700}
+  .cdm .ttl-bar .k{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--gray);
+  }
+  .cdm .canvas-wrap{
+    position:relative;height:790px;
+  }
+  .cdm .row-lbl{
+    position:absolute;left:0;width:130px;text-align:right;
+    line-height:1.25;
+  }
+  .cdm .row-lbl .lbl-eye{
+    display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--gray);
+    margin-bottom:4px;font-weight:500;
+  }
+  .cdm .row-lbl .lbl-num{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;
+    letter-spacing:.1em;color:var(--teal);font-weight:600;margin-right:6px;
+  }
+  .cdm .row-lbl .lbl-name{
+    font-size:14px;color:var(--dark);font-weight:500;letter-spacing:-.005em;
+  }
+  .cdm .row-note{
+    position:absolute;right:0;width:180px;
+    font-size:12px;color:#3b4a58;line-height:1.5;text-wrap:pretty;
+    z-index:3;
+  }
+  .cdm .row-note::before{
+    content:'';display:block;width:18px;height:1.5px;background:var(--teal);
+    margin-bottom:8px;opacity:.7;
+  }
+  .cdm .canvas{
+    position:absolute;left:150px;right:200px;top:0;bottom:0;
+  }
+
+  /* Source repos: chip-style cards with color dot */
+  .repo-row{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+    position:absolute;top:6px;left:0;right:0;
+  }
+  .repo-card{
+    background:#fff;border:1px solid var(--rule);border-radius:10px;
+    padding:11px 12px 10px;
+    display:flex;flex-direction:column;align-items:flex-start;gap:6px;
+    color:var(--dark);letter-spacing:-.005em;
+    line-height:1.2;min-width:0;
+  }
+  .repo-card .head{
+    display:flex;align-items:center;gap:8px;width:100%;
+  }
+  .repo-card .head::before{
+    content:'';width:8px;height:8px;border-radius:50%;flex:0 0 8px;
+  }
+  .repo-card.ml .head::before{background:var(--teal)}
+  .repo-card.mw .head::before{background:var(--green)}
+  .repo-card.gn .head::before{background:var(--orange)}
+  .repo-card .name{
+    font-size:13px;font-weight:600;flex:1;min-width:0;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .repo-card::before{display:none}
+  .repo-card .src{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--gray);font-weight:500;
+    padding:2px 7px;border:1px solid var(--rule);border-radius:4px;
+  }
+
+  /* Unified schema: pink-accent left bar, no full pink fill */
+  .cdm-box{
+    position:absolute;left:0;right:0;top:160px;
+    background:#fff;border:1px solid var(--rule);border-left:3px solid var(--blue);
+    border-radius:10px;padding:14px 18px 14px;
+  }
+  .cdm-box .ttl-row{
+    display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px;
+  }
+  .cdm-box .ttl{
+    font-weight:600;font-size:14.5px;color:var(--dark);letter-spacing:-.005em;
+  }
+  .cdm-box .meta{
+    font-family:'IBM Plex Mono',monospace;font-size:9.5px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:600;
+  }
+  .cdm-box .cv{
+    background:var(--soft);border:1px solid var(--rule);
+    border-radius:6px;padding:9px 12px;
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:1.7;
+    color:var(--dark);
+  }
+  .cdm-box .cv .h{
+    display:inline-block;font-family:'IBM Plex Sans',sans-serif;
+    font-weight:500;color:var(--gray);font-size:10px;letter-spacing:.16em;
+    text-transform:uppercase;margin-right:10px;
+  }
+  .cdm-box .cv .term{color:var(--dark)}
+  .cdm-box .cv .term + .term{margin-left:6px}
+  .cdm-box .cv .term .px{color:var(--teal);font-weight:600}
+  /* Graph schematic inside CDM box */
+  .cdm-box .stage{position:relative;height:280px;margin:6px 0 4px}
+  .cdm-box .ex-callout-row{
+    display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px;
+  }
+  .cdm-box .ex-callout{padding:8px 12px 9px}
+  .cdm-box .ex-callout .body{font-size:12px;line-height:1.3}
+  .cdm-box .ex-callout .body .key{font-size:10.5px}
+  .cdm-box .ex-callout .body .id{font-size:11.5px}
+  .cdm-box .stage svg.wires{
+    position:absolute;inset:0;width:100%;height:100%;
+    pointer-events:none;z-index:0;overflow:visible;
+  }
+  .cdm-box .stage svg.wires text{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    fill:var(--gray);letter-spacing:.04em;text-transform:lowercase;
+  }
+  .cdm-box .stage svg.wires text:not(.v-label){
+    transform-box:fill-box;transform-origin:center;
+    transform:scaleX(1.87);
+  }
+  .cdm-box .stage svg.wires text.v-label{
+    transform-box:fill-box;transform-origin:center;
+    transform:scaleY(2);
+  }
+  .cdm-box .stage svg.wires .edge{stroke:#C8D0D6;stroke-width:1.4;fill:none}
+  .cdm-box .stage svg.wires .edge.muted{stroke:#E5EAEC;stroke-dasharray:3 3}
+  .cdm-box .legend-row{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    margin-top:8px;padding-top:8px;border-top:1px solid var(--rule);
+    font-family:'IBM Plex Mono',monospace;font-size:10px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--gray);
+  }
+  .cdm-box .legend-row .keys{display:flex;gap:18px}
+  .cdm-box .legend-row .k{display:inline-flex;align-items:center;gap:7px}
+  .cdm-box .legend-row .k .sw{width:9px;height:9px;border-radius:50%}
+
+  /* Outputs tier: two artefacts produced by the model */
+  .outputs-row{
+    display:grid;grid-template-columns:max-content max-content;gap:18px;justify-content:center;
+    position:absolute;top:720px;left:0;right:0;
+  }
+  .out-card{
+    background:#fff;border:1px solid var(--rule);border-left:3px solid var(--green);
+    border-radius:8px;padding:9px 12px 10px;
+    display:flex;flex-direction:column;gap:3px;color:var(--dark);
+  }
+  .out-card .lbl{
+    font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--gray);font-weight:500;
+  }
+  .out-card .name{font-size:13px;font-weight:600;letter-spacing:-.005em}
+  .out-card .src{
+    font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--gray);font-weight:500;
+    align-self:flex-start;
+    padding:2px 7px;border:1px solid var(--rule);border-radius:4px;
+    margin-top:2px;
+  }
+
+  /* Validation box — encompassing JSON Schema + OLS4 API (with ontologies) */
+  .validation-box{
+    position:absolute;left:0;right:0;top:540px;
+    background:#fff;border:1px solid var(--rule);border-left:3px solid var(--blue);
+    border-radius:10px;padding:11px 14px 13px;
+  }
+  .validation-box .head-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:9.5px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:600;
+    margin-bottom:10px;
+  }
+  .validation-box .grid{
+    display:grid;grid-template-columns:1fr 2.4fr;gap:12px;align-items:stretch;
+  }
+  .validation-box .sub{
+    border:1px solid var(--rule);border-radius:8px;padding:9px 12px 10px;
+    background:#FBFCFD;
+  }
+  .validation-box .sub .head{
+    font-size:13px;font-weight:600;color:var(--dark);letter-spacing:-.005em;
+    margin-bottom:5px;
+  }
+  .validation-box .sub .desc{
+    font-size:11px;color:var(--gray);font-family:'IBM Plex Mono',monospace;
+    letter-spacing:.06em;text-transform:lowercase;line-height:1.35;
+  }
+  .validation-box .sub-ols .onto-inline{
+    display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;
+  }
+  .validation-box .sub-ols .onto-chip{
+    background:#fff;border:1px solid var(--rule);border-radius:6px;
+    padding:4px 10px;font-size:12px;font-weight:600;color:var(--dark);
+    letter-spacing:-.005em;display:inline-flex;align-items:center;gap:6px;
+  }
+  .validation-box .sub-ols .onto-chip::before{
+    content:'';width:6px;height:2px;border-radius:1px;background:var(--blue);
+  }
+
+  /* OLS4 validation: subtle pill with dashed border */
+  .ols-pill{
+    position:absolute;left:50%;top:575px;transform:translateX(-50%);
+    background:#fff;border:1px dashed var(--rule);border-radius:999px;
+    padding:6px 16px 6px 12px;font-size:12px;color:var(--dark);
+    display:inline-flex;align-items:center;gap:8px;
+    z-index:2;white-space:nowrap;font-weight:500;
+  }
+  .ols-pill::before{
+    content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);
+    box-shadow:0 0 0 4px rgba(18,173,181,.12);
+  }
+  .ols-pill b{color:var(--teal);font-weight:600;letter-spacing:.02em}
+
+  /* Authoritative ontologies: white chips with blue accent dot */
+  .onto-row{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:10px;
+    position:absolute;left:0;right:0;top:620px;
+  }
+  .onto-card{
+    background:#fff;border:1px solid var(--rule);border-radius:8px;
+    padding:11px 8px 12px;text-align:center;
+    font-size:13px;font-weight:600;color:var(--dark);letter-spacing:-.005em;
+    position:relative;
+  }
+  .onto-card::before{
+    content:'';display:block;width:18px;height:2px;border-radius:1px;
+    background:var(--blue);margin:0 auto 6px;
+  }
+
+  /* SVG wires: thin gray with subtle dasharrays */
+  .cdm svg.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+  .cdm svg.wires path.solid{stroke:#c0c8cc;stroke-width:1.2}
+  .cdm svg.wires path.dashed{stroke:#c0c8cc;stroke-width:1.2;stroke-dasharray:3 4}
+
+  /* Graph nodes (used inside .cdm-box .stage) */
+  .ex-node{
+    position:absolute;transform:translate(-50%,-50%);z-index:2;
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+  }
+  .ex-node .pill{
+    width:58px;height:58px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:600;color:#fff;letter-spacing:-.005em;
+    background:var(--teal);
+    box-shadow:0 2px 6px rgba(18,173,181,.20), inset 0 -2px 0 rgba(0,0,0,.06);
+    text-align:center;line-height:1.1;
+  }
+  .ex-node.muted .pill{
+    background:#fff;color:#B7BFC4;
+    border:1.5px dashed #D9E0E2;box-shadow:none;font-weight:500;
+  }
+  .ex-node.param .pill{
+    background:var(--orange);
+    box-shadow:0 2px 6px rgba(245,166,35,.24), inset 0 -2px 0 rgba(0,0,0,.06);
+  }
+  .ex-node.param.sm .pill{width:38px;height:38px;font-size:8.5px;line-height:1.05}
+  .ex-node .lbl{
+    font-family:'IBM Plex Mono',monospace;font-size:9.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--gray);
+    white-space:nowrap;font-weight:500;
+  }
+  .ex-node.muted .lbl{color:#B7BFC4}
+
+  .ex-callout{
+    background:#fff;border:1px solid var(--rule);border-radius:10px;
+    padding:9px 13px 10px;
+  }
+  .ex-callout.val{border:1.5px solid var(--orange)}
+  .ex-callout.type{border:1.5px solid var(--green)}
+  .ex-callout .head{
+    font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--gray);font-weight:500;
+    margin-bottom:6px;display:flex;align-items:center;gap:8px;
+  }
+  .ex-callout .head .dot{width:6px;height:6px;border-radius:50%}
+  .ex-callout.val .head .dot{background:var(--orange)}
+  .ex-callout.type .head .dot{background:var(--green)}
+  .ex-callout .body{font-size:13px;color:var(--dark);line-height:1.35}
+  .ex-callout .body .key{font-family:'IBM Plex Mono',monospace;color:var(--gray);font-size:11.5px}
+  .ex-callout .body .id{font-family:'IBM Plex Mono',monospace;color:var(--teal);font-weight:600;font-size:12px}
+  .ex-callout.type .body .id{color:var(--green)}
+  .ex-callout.val .body .id{color:var(--orange)}
+  .ex-callout .body .val{font-style:italic;color:var(--dark)}
+
+  /* ============ PAGE 3 — portal ============ */
+  .p3 .header{padding-top:80px}
+  .browser{
+    margin:20px 80px 0;
+    border:1px solid var(--rule);border-radius:14px;overflow:hidden;
+    background:#fff;
+    height:480px;display:flex;flex-direction:column;
+  }
+  .browser .bar{
+    display:flex;align-items:center;gap:8px;padding:11px 14px;
+    background:#F6F7F9;border-bottom:1px solid var(--rule);
+  }
+  .browser .bar .dot{width:11px;height:11px;border-radius:50%;background:#E0E3E7}
+  .browser .bar .url{
+    flex:1;margin-left:10px;background:#fff;border:1px solid var(--rule);
+    border-radius:8px;padding:6px 10px;font-family:'IBM Plex Mono',monospace;
+    font-size:12px;color:var(--gray);
+  }
+  .browser .bar .url b{color:var(--teal);font-weight:500}
+  .browser img{display:block;width:100%;flex:1;min-height:0;object-fit:cover;object-position:top}
+
+  /* Chemical Identifiers — two-row workflow (headers / values) */
+  .chem-row{
+    margin:14px 80px 0;
+    background:#fff;border:1px solid var(--rule);border-radius:14px;
+    padding:14px 12px;
+    display:flex;flex-direction:column;
+  }
+  .chem-headers, .chem-values{
+    display:grid;grid-template-columns:repeat(6,1fr);
+  }
+  .chem-headers{
+    margin-bottom:8px;
+  }
+  .chem-headers > *, .chem-values > *{
+    padding:0 12px;min-width:0;
+    border-left:1px dashed var(--rule);
+  }
+  .chem-headers > *:first-child, .chem-values > *:first-child{border-left:none}
+  .ch-h{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--gray);font-weight:500;
+    display:flex;align-items:center;gap:7px;
+  }
+  .ch-h .dot{width:7px;height:7px;border-radius:50%;flex:0 0 7px;background:var(--teal)}
+  .ch-h.tone-struct .dot,.ch-h.tone-name .dot{background:var(--dark)}
+  .ch-h.tone-ids .dot{background:var(--teal)}
+  .ch-h.tone-formula .dot{background:#8E7BB8}
+  .ch-h.tone-smiles .dot{background:var(--green)}
+  .ch-h.tone-inchi .dot{background:var(--blue)}
+  .ch-v{
+    min-height:110px;
+    font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:500;
+    color:var(--dark);line-height:1.35;letter-spacing:-.005em;
+    word-break:break-all;text-wrap:pretty;
+    display:flex;align-items:flex-start;
+  }
+  .ch-v.smaller{font-size:12px;line-height:1.45}
+  .ch-v.struct{align-items:stretch;padding:0 6px}
+  .ch-v.struct img{
+    width:100%;max-width:100%;height:auto;max-height:110px;
+    display:block;object-fit:contain;margin:auto;
+  }
+  .ch-v.ids{flex-direction:column}
+  .ch-v .ids-list{display:flex;flex-direction:column;gap:10px;width:100%}
+  .ch-v .id-row{display:flex;flex-direction:column;gap:3px}
+  .ch-v .id-row .ids-lbl{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--gray);font-weight:500;
+    display:flex;align-items:center;gap:6px;
+  }
+  .ch-v .id-row .ids-lbl .dot-mini{width:6px;height:6px;border-radius:50%;flex:0 0 6px}
+  .ch-v .id-row .ids-val{
+    margin-left:13px;
+    font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500;
+    color:var(--dark);letter-spacing:-.005em;word-break:break-all;
+  }
+
+  .feature-grid{
+    margin:14px 80px 0;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  }
+  .feat{
+    border:1px solid var(--rule);border-radius:12px;padding:12px 14px 12px;
+    background:#fff;position:relative;
+  }
+  .feat .num{
+    position:absolute;top:18px;right:20px;
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gray);
+    letter-spacing:.1em;
+  }
+  .feat .sw{width:24px;height:5px;border-radius:3px;margin-bottom:8px}
+  .feat h3{font-size:14.5px;margin:0 0 4px;font-weight:600;color:var(--dark);letter-spacing:-.01em;line-height:1.2}
+  .feat p{font-size:11.5px;line-height:1.45;color:#3b4a58;margin:0}
+
+  /* ============ PAGE 4 — impact ============ */
+  .impact{
+    margin:22px 80px 0;
+    background:linear-gradient(135deg,#0E8A92 0%, #12ADB5 50%, #2BB89A 100%);
+    border-radius:18px;color:#fff;padding:18px 32px;
+    position:relative;overflow:hidden;
+  }
+  .impact::after{
+    content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.18),transparent 60%);
+  }
+  .impact .h-eyebrow{color:rgba(255,255,255,.85)}
+  .impact h3{font-size:26px;font-weight:300;line-height:1.15;letter-spacing:-.02em;margin:6px 0 12px;max-width:920px}
+  .impact h3 b{font-weight:600}
+  .impact .grid3{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:18px;margin-top:18px;position:relative;z-index:2}
+  .impact .grid3 .it{
+    border-top:1px solid rgba(255,255,255,.4);padding-top:12px;
+  }
+  .impact .grid3 .it .k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#FFE15E;margin-bottom:8px}
+  .impact .grid3 .it .v{font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.95);font-weight:300}
+
+  .funders{
+    position:absolute;left:80px;right:80px;bottom:49px;
+    display:flex;align-items:center;gap:24px;
+    padding-top:18px;
+  }
+  .funders{align-items:center;gap:18px}
+  .funders .lbl{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--gray);font-weight:500;
+  }
+  .funders .lbl.with-rule{padding-left:22px;margin-left:8px;border-left:1px solid var(--rule)}
+  .funders .f-logo{display:block;width:auto;opacity:.92}
+  .funders .embl{height:42px;margin-right:22px}
+  .funders .czi-logo{height:48px}
+  .funders .right{margin-left:auto}
+
+  /* nav side rail (visual nav, like bookmarks) */
+  .rail{
+    position:absolute;right:20px;top:120px;display:flex;flex-direction:column;gap:6px;
+  }
+  .rail span{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;
+    color:var(--gray);writing-mode:vertical-rl;letter-spacing:.18em;text-transform:uppercase;
+  }
+  .rail .dot{width:8px;height:8px;border-radius:50%;background:var(--rule);align-self:center}
+  .rail .dot.on{background:var(--teal)}
+
+  /* Figure caption (under each major figure) */
+  .fig-cap{
+    margin:9px 80px 0;
+    display:flex;align-items:flex-start;gap:14px;
+    font-size:12.5px;line-height:1.5;color:#3b4a58;
+    text-wrap:pretty;
+  }
+  .fig-cap .num{
+    flex-shrink:0;
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:600;
+    padding-top:1px;
+  }
+  .fig-cap .body{flex:1}
+  .fig-cap .body b{color:var(--dark);font-weight:600}
+  .fig-cap.under-figure{margin-top:14px}
+  .fig-cap.full-bleed{margin-left:60px;margin-right:60px}
+
+  /* PSI-MS-CV figure (inlined chart) */
+  .psi-cv-figure{
+    margin:14px 80px 0;
+    border:1px solid var(--rule);border-radius:18px;
+    padding:24px 28px 26px;
+    background:#fff;position:relative;
+    --pcv-new:#12ADB5;
+    --pcv-pre:#CBD5D8;
+  }
+  .psi-cv-figure .pcv-wrap{padding:0}
+  .psi-cv-figure .pcv-axis-label{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--gray);font-weight:500;
+    text-align:right;padding-right:6px;margin-bottom:4px;margin-left:170px;
+  }
+  .psi-cv-figure .pcv-head{
+    display:flex;align-items:flex-start;justify-content:space-between;gap:40px;
+    padding-bottom:14px;border-bottom:1px solid var(--rule);margin-bottom:18px;
+  }
+  .psi-cv-figure .pcv-head .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--teal);font-weight:500;
+    margin-bottom:8px;display:block;
+  }
+  .psi-cv-figure .pcv-head h1{
+    margin:0;font-weight:600;font-size:22px;letter-spacing:-.015em;color:var(--dark);
+    line-height:1.2;text-wrap:pretty;
+  }
+  .psi-cv-figure .pcv-chart{
+    --label-w:170px;
+    --row-h:30px;
+    --gap:5px;
+  }
+  .psi-cv-figure .axis{
+    margin-left:var(--label-w);
+    position:relative;height:20px;
+    border-bottom:1px solid var(--rule);
+  }
+  .psi-cv-figure .axis .tick{
+    position:absolute;top:0;bottom:0;border-left:1px dashed #E6EBED;
+  }
+  .psi-cv-figure .axis .tick:first-child{border-left:1px solid var(--rule)}
+  .psi-cv-figure .axis .tlabel{
+    position:absolute;top:0;transform:translateX(-50%);
+    font-family:'IBM Plex Mono',monospace;font-size:10px;
+    color:var(--gray);letter-spacing:.06em;
+  }
+  .psi-cv-figure .row{
+    display:grid;grid-template-columns:var(--label-w) 1fr;
+    align-items:center;height:var(--row-h);margin-top:var(--gap);
+  }
+  .psi-cv-figure .row .name{
+    text-align:right;padding-right:18px;
+    font-size:13.5px;font-weight:500;color:var(--dark);letter-spacing:-.005em;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .psi-cv-figure .track{position:relative;height:100%}
+  .psi-cv-figure .track .gridline{
+    position:absolute;top:0;bottom:0;border-left:1px dashed #E6EBED;
+  }
+  .psi-cv-figure .track .gridline:first-child{border-left:1px solid var(--rule)}
+  .psi-cv-figure .bar{position:absolute;top:5px;bottom:5px;display:flex;align-items:stretch}
+  .psi-cv-figure .seg{
+    position:relative;display:flex;align-items:center;
+    color:#fff;font-family:'IBM Plex Mono',monospace;font-size:11px;
+    font-weight:500;letter-spacing:.04em;padding:0 8px;overflow:hidden;
+  }
+  .psi-cv-figure .seg.new{background:var(--pcv-new)}
+  .psi-cv-figure .seg.pre{background:var(--pcv-pre);color:var(--dark)}
+  .psi-cv-figure .seg.new.is-first{border-radius:3px 0 0 3px}
+  .psi-cv-figure .seg.pre.is-last{border-radius:0 3px 3px 0}
+  .psi-cv-figure .seg.only{border-radius:3px}
+  .psi-cv-figure .seg .tag{white-space:nowrap}
+  .psi-cv-figure .seg.tiny .tag{display:none}
+  .psi-cv-figure .row .total{
+    position:absolute;left:100%;margin-left:14px;top:50%;transform:translateY(-50%);
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gray);
+    letter-spacing:.06em;white-space:nowrap;
+  }
+  .psi-cv-figure .row .total b{color:var(--dark);font-weight:600}
+  .psi-cv-figure .track .count{
+    position:absolute;top:50%;transform:translate(10px,-50%);
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:.04em;white-space:nowrap;pointer-events:none;z-index:2;
+  }
+  .psi-cv-figure .track .count.inside{transform:translate(calc(-100% - 8px),-50%)}
+  .psi-cv-figure .track .count.inside b{color:#fff !important;font-weight:600}
+  .psi-cv-figure .track .count.count-new b{color:var(--teal);font-weight:600}
+  .psi-cv-figure .row.row--family.lc .track .count.count-new b{color:var(--green)}
+  .psi-cv-figure .row.row--family.gc .track .count.count-new b{color:var(--orange)}
+  .psi-cv-figure .row.row--meta.concepts .track .count.count-new b{color:var(--purple)}
+  .psi-cv-figure .row.row--meta.edits .track .count.count-new b{color:var(--purple)}
+  .psi-cv-figure .row.row--other .track .count.count-new b{color:#7FCED2}
+  .psi-cv-figure .row[data-row="finnigan"] .track .count{transform:translate(13px,-50%)}
+  .psi-cv-figure .row[data-row="leco"]     .track .count{transform:translate(5px,-50%)}
+  .psi-cv-figure .row[data-row="sciex"]    .track .count{transform:translate(13px,-50%)}
+  .psi-cv-figure .row[data-row="varian"]   .track .count{transform:translate(5px,-50%)}
+  .psi-cv-figure .sep{
+    margin-left:var(--label-w);margin-top:18px;padding-top:14px;
+    border-top:1px dashed var(--rule);position:relative;
+  }
+  .psi-cv-figure .sep .sep-lbl{
+    position:absolute;left:0;top:-8px;background:#fff;padding:0 10px 0 0;
+    font-family:'IBM Plex Mono',monospace;font-size:9.5px;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--gray);
+  }
+  .psi-cv-figure .sep.sep-edits{margin-top:24px}
+  .psi-cv-figure .row.row--family,
+  .psi-cv-figure .row.row--other,
+  .psi-cv-figure .row.row--meta{
+    height:var(--row-h);min-height:0;margin-top:var(--gap);
+  }
+  .psi-cv-figure .row.row--family{margin-top:6px}
+  .psi-cv-figure .row .name .vname{display:block}
+  .psi-cv-figure .row.row--family .name .vname,
+  .psi-cv-figure .row.row--meta .name .vname{
+    font-size:13.5px;font-weight:600;color:var(--ink);
+  }
+  .psi-cv-figure .row.row--family.lc .seg.new{background:var(--green)}
+  .psi-cv-figure .row.row--family.lc .seg.pre{background:#D5E0BF}
+  .psi-cv-figure .row.row--family.gc .seg.new{background:var(--orange)}
+  .psi-cv-figure .row.row--family.gc .seg.pre{background:#F5DDB1}
+  .psi-cv-figure .row.row--meta{margin-top:6px}
+  .psi-cv-figure .row.row--meta.concepts .seg.new{background:var(--purple)}
+  .psi-cv-figure .row.row--meta.edits .seg.new{
+    background:repeating-linear-gradient(45deg,var(--purple) 0 6px,#BFB1D6 6px 12px);
+    color:#fff;
+  }
+  .psi-cv-figure .row.row--meta.edits .bar-edit{outline:1.5px solid var(--purple);outline-offset:-1px;border-radius:3px}
+  .psi-cv-figure .row.row--other .name .vname{font-style:italic;color:var(--gray);font-weight:400}
+  .psi-cv-figure .row.row--other .seg.new{background:#7FCED2}
+
+</style>
+</head>
+<body>
+<div class="stage">
+
+<!-- ================= PAGE 1 ================= -->
+<section id="p1" class="page p1" data-screen-label="01 Title">
+  <div class="hero">
+    <div class="hex"></div>
+    <svg class="lines" viewBox="0 0 1080 920" preserveAspectRatio="none">
+      <g fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1">
+        <polygon points="120,180 180,150 240,180 240,240 180,270 120,240"/>
+        <polygon points="900,120 960,90 1020,120 1020,180 960,210 900,180"/>
+        <polygon points="820,720 880,690 940,720 940,780 880,810 820,780"/>
+        <polygon points="80,640 140,610 200,640 200,700 140,730 80,700"/>
+        <line x1="240" y1="210" x2="900" y2="150"/>
+        <line x1="200" y1="670" x2="820" y2="750"/>
+        <line x1="240" y1="240" x2="200" y2="640"/>
+        <line x1="940" y1="180" x2="880" y2="690"/>
+      </g>
+      <g fill="rgba(255,255,255,.45)">
+        <circle cx="240" cy="210" r="3"/><circle cx="900" cy="150" r="3"/>
+        <circle cx="200" cy="670" r="3"/><circle cx="880" cy="750" r="3"/>
+      </g>
+    </svg>
+    <div class="hero-inner">
+      <div class="conf-tag"><span class="dot"></span>HUPO-PSI Spring Meeting · Rome · 4–8 May 2026</div>
+      <div class="logo-row">
+        <img src="assets/MetabolomicsHub_logo.png" alt="MetabolomicsHub mark" style="width:150px;height:150px;margin-top:40px">
+        <div class="wordmark" style="font-size:80px;margin-top:40px">Metabolomics<b>Hub</b><span style="display:block;font-size:28px;font-weight:400;letter-spacing:0.04em;color:rgba(255,255,255,0.75);line-height:1.2;margin-top:0">metabolomicshub.org</span></div>
+        <a class="qr-quick" href="https://metabolomicshub.org" aria-label="Scan to visit metabolomicshub.org">
+          <img src="assets/qr-code.png" alt="QR code to metabolomicshub.org">
+        </a>
+      </div>
+      <h1 style="font-size:67px;margin-top:50px">International data exchange and<br><em>data representation standards</em><br>for metabolomics.</h1>
+      <p class="lede">Public metabolomics data are deposited across repositories with divergent metadata conventions, blocking cross-resource discovery, meta-analysis and AI-ready reuse.&nbsp;<b>MetabolomicsHub</b> is a new international consortium building a unified, FAIR-compliant framework for discovery, exchange and reuse of public metabolomics data — delivered through shared standards, a common data model and a centralised portal.</p>
+    </div>
+  </div>
+
+  <div class="authors">
+    <div class="label">Authors</div>
+    <div class="names">
+      <span class="pres">Jonathan E. Hunter</span><sup>1,†</sup>; Ozgur Yurekten<sup>1,†</sup>; Thomas Payne<sup>1</sup>; Naveen Raj Kookkal Polliapram<sup>1</sup>; Callum Martin<sup>1</sup>; Eoin Fahy<sup>2</sup>; Mano Maurya<sup>2</sup>; Srinivasan Ramachandran<sup>2</sup>; Brian C. DeFelice<sup>3</sup>; Carlos G. Gonzalez<sup>3</sup>; Joshua E. Elias<sup>3</sup>; Nils Hoffmann<sup>4</sup>; Yasin El Abiead<sup>5,6</sup>; Pieter C. Dorrestein<sup>5</sup>; Shankar Subramaniam<sup>2</sup>; Juan Antonio Vizcaíno<sup>1,†</sup>
+    </div>
+    <div class="affil">
+      <p><sup>1</sup>EMBL-EBI, Wellcome Genome Campus, Hinxton, UK</p>
+      <p><sup>2</sup>Bioengineering &amp; San Diego Supercomputer Center, UC San Diego, CA</p>
+      <p><sup>3</sup>CZ Biohub, San Francisco, CA</p>
+      <p><sup>†</sup>Attending the HUPO-PSI Spring Meeting, Rome 2026</p>
+      <p style="break-before:column"><sup>4</sup>Forschungszentrum Jülich GmbH, Bielefeld, Germany</p>
+      <p><sup>5</sup>Skaggs School of Pharmacy, UC San Diego, CA</p>
+      <p><sup>6</sup>BOKU University, Institute of Analytical Chemistry, Vienna, Austria</p>
+    </div>
+  </div>
+
+  <div class="stat-strip">
+    <div class="stat-group g-open">
+      <span class="group-lbl"><span class="group-dot"></span><span>Metabolomics<b style="margin-left:0">Hub</b></span></span>
+      <div class="group-row">
+        <div class="stat tone-teal">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span>
+          <div class="num" style="font-size:20px">6,500<span style="vertical-align:super">+</span></div>
+          <div class="lbl">Legacy Datasets</div>
+          <div class="sub">indexed across consortium</div>
+        </div>
+        <div class="stat tone-blue">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="M14.5 14.5L20 20"/></svg></span>
+          <div class="num num-text">Portal &amp; API</div>
+          <div class="lbl">Unified Discovery</div>
+          <div class="sub">central search &amp; filtering · cross-repository facets</div>
+        </div>
+        <div class="stat tone-blue">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg></span>
+          <div class="num num-text">Open standards</div>
+          <div class="lbl">Adoption</div>
+          <div class="sub">promote mzTab-M &amp; Universal Spectrum Identifiers (USIs)</div>
+        </div>
+        <div class="stat tone-green">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+          <div class="num num-text">Following</div>
+          <div class="lbl">Established models</div>
+          <div class="sub">ProteomeXchange · INSDC · wwPDB</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-group g-mhd">
+      <span class="group-lbl"><span class="group-dot"></span>Common Data Model <b>(MHD)</b></span>
+      <div class="group-row">
+        <div class="stat tone-orange">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5v14"/><path d="M7 5v14" stroke-width="1"/><path d="M9.5 5v14"/><path d="M12 5v14" stroke-width="1"/><path d="M14 5v14" stroke-width="2.4"/><path d="M16.5 5v14" stroke-width="1"/><path d="M19 5v14"/></svg></span>
+          <div class="num" style="font-size:20px">MHD<span style="color:var(--orange);font-weight:500">12345</span></div>
+          <div class="lbl">Accession space</div>
+          <div class="sub">global, persistent IDs</div>
+        </div>
+        <div class="stat tone-orange">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="6" cy="18" r="2.2"/><circle cx="18" cy="18" r="2.2"/><circle cx="12" cy="12" r="2.6"/><path d="M8 6.8l2.4 4M16 6.8l-2.4 4M8 17.2l2.4-4M16 17.2l-2.4-4"/></svg></span>
+          <div class="num num-text">MHD</div>
+          <div class="lbl">Common data model</div>
+          <div class="sub">JSON · graph-enabled · AI-ready · extensible</div>
+        </div>
+        <div class="stat tone-green">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><path d="M3.5 9.5h17"/><path d="M3.5 14.5h17"/><path d="M9.5 4.5v15"/><path d="M15 4.5v15"/></svg></span>
+          <div class="num num-text">Legacy + MHD</div>
+          <div class="lbl">Profiles</div>
+          <div class="sub">with validation rules</div>
+        </div>
+        <div class="stat tone-teal">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg></span>
+          <div class="num num-text">Ontology terms</div>
+          <div class="lbl">Validated</div>
+          <div class="sub">validated via the OLS4 API</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="repos">
+    <div class="h">Founding repositories · v0.1 launch June 2026</div>
+    <div class="repo-row">
+      <div class="repo-col">
+        <div class="logo-cell"><img src="assets/metabolights.png" alt="MetaboLights" class="lg ml"><span class="wm">Metabo<b>Lights</b></span></div>
+        <span class="chip"><span class="sw" style="background:var(--teal)"></span>MetaboLights · EMBL-EBI</span>
+      </div>
+      <div class="repo-col">
+        <div class="logo-cell"><img src="assets/workbench.png" alt="Metabolomics Workbench" class="lg wb"></div>
+        <span class="chip"><span class="sw" style="background:var(--green)"></span>Metabolomics Workbench · UCSD</span>
+      </div>
+      <div class="repo-col">
+        <div class="logo-cell"><img src="assets/gnps.png" alt="GNPS" class="lg gnps"><img src="assets/MassIVE_logo.png" alt="MassIVE" class="lg massive"></div>
+        <span class="chip"><span class="sw" style="background:var(--pink)"></span>GNPS / MassIVE · UCSD</span>
+      </div>
+      <div class="repo-col future-col">
+        <div class="logo-cell" aria-hidden="true"></div>
+        <span class="chip"><span class="sw" style="background:var(--rule)"></span><span class="future">+ future partners</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ml-mark">
+    <img src="assets/metabolights.png" alt="MetaboLights">
+    <div class="txt">
+      <span class="lbl">Coordinating repository</span>
+      <span class="url"><b>ebi.ac.uk/metabolights</b></span>
+    </div>
+    <img class="ebi" src="assets/EMBL-EBI_logo.png" alt="EMBL-EBI">
+  </div>
+
+  <div class="corner-mark"><b>METABOLOMICSHUB</b> · HUPO-PSI ROME 2026 · <b>1 / 4</b></div>
+  <div class="hubline bottom"></div>
+  <div class="footer">
+    <span class="pg">01 / 04 &nbsp;·&nbsp; Overview</span>
+    <span class="meta">metabolomicshub.org &nbsp;·&nbsp; ebi.ac.uk/metabolights &nbsp;·&nbsp; jhunter@ebi.ac.uk &nbsp;·&nbsp; hunter.phd</span>
+  </div>
+</section>
+
+<!-- ================= PAGE 2 ================= -->
+<section id="p2" class="page p2" data-screen-label="02 Introduction and Data Flow">
+  <div class="hubline"></div>
+  <div class="header">
+    <span class="h-eyebrow">Introduction</span>
+    <h2 class="h-section">Standardising open data practices<br>in metabolomics</h2>
+    <div class="h-rule"></div>
+  </div>
+
+  <div class="two-col">
+    <div class="body-l">
+      <p style="margin-top:0">Public metabolomics datasets are growing rapidly, yet remain fragmented across repositories with divergent metadata conventions. <b>MetabolomicsHub</b> is a new international consortium building a unified, <b>FAIR</b>-compliant (<em>Findable, Accessible, Interoperable, Reusable</em>) infrastructure for the discovery, exchange and reuse of public metabolomics data.</p>
+      <p style="margin-top:14px">Modelled on <em>ProteomeXchange</em> and the <em>INSDC</em>, the consortium brings together major repositories as a starting point, and partners with researchers, journals, funders and technology vendors.</p>
+      <p style="margin-top:14px">Funded by the <b>Chan Zuckerberg Initiative</b> as a 30-month programme (Dec 2024 – May 2027), MetabolomicsHub launches (GC/LC-)MS-first. Later releases will extend to NMR and MS imaging, with planned support for <b>Universal Spectrum Identifiers (USIs)</b> — per-spectrum traceability — and the <b>mzTab-M</b> reporting format.</p>
+    </div>
+    <div class="body-l">
+      <div style="border-left:3px solid var(--blue);padding:4px 0 4px 18px">
+        <ul style="margin:0;padding-left:18px">
+          <li style="margin-bottom:8px">Promote data deposition and reuse.</li>
+          <li style="margin-bottom:8px">Develop and promote open-source tools, software and open-standard data formats.</li>
+          <li style="margin-bottom:8px">Continuity of data hosting — underwritten by a formal Consortium Agreement with PX-style fail-over across partners.</li>
+          <li style="margin-bottom:8px">Open Data — no human-sensitive data.</li>
+          <li style="margin-bottom:8px">Open Repositories — no controlled access.</li>
+          <li>Open Framework — enable other resources to join in the future.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="header" style="padding-top:24px">
+    <span class="h-eyebrow">Central Portal</span>
+    <h2 class="h-section">Central Search Portal<span style="display:block;font-size:0.55em;font-weight:400;font-style:italic;color:var(--gray);margin-top:8px;line-height:1.3">Underpinned by a Common Data Model, in turn rooted in authoritative ontologies</span></h2>
+    <div class="h-rule"></div>
+    <p class="body-l" style="max-width:920px;text-align:justify">The Central Search Portal delivers cross-repository discovery across <b>6,500+ legacy public metabolomics datasets</b>, with all <b>post-release MS depositions</b> captured as fully-harmonised MHD profiles. Raw data, result files and MHD files remain hosted by the source repositories.</p>
+  </div>
+
+    <div class="browser">
+    <div class="bar">
+      <span class="dot" style="background:#FF5F57"></span>
+      <span class="dot" style="background:#FEBC2E"></span>
+      <span class="dot" style="background:#28C840"></span>
+      <div class="url">🔒 <b>https://metabolomicshub.org</b></div>
+    </div>
+    <img src="assets/portal-search.png" alt="MetabolomicsHub search portal — facet treemaps and dataset table">
+  </div>
+
+  <div class="fig-cap">
+    <span class="num">Fig&nbsp;1</span>
+    <span class="body"><b>MetabolomicsHub search portal.</b> Faceted search across harmonised public datasets with treemap previews.</span>
+  </div>
+
+  <div class="feature-grid">
+    <div class="feat">
+      <div class="num">01</div>
+      <div class="sw" style="background:var(--teal)"></div>
+      <h3>Unified search &amp; faceting</h3>
+      <p>Repository, organism, organism part, instrument, release year, disease, assay &amp; measurement type — with an advanced composer for AND/OR/NOT multi-clause queries.</p>
+    </div>
+    <div class="feat">
+      <div class="num">02</div>
+      <div class="sw" style="background:var(--green)"></div>
+      <h3>Visual highlights</h3>
+      <p>Treemap previews summarise the top organisms, organism parts and assay types for any query — faster scoping for meta-analyses.</p>
+    </div>
+    <div class="feat">
+      <div class="num">03</div>
+      <div class="sw" style="background:var(--orange)"></div>
+      <h3>Open API &amp; notifications</h3>
+      <p>Public Search API and dataset-announcement feed enable LLM-ready integration, automation and external indexing — every record downloadable as an MHD Common Data Model File (JSON).</p>
+    </div>
+  </div>
+
+<div class="hubline bottom"></div>
+  <div class="footer">
+    <span class="pg">02 / 04 &nbsp;·&nbsp; Introduction · Portal</span>
+    <span class="meta">metabolomicshub.org</span>
+  </div>
+</section>
+
+<!-- ================= PAGE 3 ================= -->
+<section id="p3" class="page p3" data-screen-label="03 Portal CDM and Ontology">
+  <div class="hubline"></div>
+
+  <div class="header">
+    <span class="h-eyebrow">Common Data Model</span>
+    <h2 class="h-section">Common Data Model (MHD)<span style="display:block;font-size:0.55em;font-weight:400;font-style:italic;color:var(--gray);margin-top:8px;line-height:1.3">Graph-based model for interoperable metabolomics study metadata</span></h2>
+    <div class="h-rule"></div>
+    <p class="body-l" style="max-width:920px;text-align:justify">The <b>MHD Common Data Model</b> is a versioned graph schema that represents a metabolomics study as typed nodes — <em>Subject, Sample, Study, Protocol, Assay</em> and other entities — linked by named relationships, with parameters bound to controlled-vocabulary values and types. Native <em>ISA-Tab</em> (MetaboLights); <em>mwTab</em> (Workbench); JSON (GNPS/MassIVE) study metadata are converted into two artefacts: an extensible <b>MHD Common Data Model File</b> (graph JSON) and a lighter-weight <b>MHD Announcement File</b>. Every controlled-vocabulary reference carries a <code style="font-family:'IBM Plex Mono',monospace;font-size:.92em">source/accession/name</code> triple, validated by JSON Schema and resolved via the OLS4 API.</p>
+  </div>
+
+  <div class="cdm">
+    <div class="canvas-wrap">
+      <div class="row-lbl" style="top:18px"><span class="lbl-name">Source<br>Repositories</span></div>
+      <div class="row-lbl" style="top:138px"><span class="lbl-name">MHD<br>Common<br>Data&nbsp;Model</span></div>
+      <div class="row-lbl" style="top:560px"><span class="lbl-name">Validation</span></div>
+      <div class="row-lbl" style="top:720px"><span class="lbl-name">Output<br>Artefacts</span></div>
+      <div class="row-note" style="top:18px">Native formats (e.g. <em>ISA-Tab</em>, <em>mwTab</em>) converted to the common data model.</div>
+      <div class="row-note" style="top:300px">Studies represented as a graph of typed nodes (Study, Sample, Protocol, Assay…) bound by named relationships, with parameters carrying both a <b>value</b> and an ontology-bound <b>type</b>.</div>
+      <div class="row-note" style="top:570px">Two-tier validation: <b>JSON Schema</b> for structure; the <b>OLS4 API</b> resolves every CV term against authoritative ontologies.</div>
+      <div class="row-note" style="top:730px">Each study yields two JSON artefacts: an <b>MHD Common Data Model File</b> and an <b>MHD Announcement File</b>.</div>
+      <div class="canvas">
+        <svg class="wires" viewBox="0 0 700 790" preserveAspectRatio="none">
+          <defs>
+            <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+              <path d="M0,0 L10,5 L0,10 z" fill="#c0c8cc"></path>
+            </marker>
+          </defs>
+          <g fill="none" marker-end="url(#arr2)">
+            <path class="solid" d="M117,52 C117,75 220,98 290,118"></path>
+            <path class="solid" d="M350,52 L350,118"></path>
+            <path class="solid" d="M583,52 C583,75 480,98 410,118"></path>
+            <path class="solid" d="M350,520 L350,540"></path>
+            <path class="solid" d="M223,670 L223,718"></path>
+            <path class="solid" d="M511,670 L511,718"></path>
+          </g>
+        </svg>
+        <div class="repo-row">
+          <div class="repo-card ml"><div class="head"><span class="name">MetaboLights</span></div><span class="src">ISA-Tab</span></div>
+          <div class="repo-card mw"><div class="head"><span class="name">Metabolomics WB</span></div><span class="src">mwTab</span></div>
+          <div class="repo-card gn"><div class="head"><span class="name">GNPS / MassIVE</span></div><span class="src">JSON</span></div>
+        </div>
+        <div class="cdm-box" style="top:120px;height:400px;padding-top:10px">
+          <span class="meta" style="position:absolute;top:9px;right:14px">MHD simplified graph schema</span>
+          <div class="stage" style="margin:0 0 4px">
+            <svg class="wires" viewBox="0 0 960 300" preserveAspectRatio="none">
+              <defs>
+                <marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#9aa6af"></path>
+                </marker>
+                <marker id="arr3m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#cdd4d8"></path>
+                </marker>
+              </defs>
+              <path class="edge muted" d="M119,111 L168,111" marker-end="url(#arr3m)"></path>
+              <path class="edge" d="M291,111 L351,111" marker-end="url(#arr3)"></path>
+              <path class="edge" d="M474,111 L533,111" marker-end="url(#arr3)"></path>
+              <path class="edge" d="M656,111 L706,111" marker-end="url(#arr3)"></path>
+              <path class="edge muted" d="M829,111 L860,111" marker-end="url(#arr3m)"></path>
+              <path class="edge" d="M595,188 L595,146" marker-end="url(#arr3)"></path>
+              <path class="edge" d="M560,248 C510,270 233,275 233,290 L233,311" marker-end="url(#arr3)"></path>
+              <path class="edge" d="M630,248 C680,270 727,275 727,290 L727,311" marker-end="url(#arr3)"></path>
+              <g>
+                <text x="321" y="73" text-anchor="middle">used-in</text>
+                <text x="503" y="73" text-anchor="middle">has-protocol</text>
+                <text x="681" y="73" text-anchor="middle">used-in</text>
+                <text x="638" y="173" text-anchor="start">used-in</text>
+                <text x="325" y="262" text-anchor="middle">has-instance</text>
+                <text x="765" y="262" text-anchor="middle">has-type</text>
+              </g>
+            </svg>
+            <div class="ex-node muted" style="left:6%;top:37%"><div class="pill">subject</div></div>
+            <div class="ex-node" style="left:24%;top:37%"><div class="pill">sample</div></div>
+            <div class="ex-node" style="left:43%;top:37%"><div class="pill">study</div></div>
+            <div class="ex-node" style="left:62%;top:37%"><div class="pill">protocol</div></div>
+            <div class="ex-node" style="left:80%;top:37%"><div class="pill">assay</div></div>
+            <div class="ex-node muted" style="left:96%;top:37%"><div class="pill">…</div></div>
+            <div class="ex-node param" style="left:62%;top:73%">
+              <div class="pill">parameter<br>definition</div>
+            </div>
+          </div>
+          <div class="ex-callout-row">
+            <div class="ex-callout val">
+              <div class="head"><span class="dot"></span>parameter-value</div>
+              <div class="body">
+                <span class="key">value =</span>
+                <span class="id">MS:1001911</span>
+                &nbsp;<span class="val">"Q&nbsp;Exactive"</span>
+              </div>
+            </div>
+            <div class="ex-callout type">
+              <div class="head"><span class="dot"></span>parameter-type</div>
+              <div class="body">
+                <span class="key">type =</span>
+                <span class="id">MSIO:0000171</span><br>
+                <span class="val">"mass spectrometry instrument"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="outputs-row">
+          <div class="out-card"><span class="name">MHD Common Data Model File</span><span class="src">.mhd.json</span></div>
+          <div class="out-card"><span class="name">MHD Announcement File</span><span class="src">.announcement.json</span></div>
+        </div>
+        <div class="validation-box">
+          <div class="head-tag">Validation</div>
+          <div class="grid">
+            <div class="sub sub-json">
+              <div class="head">JSON Schema</div>
+              <div class="desc">structure&nbsp;&amp;<br>type validation</div>
+            </div>
+            <div class="sub sub-ols">
+              <div class="head">OLS4 API</div>
+              <div class="desc" style="margin-bottom:6px">CV term validation</div>
+              <div class="onto-inline">
+                <span class="onto-chip">PSI-MS</span>
+                <span class="onto-chip">EDAM</span>
+                <span class="onto-chip">ChEBI</span>
+                <span class="onto-chip">EFO</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fig-cap">
+    <span class="num">Fig&nbsp;2</span>
+    <span class="body"><b>MetabolomicsHub data flow and MHD Common Data Model.</b> Each study yields an <b>MHD Common Data Model File</b> carrying the full graph-structured metadata that powers cross-repository search and meta-analyses, and an <b>MHD Announcement File</b> that registers the dataset with the central portal.</span>
+  </div>
+
+  <div style="padding:22px 80px 0">
+    <span class="h-eyebrow">Automated metadata harmonisation &amp; improvement</span>
+    <h3 style="margin:6px 0 8px;font-size:19px;font-weight:600;letter-spacing:-.015em;color:var(--dark)">Chemical Identifier Enrichment</h3>
+    <p class="body-l" style="margin:0;max-width:920px;text-align:justify">As part of the MetabolomicsHub infrastructure, an automatic pipeline for the enrichment of compound identifiers, descriptors &amp; database cross-referencing is in development. The pipeline ingests the compound metadata provided in the source repository and fills missing values based on lookups from various online resources, with <b>ChEBI</b> identifiers and standardised <b>RefMet</b> name and identifier as key outputs.</p>
+  </div>
+
+  <div class="chem-row">
+    <div class="chem-headers">
+      <div class="ch-h tone-struct"><span class="dot"></span>2D structure</div>
+      <div class="ch-h tone-name"><span class="dot"></span>Trivial name</div>
+      <div class="ch-h tone-ids"><span class="dot"></span>Identifiers</div>
+      <div class="ch-h tone-formula"><span class="dot"></span>Molecular formula</div>
+      <div class="ch-h tone-smiles"><span class="dot"></span>SMILES</div>
+      <div class="ch-h tone-inchi"><span class="dot"></span>InChIKey</div>
+    </div>
+    <div class="chem-values">
+      <div class="ch-v struct"><img src="assets/caffeine-structure.png" alt="Caffeine 2D structure"></div>
+      <div class="ch-v">caffeine</div>
+      <div class="ch-v ids">
+        <div class="ids-list">
+          <div class="id-row"><span class="ids-lbl"><span class="dot-mini" style="background:#0E8A92"></span>ChEBI</span><span class="ids-val">CHEBI:27732</span></div>
+          <div class="id-row"><span class="ids-lbl"><span class="dot-mini" style="background:var(--green)"></span>RefMet</span><span class="ids-val">RM0032992</span></div>
+          <div class="id-row"><span class="ids-lbl"><span class="dot-mini" style="background:var(--orange)"></span>PubChem</span><span class="ids-val">CID 2519</span></div>
+        </div>
+      </div>
+      <div class="ch-v">C₈H₁₀N₄O₂</div>
+      <div class="ch-v smaller">CN1C=NC2=C1C(=O)N(C(=O)N2C)C</div>
+      <div class="ch-v smaller">RYYVLZVUVIJVGH-<br>UHFFFAOYSA-N</div>
+    </div>
+  </div>
+
+  <div class="fig-cap">
+    <span class="num">Fig&nbsp;3</span>
+    <span class="body"><b>Chemical identifier enrichment — caffeine worked example.</b> Provenance of each value is traceable and the lookup order and output value selection are highly configurable and modular to support careful optimisation prior to release.</span>
+  </div>
+
+  <div class="hubline bottom"></div>
+  <div class="footer">
+    <span class="pg">03 / 04 &nbsp;·&nbsp; Common Data Model · Ontology · Chemical Identifiers</span>
+    <span class="meta">metabolomicshub.org</span>
+  </div>
+</section>
+
+<!-- ================= PAGE 4 ================= -->
+<section id="p4" class="page p4" data-screen-label="04 PSI-MS-CV Compound and Conclusions">
+  <div class="hubline"></div>
+
+  <div class="header">
+    <span class="h-eyebrow">Ontology contribution</span>
+    <h2 class="h-section">Contributions to PSI-MS-CV</h2>
+    <div class="h-rule"></div>
+    <p class="body-l" style="max-width:920px;text-align:justify">Cross-repository metadata reconciliation led to an expansion of the <b>PSI-MS Controlled Vocabulary (PSI-MS-CV)</b>: chromatography hardware was not previously included (beyond a handful of placeholders), and non-US-vendor mass spectrometers were under-represented. Gaps were identified from cross-repository mapping, drafted with <b>AI-assisted</b> definition generation (iterative web search and summarisation), edited into the OBO file via Python, and submitted as GitHub pull requests.</p>
+    <p class="body-l" style="max-width:920px;margin-top:12px;text-align:justify">We have contributed <b>+220 new instrument terms</b> (118 MS/GC-MS; 83 LC; 19 GC, Fig.&nbsp;4) plus supporting hierarchies, with a further <b>10 terms</b> added or under review at <em>EDAM</em>, <em>ChEBI</em> and <em>CHEMINF</em>. Enriched terms feed back upstream, so every downstream consumer — mzML, ProteoWizard, OpenMS, MZmine, XCMS, MassBank, etc. — benefits from a single shared vocabulary.</p>
+  </div>
+
+  <!-- PSI-MS-CV vendor bar chart figure (inlined) -->
+  <div class="psi-cv-figure">
+    <div class="pcv-wrap">
+      <div class="pcv-axis-label">No. of terms added / edited</div>
+      <div class="pcv-chart" id="pcv-chart-ms"></div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    const msData = [
+      { vendor:'Thermo',           pre:77, new:10 },
+      { vendor:'Bruker',           pre:62, new:24 },
+      { vendor:'Agilent',          pre:45, new:33 },
+      { vendor:'Waters',           pre:56, new:9  },
+      { vendor:'Shimadzu',         pre:17, new:31 },
+      { vendor:'Thermo Finnigan',  pre:16, new:1, slug:'finnigan' },
+      { vendor:'LECO',             pre:7,  new:3, slug:'leco' },
+      { vendor:'SCIEX',            pre:6,  new:1, slug:'sciex' },
+      { vendor:'Varian',           pre:3,  new:2, slug:'varian' },
+      { vendor:'Other (4 vendors)',pre:0,  new:4, kind:'other' },
+    ];
+    const familyData = [
+      { vendor:'LC systems', pre:8, new:83, kind:'family', tag:'lc' },
+      { vendor:'GC systems', pre:0, new:19, kind:'family', tag:'gc' },
+    ];
+    const ontologyWorkData = [
+      { vendor:'Supporting concepts', pre:0, new:51, kind:'meta', tag:'concepts' },
+    ];
+    const editData = [
+      { vendor:'Term edits & fixes', pre:0, new:100, kind:'meta', tag:'edits', edit:true },
+    ];
+
+    function render(elId, data, summaryData, metaData, editData, axisMax, ticks){
+      const chart = document.getElementById(elId);
+      const axis = document.createElement('div');
+      axis.className = 'axis';
+      ticks.forEach(t=>{
+        const tk = document.createElement('div');
+        tk.className = 'tick';
+        tk.style.left = (t/axisMax*100)+'%';
+        axis.appendChild(tk);
+        const lab = document.createElement('div');
+        lab.className = 'tlabel';
+        lab.textContent = t;
+        lab.style.left = (t/axisMax*100)+'%';
+        axis.appendChild(lab);
+      });
+      chart.appendChild(axis);
+
+      function buildRow(d){
+        const total = d.pre + d.new;
+        const row = document.createElement('div');
+        row.className = 'row' + (d.kind ? ' row--'+d.kind : '') + (d.tag ? ' '+d.tag : '');
+        if(d.slug) row.setAttribute('data-row', d.slug);
+        const name = document.createElement('div');
+        name.className = 'name';
+        name.textContent = d.vendor;
+        row.appendChild(name);
+        const track = document.createElement('div');
+        track.className = 'track';
+        ticks.forEach(t=>{
+          const g = document.createElement('div');
+          g.className = 'gridline';
+          g.style.left = (t/axisMax*100)+'%';
+          track.appendChild(g);
+        });
+        const bar = document.createElement('div');
+        bar.className = 'bar' + (d.edit ? ' bar-edit' : '');
+        bar.style.left = '0%';
+        bar.style.width = (total/axisMax*100)+'%';
+        if(d.new>0){
+          const seg = document.createElement('div');
+          seg.className = 'seg new is-first' + (d.pre===0 ? ' only' : '');
+          seg.style.width = (d.new/total*100)+'%';
+          bar.appendChild(seg);
+          const newOfAxis = (d.new / axisMax) * 100;
+          const inside = newOfAxis >= 5;
+          const newLbl = document.createElement('div');
+          newLbl.className = 'count count-new' + (inside ? ' inside' : '');
+          newLbl.style.left = (d.new/axisMax*100)+'%';
+          newLbl.innerHTML = '<b>'+(d.edit?'~':'+')+d.new+'</b>';
+          track.appendChild(newLbl);
+        }
+        if(d.pre>0){
+          const preSeg = document.createElement('div');
+          preSeg.className = 'seg pre is-last' + (d.new===0 ? ' only' : '');
+          preSeg.style.width = (d.pre/total*100)+'%';
+          bar.appendChild(preSeg);
+        }
+        if(d.pre>0){
+          const tot = document.createElement('div');
+          tot.className = 'total';
+          tot.innerHTML = '<b>'+total+'</b>';
+          bar.appendChild(tot);
+        }
+        track.appendChild(bar);
+        row.appendChild(track);
+        return row;
+      }
+
+      const msHeader = document.createElement('div');
+      msHeader.className = 'sep sep-ms';
+      msHeader.innerHTML = '<span class="sep-lbl">Mass spectrometer model by vendor</span>';
+      chart.appendChild(msHeader);
+      data.forEach(d => chart.appendChild(buildRow(d)));
+      if(summaryData && summaryData.length){
+        const sep = document.createElement('div');
+        sep.className = 'sep';
+        sep.innerHTML = '<span class="sep-lbl">Chromatography systems · rolled up across vendors</span>';
+        chart.appendChild(sep);
+        summaryData.forEach(d => chart.appendChild(buildRow(d)));
+      }
+      if(metaData && metaData.length){
+        const sep2 = document.createElement('div');
+        sep2.className = 'sep sep-meta';
+        sep2.innerHTML = '<span class="sep-lbl">Ontology scaffolding</span>';
+        chart.appendChild(sep2);
+        metaData.forEach(d => chart.appendChild(buildRow(d)));
+      }
+      if(editData && editData.length){
+        const editHeader = document.createElement('div');
+        editHeader.className = 'sep sep-edits';
+        editHeader.innerHTML = '<span class="sep-lbl">Existing terms revised · ~100 term edits</span>';
+        chart.appendChild(editHeader);
+        editData.forEach(d => chart.appendChild(buildRow(d)));
+      }
+    }
+
+    render('pcv-chart-ms', msData, familyData, ontologyWorkData, editData, 100, [0,20,40,60,80,100]);
+  })();
+  </script>
+
+  <div class="fig-cap">
+    <span class="num">Fig&nbsp;4</span>
+    <span class="body"><b>Contributions to PSI-MS-CV.</b> Stacked bars show pre-existing (grey) and newly added (accent) terms across MS vendors and LC/GC system families.<br>Cut-off Feb&nbsp;2026.</span>
+  </div>
+
+
+  <div class="impact" style="margin-top:19px">
+    <span class="h-eyebrow">Conclusions</span>
+    <h3>MetabolomicsHub harmonises public metabolomics data repositories into a unified, FAIR-compliant resource for <b>discovery, exchange and reuse</b>.</h3>
+    <div class="grid3" style="margin-bottom:18px">
+      <div class="it"><div class="k">For Researchers</div><div class="v">Central, faceted and filter-capable search across participating repositories. Provenance-traceable metadata, harmonised compound identifiers and machine-readable <b>MHD JSON</b> for downstream pipelines and AI workflows.</div></div>
+      <div class="it"><div class="k">For Repositories</div><div class="v">Shared converters, JSON Schema + OLS4 validation and a public announcement protocol. Less duplication, more cross-repository discoverability, rooted in authoritative ontologies.</div></div>
+      <div class="it"><div class="k">For Funders &amp; Journals</div><div class="v">Persistent <b>MHD</b> accessions, FAIR-compliant submissions and machine-readable manifests for reproducibility checks at submission, review and audit.</div></div>
+    </div>
+    <p style="margin:0;font-size:15.5px;line-height:1.55;color:rgba(255,255,255,.92);font-weight:300;max-width:920px;text-align:justify">
+      A central search portal for cross-repository discovery indexes <b style="font-weight:600">6,500+ legacy datasets</b> — with all post-release MS depositions captured as fully-harmonised MHD profiles — underpinned by a graph <b style="font-weight:600">Common Data Model</b> bound to authoritative ontologies and an automated <b style="font-weight:600">chemical-identifier enrichment</b> pipeline. Contributing <b style="font-weight:600">+220 terms</b> to PSI-MS-CV and committing to open standards (mzTab-M, USIs), the consortium strengthens the <b style="font-weight:600">shared FAIR foundation</b> for the metabolomics community.
+    </p>
+  </div>
+
+  <div class="funders">
+    <span class="lbl">Hosted &amp; coordinated by</span>
+    <img src="assets/EMBL-EBI_logo.png" alt="EMBL-EBI" class="f-logo embl">
+
+    <span class="lbl with-rule">Funded by</span>
+    <img src="assets/czi.svg" alt="Chan Zuckerberg Initiative" class="f-logo czi-logo">
+
+    <span class="lbl right" style="font-weight: 500;">HUPO-PSI Spring Meeting, Rome <br>4–8 May 2026</span>
+  </div>
+
+  <div class="hubline bottom"></div>
+  <div class="footer">
+    <span class="pg">04 / 04 &nbsp;·&nbsp; PSI-MS-CV · Conclusions</span>
+    <span class="meta">© 2026 MetabolomicsHub Consortium</span>
+  </div>
+</section>
+
+</div>
+
+<script>
+// Single-page mode for iframe embeds in the blog post: when the URL hash names
+// a page (e.g. #p2), hide all other pages and remove .stage padding so the
+// visible page sits flush at the top of the frame. Loading without a hash
+// shows the full poster as before.
+(function () {
+  function applyPageFilter() {
+    var hash = window.location.hash;
+    var match = hash.match(/^#(p[1-4])$/);
+    var stage = document.querySelector('.stage');
+    var pages = document.querySelectorAll('.page');
+    if (!match) {
+      pages.forEach(function (p) { p.style.display = ''; });
+      if (stage) stage.style.padding = '';
+      return;
+    }
+    var targetId = match[1];
+    pages.forEach(function (p) {
+      p.style.display = p.id === targetId ? '' : 'none';
+    });
+    if (stage) stage.style.padding = '0';
+    document.body.style.background = '#ffffff';
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', applyPageFilter);
+  applyPageFilter();
+})();
+</script>
+</body>
+</html>
