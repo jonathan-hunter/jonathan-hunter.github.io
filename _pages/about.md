@@ -42,5 +42,8 @@ Grounded in an MChem, a Ph. D. in phytoplankton lipidomics and a certification i
     <td style="text-align: center; padding: 15px 30px;"><a href="https://www.metabolomicshub.org/"><img class="only-light" src="assets/img/link_images/mhub-light.png" width="263" height="60"><img class="only-dark" src="assets/img/link_images/mhub.png" width="263" height="60"></a></td>
     <td style="text-align: center; padding: 15px 30px;"><a href="https://psidev.info"><img src="assets/img/link_images/psi-ms.png" width="105" height="60"></a></td>
   </tr>
+  <tr>
+    <td style="text-align: center; padding: 15px 30px;"><a href="https://edamontology.org/"><img src="assets/img/link_images/EDAM-logo-square.svg" width="63" height="60"></a></td>
+  </tr>
 </table>
 <br>
