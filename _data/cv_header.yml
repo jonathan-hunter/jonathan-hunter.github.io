@@ -7,4 +7,3 @@ nav_order: 5
 cv_pdf: JEH-CV.pdf
 # Edit _data/cv_header.yml and then rerun Local Scripts/generate_CVs.sh to change these yml properties.
 ---
-

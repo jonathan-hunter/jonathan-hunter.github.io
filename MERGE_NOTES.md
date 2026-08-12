@@ -7,16 +7,16 @@ upstream rarely touch theme machinery.
 
 ## Files that are **user-owned** (safe to keep, never overwritten by upstream)
 
-| Path | Notes |
-|------|-------|
+| Path                                                                                                                | Notes                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | `_pages/about.md` `_pages/cv.md` `_pages/news.md` `_pages/publications.md` `_pages/repositories.md` `_pages/404.md` | Personal page content. The mass-spectrum banner HTML + `<script>` tag live in `about.md`. |
-| `_news/announcement_*.md` | Personal announcements. |
-| `_bibliography/papers.bib` | Personal BibTeX. |
-| `_data/socials.yml` `_data/coauthors.yml` `_data/repositories.yml` `_data/venues.yml` `_data/cv_header.yml` | Personal data. |
-| `assets/img/`, `assets/pdf/`, `assets/json/` | Personal images, PDFs (CV, thesis), JSON-resume. |
-| `_sass/_custom.scss` | All custom global CSS overrides. |
-| `_sass/_mass-spectrum-styles.scss` | Styles for the about-page spectrum banner. |
-| `assets/js/mass-spectrum-background.js` | Spectrum animation. |
+| `_news/announcement_*.md`                                                                                           | Personal announcements.                                                                   |
+| `_bibliography/papers.bib`                                                                                          | Personal BibTeX.                                                                          |
+| `_data/socials.yml` `_data/coauthors.yml` `_data/repositories.yml` `_data/venues.yml` `_data/cv_header.yml`         | Personal data.                                                                            |
+| `assets/img/`, `assets/pdf/`, `assets/json/`                                                                        | Personal images, PDFs (CV, thesis), JSON-resume.                                          |
+| `_sass/_custom.scss`                                                                                                | All custom global CSS overrides.                                                          |
+| `_sass/_mass-spectrum-styles.scss`                                                                                  | Styles for the about-page spectrum banner.                                                |
+| `assets/js/mass-spectrum-background.js`                                                                             | Spectrum animation.                                                                       |
 
 ## Files that **must stay in sync with upstream** (do not edit directly)
 

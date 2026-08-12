@@ -54,7 +54,7 @@ _styles: >
   }
 ---
 
-Last week, I attended the <a href="https://www.psidev.info">HUPO-PSI</a> Spring Workshop at the National Research Council of Italy (CNR) in Rome. 
+Last week, I attended the <a href="https://www.psidev.info">HUPO-PSI</a> Spring Workshop at the National Research Council of Italy (CNR) in Rome.
 
 It was a pleasure to meet colleagues including Eric Deutsch and Joshua Klein that I have worked with extensively online through my contributions
 to the <a href="https://www.ebi.ac.uk/ols4/ontologies/ms">PSI-MS Controlled Vocabulary</a>.
@@ -71,7 +71,6 @@ I also presented the below four page digital poster on the MetabolomicsHub, and 
 
 Last but not least, I snuck off Wednesday night to have a gentle run around Rome exploring many of the tourist hotspots:
 {% include figure.liquid path="assets/img/posts/2026-hupo-psi/IMG_0862.jpeg" caption="Rome tourism run, Wednesday night!" %}
-
 
 ---
 
