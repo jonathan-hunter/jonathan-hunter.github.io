@@ -269,7 +269,9 @@
 
       // Generate peaks and pre-calculate spatial data
       this.peaks = this.generatePeaks();
-      this.labels = this.peaks.map((peak, index) => (peak.label ? { text: peak.label, mz: peak.mz, index } : null)).filter(Boolean);
+      this.labels = this.peaks
+        .map((peak, index) => (peak.label ? { text: peak.label, mz: peak.mz, index, accent: peak.accent } : null))
+        .filter(Boolean);
       this.peakIntensities = new Float32Array(this.peaks.length);
       this.noiseData = this.generateNoise();
 
@@ -320,6 +322,7 @@
       LABELLED_PEAKS.forEach((label) => {
         const cluster = createIsotopeCluster(label.mz, 62, 1.4);
         cluster[0].label = label.text;
+        cluster[0].accent = label.accent;
         peaks.push(...cluster);
       });
 
@@ -783,7 +786,12 @@
 
       ctx.save();
       const uiSans = getComputedStyle(document.documentElement).getPropertyValue("--sans").trim() || "system-ui, sans-serif";
-      ctx.font = "500 11.5px " + uiSans;
+      // The accented keyword is set bold, matching the filled chip it becomes
+      // once the banner is too narrow to annotate itself. 600 is the heaviest
+      // weight loaded for the sans (see google_fonts in _config.yml).
+      const baseFont = "500 11.5px " + uiSans;
+      const accentFont = "600 11.5px " + uiSans;
+      ctx.font = baseFont;
       if ("letterSpacing" in ctx) ctx.letterSpacing = "0.11em";
       ctx.textAlign = "center";
       ctx.textBaseline = "alphabetic";
@@ -794,6 +802,10 @@
 
         const x = this.spectrumX[sample];
         const apexY = this.spectrumY[sample];
+
+        // Set before measuring: the bold face is wider, and that width drives
+        // both the clearance span below and the centring above.
+        ctx.font = label.accent ? accentFont : baseFont;
 
         // The label must clear everything under its text, not just the peak it
         // names — a neighbouring cluster can easily be taller within that span.
