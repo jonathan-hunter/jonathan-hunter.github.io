@@ -3,12 +3,7 @@
     "playwright-browser": {
       "type": "stdio",
       "command": "playwright-mcp",
-      "args": [
-        "--headless",
-        "--browser",
-        "chromium",
-        "--no-sandbox"
-      ],
+      "args": ["--headless", "--browser", "chromium"],
       "env": {}
     },
     "ols4": {
