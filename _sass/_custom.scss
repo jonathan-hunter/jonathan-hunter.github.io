@@ -747,6 +747,9 @@ html[data-theme="dark"] .social-link {
 
       // _data/venues.yml sets a per-venue background as an inline style; the
       // design uses one accent tint for every badge, so override it.
+      // box-shadow undoes mdbootstrap's z-depth on .badge — the design is flat,
+      // and on the hero eyebrow (transparent background) the shadow was left
+      // hanging in mid-air as a full-width rectangle.
       abbr {
         display: block;
         font-family: var(--label);
@@ -760,6 +763,7 @@ html[data-theme="dark"] .social-link {
         text-align: center;
         margin: 0;
         text-shadow: none;
+        box-shadow: none;
 
         a {
           color: var(--global-theme-color);
