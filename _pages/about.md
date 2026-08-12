@@ -35,23 +35,25 @@ Grounded in an MChem, a Ph. D. in phytoplankton lipidomics and a certification i
 
 </div>
 
+<!-- --logo-accent is the dominant brand colour of each mark, sampled from the
+     image itself; .logo-cell uses it for the hover border. -->
 <div class="jeh-logo-grid">
-  <a href="https://ebi.ac.uk" class="logo-cell">
+  <a href="https://ebi.ac.uk" class="logo-cell" style="--logo-accent: #74b460">
     <img class="only-light" src="assets/img/link_images/embl-ebi-light.png" alt="EMBL-EBI">
     <img class="only-dark" src="assets/img/link_images/embl-ebi.png" alt="EMBL-EBI">
   </a>
-  <a href="https://www.ebi.ac.uk/metabolights/" class="logo-cell">
+  <a href="https://www.ebi.ac.uk/metabolights/" class="logo-cell" style="--logo-accent: #23b3cf">
     <img class="only-light" src="assets/img/link_images/mtbls-light.png" alt="MetaboLights">
     <img class="only-dark" src="assets/img/link_images/mtbls.png" alt="MetaboLights">
   </a>
-  <a href="https://www.metabolomicshub.org/" class="logo-cell">
+  <a href="https://www.metabolomicshub.org/" class="logo-cell" style="--logo-accent: #15aeb3">
     <img class="only-light" src="assets/img/link_images/mhub-light.png" alt="MetabolomicsHub">
     <img class="only-dark" src="assets/img/link_images/mhub.png" alt="MetabolomicsHub">
   </a>
-  <a href="https://psidev.info" class="logo-cell">
+  <a href="https://psidev.info" class="logo-cell" style="--logo-accent: #b83056">
     <img src="assets/img/link_images/psi-ms.png" alt="HUPO-PSI">
   </a>
-  <a href="https://edamontology.org/" class="logo-cell">
+  <a href="https://edamontology.org/" class="logo-cell" style="--logo-accent: #00448a">
     <img src="assets/img/link_images/EDAM-logo-square.svg" alt="EDAM Ontology">
   </a>
 </div>

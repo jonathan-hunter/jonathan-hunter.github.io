@@ -525,8 +525,10 @@ html[data-theme="dark"] .social-link {
   background: var(--global-card-bg-color);
   transition: border-color 0.2s ease;
 
+  // Each cell carries its logo's own brand colour as --logo-accent (set inline
+  // in _pages/about.md); the site accent is the fallback.
   &:hover {
-    border-color: var(--global-theme-color);
+    border-color: var(--logo-accent, var(--global-theme-color));
     text-decoration: none;
   }
 
@@ -538,6 +540,12 @@ html[data-theme="dark"] .social-link {
     object-fit: contain;
     transition: opacity 0.2s ease;
   }
+}
+
+// Darker brand colours (EDAM's navy in particular) all but disappear against
+// the dark card, so lift them towards white there.
+html[data-theme="dark"] .logo-cell:hover {
+  border-color: color-mix(in srgb, var(--logo-accent, var(--global-theme-color)) 65%, white);
 }
 
 // Selected papers | latest news, side by side.
