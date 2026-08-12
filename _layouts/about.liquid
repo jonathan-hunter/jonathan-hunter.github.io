@@ -1,86 +1,81 @@
 ---
 layout: default
 ---
-<!-- Mass-spectrum animated banner. All assets are user-owned:
-     - _sass/_mass-spectrum-styles.scss (imported from assets/css/main.scss)
-     - assets/js/mass-spectrum-background.js
-     Placed above the page title so it sits below the navbar/link toolbar. -->
+<!--
+  Mass-spectrum animated banner. All assets are user-owned:
+  - _sass/_mass-spectrum-styles.scss (imported from assets/css/main.scss)
+  - assets/js/mass-spectrum-background.js
+  Placed above the page title so it sits below the navbar/link toolbar.
+-->
 <div id="mass-spectrum-background" data-max-height="33.333" data-min-height="8.333">
-  <canvas id="mass-spectrum-canvas"></canvas>
+  <canvas id="mass-spectrum-canvas" class="mass-spectrum-canvas" data-variant="hero"></canvas>
 </div>
-<script defer src="{{ '/assets/js/mass-spectrum-background.js' | relative_url }}"></script>
 
 <div class="post">
-  <header class="post-header">
-    <h1 class="post-title">
-      {% if site.title == 'blank' %}
-        <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
-        {{ site.last_name }}
-      {% else %}
-        {{ site.title }}
+  <!-- Hero: eyebrow, name, lede and contact rail, with the portrait at right. -->
+  <section class="jeh-hero">
+    <div>
+      {% if page.eyebrow %}
+        <div class="jeh-hero__eyebrow">{{ page.eyebrow }}</div>
       {% endif %}
-    </h1>
-    <p class="desc">{{ page.subtitle }}</p>
-  </header>
+      <h1 class="jeh-hero__name">
+        {% if site.title == 'blank' %}
+          {{ site.first_name }}
+          {{ site.middle_name }}
+          {{ site.last_name }}
+        {% else %}
+          {{ site.title }}
+        {% endif %}
+      </h1>
+      {% if page.lede %}
+        <p class="jeh-hero__lede">{{ page.lede }}</p>
+      {% endif %}
+      {% include jeh_contact_links.liquid %}
+    </div>
+
+    {% if page.profile and page.profile.image %}
+      <div class="jeh-hero__portrait">
+        {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
+        {%
+          include figure.liquid loading="eager" path=profile_image_path sizes="220px" alt=page.profile.image
+          cache_bust=true
+        %}
+      </div>
+    {% endif %}
+  </section>
 
   <article>
-    {% if page.profile %}
-      <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
-        {% if page.profile.image %}
-          {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
-          {% if page.profile.image_circular %}
-            {% assign profile_image_class = 'img-fluid z-depth-1 rounded-circle' %}
-          {% else %}
-            {% assign profile_image_class = 'img-fluid z-depth-1
-      rounded' %}
-          {% endif %}
-          {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px)
-      30vw, 95vw"{% endcapture %}
-          {%
-            include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image
-            cache_bust=true
-          %}
-        {% endif %}
-        {% if page.profile.more_info %}
-          <div class="more-info">{{ page.profile.more_info }}</div>
-        {% endif %}
-      </div>
-    {% endif %}
+    <!-- Intro prose and partner logos, authored in _pages/about.md -->
+    {{ content }}
 
-    <div class="clearfix">{{ content }}</div>
+    <div class="spectrum-divider" style="margin-top: 44px">
+      <canvas class="mass-spectrum-canvas" data-variant="divider-stems-fade"></canvas>
+    </div>
 
-    <!-- News -->
-    {% if page.announcements and page.announcements.enabled %}
-      <h2>
-        <a href="{{ '/news/' | relative_url }}" style="color: inherit">news</a>
-      </h2>
-      {% include news.liquid limit=true %}
-    {% endif %}
+    <div class="jeh-home-cols">
+      <!-- Selected papers -->
+      {% if page.selected_papers %}
+        <div>
+          <h2 class="jeh-col-head">Selected papers</h2>
+          {% include selected_papers.liquid %}
+          <div class="jeh-col-more">
+            <a href="{{ '/publications/' | relative_url }}">all publications &rarr;</a>
+          </div>
+        </div>
+      {% endif %}
 
-    <!-- Latest posts -->
-    {% if page.latest_posts and page.latest_posts.enabled %}
-      <h2>
-        <a href="{{ '/blog/' | relative_url }}" style="color: inherit">posts</a>
-      </h2>
-      {% include latest_posts.liquid %}
-    {% endif %}
-
-    <!-- Selected papers -->
-    {% if page.selected_papers %}
-      <h2>
-        <a href="{{ '/publications/' | relative_url }}" style="color: inherit">selected publications</a>
-      </h2>
-      {% include selected_papers.liquid %}
-    {% endif %}
-
-    <!-- Social -->
-    {% if page.social %}
-      <div class="social">
-        <div class="contact-icons">{% social_links %}</div>
-
-        <div class="contact-note">{{ site.contact_note }}</div>
-      </div>
-    {% endif %}
+      <!-- Latest news and posts, merged into one date-ordered feed -->
+      {% if page.announcements and page.announcements.enabled %}
+        <div>
+          <h2 class="jeh-col-head">Latest news &amp; posts</h2>
+          {% include jeh_feed.liquid limit=page.announcements.limit %}
+          <div class="jeh-col-more">
+            <a href="{{ '/news/' | relative_url }}">all news &rarr;</a>
+            <a href="{{ '/blog/' | relative_url }}">all posts &rarr;</a>
+          </div>
+        </div>
+      {% endif %}
+    </div>
 
     {% if site.newsletter and site.newsletter.enabled and site.footer_fixed %}
       {% include newsletter.liquid center=true %}

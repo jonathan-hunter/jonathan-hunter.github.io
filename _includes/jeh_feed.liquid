@@ -1,0 +1,52 @@
+{% comment %}
+  Home-page feed: news announcements and blog posts merged into one
+  date-descending list, each row labelled with its kind.
+
+  Params:
+    limit — maximum rows to show (defaults to all)
+{% endcomment %}
+
+{% assign feed = site.posts | concat: site.news | sort: 'date' | reverse %}
+{% assign feed_size = feed | size %}
+{% if include.limit %}
+  {% assign feed_limit = include.limit %}
+{% else %}
+  {% assign feed_limit = feed_size %}
+{% endif %}
+
+<div class="jeh-feed">
+  {% for item in feed limit: feed_limit %}
+    {% if item.collection == 'posts' %}
+      {% comment %}Blog post — title links out, description below.{% endcomment %}
+      {% if item.redirect contains '://' %}
+        {% assign item_url = item.redirect %}
+      {% elsif item.redirect %}
+        {% assign item_url = item.redirect | relative_url %}
+      {% else %}
+        {% assign item_url = item.url | relative_url %}
+      {% endif %}
+      <a class="jeh-feed__item" href="{{ item_url }}">
+        <div class="jeh-feed__meta">
+          <span class="kind">post</span>
+          {%- if item.source %} &middot; {{ item.source }}{% endif %} &middot; {{ item.date | date: '%b %-d, %Y' }}
+        </div>
+        <div class="jeh-feed__title">{{ item.title }}</div>
+        {% if item.description %}
+          <div class="jeh-feed__text">{{ item.description }}</div>
+        {% endif %}
+      </a>
+    {% elsif item.inline %}
+      {% comment %}Inline announcement — the content is the whole item.{% endcomment %}
+      <div class="jeh-feed__item">
+        <div class="jeh-feed__meta"><span class="kind">news</span> &middot; {{ item.date | date: '%b %-d, %Y' }}</div>
+        <div class="jeh-feed__text">{{ item.content | remove: '<p>' | remove: '</p>' | emojify }}</div>
+      </div>
+    {% else %}
+      {% comment %}Long-form announcement — headline links to its own page.{% endcomment %}
+      <a class="jeh-feed__item" href="{{ item.url | relative_url }}">
+        <div class="jeh-feed__meta"><span class="kind">news</span> &middot; {{ item.date | date: '%b %-d, %Y' }}</div>
+        <div class="jeh-feed__title">{{ item.title }}</div>
+      </a>
+    {% endif %}
+  {% endfor %}
+</div>

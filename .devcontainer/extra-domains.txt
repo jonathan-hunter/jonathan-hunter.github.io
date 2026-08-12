@@ -1,0 +1,14 @@
+## add line-seperated domain URLs below to add to firewall whitelist.
+
+# ruby gem installs (bundle install, gem install bundler)
+index.rubygems.org
+rubygems.org
+
+# cdn assets the site renders from (third_party_libraries.download is false, so
+# these are fetched by the browser at render time, not vendored at build time).
+# only needed when driving Chromium inside the container; the host browser is
+# unaffected by the firewall. analytics and giscus stay blocked deliberately.
+cdn.jsdelivr.net
+cdnjs.cloudflare.com
+fonts.googleapis.com
+fonts.gstatic.com

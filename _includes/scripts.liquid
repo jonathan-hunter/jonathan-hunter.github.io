@@ -179,6 +179,13 @@
   ></script>
 {% endif %}
 
+<!--
+  Mass-spectrum canvases: the about-page hero banner and the section dividers
+  used across publications/news/posts/repositories/cv. Loaded site-wide so
+  any page can drop in a <canvas class="mass-spectrum-canvas">.
+-->
+<script defer src="{{ '/assets/js/mass-spectrum-background.js' | relative_url | bust_file_cache }}"></script>
+
 <!-- Load Common JS -->
 <script src="{{ '/assets/js/no_defer.js' | relative_url | bust_file_cache }}"></script>
 <script defer src="{{ '/assets/js/common.js' | relative_url | bust_file_cache }}"></script>

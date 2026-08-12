@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "playwright-browser": {
+      "type": "stdio",
+      "command": "playwright-mcp",
+      "args": [
+        "--headless",
+        "--browser",
+        "chromium",
+        "--no-sandbox"
+      ],
+      "env": {}
+    },
+    "ols4": {
+      "type": "http",
+      "url": "https://www.ebi.ac.uk/ols4/api/mcp"
+    }
+  }
+}

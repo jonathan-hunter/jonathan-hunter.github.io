@@ -1,22 +1,31 @@
 ---
-layout: cv
+layout: page
 permalink: /cv/
 title: cv
 nav: true
 nav_order: 5
 cv_pdf: JEH-CV.pdf
+hide_header: true # the CV supplies its own masthead below
 toc:
   sidebar: left
 # Edit _data/cv_header.yml and then rerun Local Scripts/generate_CVs.sh to change these yml properties.
 ---
 
+<div class="cv-body" markdown="1">
+
 # **Jonathan E. Hunter**, MChem. Ph.D.
 
 Data Science `|` Chemical Informatics `|` Analytical Chemistry `|` Life Sciences
+{: .cv-strapline}
 
 Last Updated: 28<sup>th</sup> November 2025
+{: .cv-updated}
 
-<br>
+<a href="{{ site.data.socials.cv_pdf | relative_url }}" class="cv-download">Download PDF ↓</a>
+
+<div class="spectrum-divider" style="margin: 24px 0 34px">
+  <canvas class="mass-spectrum-canvas" data-variant="divider-stems-fade"></canvas>
+</div>
 
 ## Summary
 
@@ -36,7 +45,9 @@ Last Updated: 28<sup>th</sup> November 2025
 ---
 
  <br>
-  
+
+{: .cv-skills}
+
 | Category                     | Skills                                                                                     |
 | ---------------------------- | ------------------------------------------------------------------------------------------ |
 | **Data Science & ML**        | Python (Pandas, Scikit-learn, Matplotlib), R, SQL, Git, Docker, AWS, Markdown, Bash, LaTeX |
@@ -49,22 +60,30 @@ Last Updated: 28<sup>th</sup> November 2025
 
 ---
 
-| **Scientific Database Curator, Metabolomics** EMBL-EBI, Cambridge, UK | May 2025 - Present |
-| --------------------------------------------------------------------- | -----------------: |
+<div class="cv-role">
+  <div><strong>Scientific Database Curator, Metabolomics</strong> EMBL-EBI, Cambridge, UK</div>
+  <div class="cv-role__dates">May 2025 - Present</div>
+</div>
 
 - Bridging laboratory analytical chemistry through computational mass spectrometry to advance open data reuse and FAIR principles.
 
-| **Senior Scientist, Innovation**, LGC, Cambridge, UK | Feb. 2019 – Jan. 2023 |
-| ---------------------------------------------------- | --------------------: |
+<div class="cv-role">
+  <div><strong>Senior Scientist, Innovation</strong>, LGC, Cambridge, UK</div>
+  <div class="cv-role__dates">Feb. 2019 – Jan. 2023</div>
+</div>
 
 - Led development of analytical methods for occupational drug testing in a regulated laboratory environment.
 - Contract research for external sponsors, implementing novel technologies, and providing supervision, technical training, and mentorship to colleagues and students.
 - Completed ISO17025 method validations for the determination of cannabinoids in strategically critical sample matrices and made key technical contributions to a large, commercially important contract research study on epicatechin metabolism.
 
+{: .cv-aside data-label="Outcome"}
+
 > These outcomes required complex problem-solving and close teamwork, conducted within rigorous scientific standards, meticulous record keeping, quality control, and efficiency considerations.
 
-| **Postdoctoral Investigator**, Woods Hole Oceanographic Institution, MA, USA | Jul. 2016 – Jul. 2018 |
-| ---------------------------------------------------------------------------- | --------------------: |
+<div class="cv-role">
+  <div><strong>Postdoctoral Investigator</strong>, Woods Hole Oceanographic Institution, MA, USA</div>
+  <div class="cv-role__dates">Jul. 2016 – Jul. 2018</div>
+</div>
 
 _"Microscale Mechanistic Chemical and Physical Processes Contributing to Marine Organic Matter Degradation"_
 
@@ -72,17 +91,25 @@ _"Microscale Mechanistic Chemical and Physical Processes Contributing to Marine 
 - Collaborated with partner laboratories in Zurich and Calgary; presented findings at large international conferences and to philanthropic sponsors.
 - Data analysis and visualisation using R, Excel, and MATLAB to handle large, multidimensional datasets, statistical interpretation, and broad chemical space.
 
+{: .cv-aside data-label="Outcome"}
+
 > Delivered publications at the highest levels of academic impact, including co-lead authorship in _Science_ and lead authorship in _Environmental Science & Technology_.
 
-| **Research Fellow**, University of Southampton, UK | Jul. 2015 – Jun. 2016 |
-| -------------------------------------------------- | --------------------: |
+<div class="cv-role">
+  <div><strong>Research Fellow</strong>, University of Southampton, UK</div>
+  <div class="cv-role__dates">Jul. 2015 – Jun. 2016</div>
+</div>
 
 _"Characterization of Reactive Oxygen and Nitrogen Modified Lipids"_
 
-| **Visiting Student**, AkzoNobel, NL | Jul. 2010 – Dec. 2010 |
-| ----------------------------------- | --------------------: |
+<div class="cv-role">
+  <div><strong>Visiting Student</strong>, AkzoNobel, NL</div>
+  <div class="cv-role__dates">Jul. 2010 – Dec. 2010</div>
+</div>
 
 _"Synthesis of Metallocenes"_
+
+{: .cv-aside data-label="Outcome"}
 
 > Developed process resulted in large-scale industrial production and was a commercial success.
 
@@ -112,20 +139,24 @@ _"Synthesis of Metallocenes"_
 
 ---
 
-| **Doctor of Philosophy, Lipid Biochemistry**, University of Southampton, UK | Aug. 2011 – Jul. 2015 |
-| --------------------------------------------------------------------------- | --------------------: |
+<div class="cv-role">
+  <div><strong>Doctor of Philosophy, Lipid Biochemistry</strong>, University of Southampton, UK</div>
+  <div class="cv-role__dates">Aug. 2011 – Jul. 2015</div>
+</div>
 
 _["Phytoplankton Lipidomics: Lipid Dynamics in Response to Microalgal Stressors"](https://eprints.soton.ac.uk/384576/)_
 
 <br>
 
-| **Master of Chemistry**, University of Southampton, UK | Oct. 2007 – Jul. 2011 |
-| ------------------------------------------------------ | --------------------: |
+<div class="cv-role">
+  <div><strong>Master of Chemistry</strong>, University of Southampton, UK</div>
+  <div class="cv-role__dates">Oct. 2007 – Jul. 2011</div>
+</div>
 
 <br>
 <br>
 <br>
-  
+
 ## Honours and Awards
 
 ---
@@ -155,6 +186,8 @@ _["Phytoplankton Lipidomics: Lipid Dynamics in Response to Microalgal Stressors"
 
 5. **Hunter, J. E.**, _et al._ ["Targeted and Untargeted Lipidomics of _Emiliania huxleyi_ Viral Infection and Life Cycle Phases Highlights Molecular Biomarkers of Infection, Susceptibility, and Ploidy"](https://doi.org/10.3389/fmars.2015.00081) _Frontiers in Marine Science_ (2015).
 
+{: .cv-aside data-label="Metrics"}
+
 > h-index = 5 with 270 citations as of Feb. 2025 ([Google Scholar](https://scholar.google.com/citations?user=qIGWQdwAAAAJ&hl=en&oi=sra))  
 > †Authors contributed equally.
 
@@ -170,6 +203,8 @@ _["Phytoplankton Lipidomics: Lipid Dynamics in Response to Microalgal Stressors"
 | **Gordon and Betty Moore Foundation – Early Career Ocean Summit**, Kona, HI, USA<br>_"Microscale Lipidomics of Organic Matter Degradation"_                                              | Jan. 2017 |
 | **Society for Industrial and Applied Mathematics (Life Sciences Conference)**, Boston, MA, USA<br>_"Chemical Signaling, Microbial Interactions, and the Ocean's Biological Carbon Pump"_ | Jul. 2016 |
 
+{: .cv-aside data-label="Note"}
+
 > † Presentation well recieved by an audience of >200 scientists.
 
 ## Leadership and Mentorship
@@ -181,6 +216,8 @@ _["Phytoplankton Lipidomics: Lipid Dynamics in Response to Microalgal Stressors"
 
 - Provided technical direction to junior scientists and laboratory technicians.
   **LGC & University of Southampton**
+
+{: .cv-aside data-label="Note"}
 
 > † Students awarded three 1<sup>st</sup> class Masters theses and one 2:1 Dissertation including the “Charnwood Molecular Prize for Best MChem Commercial Research Project”.
 
@@ -196,3 +233,5 @@ _["Phytoplankton Lipidomics: Lipid Dynamics in Response to Microalgal Stressors"
 ---
 
 References available upon request.
+
+</div>

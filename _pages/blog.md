@@ -3,7 +3,7 @@ layout: default
 permalink: /blog/
 title: posts
 nav: true
-nav_order: 6
+nav_order: 3
 pagination:
   enabled: true
   collection: posts
@@ -17,6 +17,14 @@ pagination:
 ---
 
 <div class="post">
+
+<header class="post-header">
+  <h1 class="post-title">{{ page.title }}</h1>
+</header>
+
+<div class="spectrum-divider" style="margin-bottom: 28px">
+  <canvas class="mass-spectrum-canvas" data-variant="divider-stems-fade"></canvas>
+</div>
 
 {% assign featured_posts = site.posts | where: "featured", "true" %}
 {% if featured_posts.size > 0 %}

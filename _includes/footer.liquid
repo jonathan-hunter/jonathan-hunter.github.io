@@ -23,8 +23,9 @@
       {% include newsletter.liquid %}
     {% endif %}
 
-    <div class="container">
-      {{ footer_contents }}
+    <div class="container jeh-footer">
+      <div>{{ footer_contents }}</div>
+      {% include jeh_contact_links.liquid class="jeh-footer__links" compact=true %}
     </div>
   </footer>
 {% endif %}

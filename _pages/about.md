@@ -2,13 +2,12 @@
 layout: about
 title: about
 permalink: /
-subtitle: <strong>MChem, Ph. D.</strong> <a href="mailto:web-enq@hunter.phd">web-enq@hunter.phd</a>
+eyebrow: MChem, Ph. D.
+lede: Metabolomics Scientific Database Curator at EMBL-EBI, bridging laboratory analytical chemistry through computational mass spectrometry to advance open data reuse and FAIR principles.
 
 profile:
   align: right
   image: prof_pic_color.png
-  image_circular: true # crops the image to make it circular
-  more_info: >
 
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
@@ -16,7 +15,7 @@ social: true # includes social icons at the bottom of the page
 announcements:
   enabled: true # includes a list of news items
   scrollable: true # adds a vertical scroll bar if there are more than 3 news items
-  limit: 5 # leave blank to include all the news in the `_news` folder
+  limit: 6 # leave blank to include all the news in the `_news` folder
 
 latest_posts:
   enabled: true
@@ -24,23 +23,35 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-Data Science `|` Informatics `|` **Metabolomics** `|` Analytical Chemistry `|` Life Sciences
+<!-- The keyword line (Data Science | Informatics | Metabolomics | Analytical
+     Chemistry | Life Sciences) is carried by the annotated peaks in the mass
+     spectrum banner above, so it is not repeated as body copy here. -->
 
-**Metabolomics Scientific Database Curator at EMBL-EBI**, bridging laboratory analytical chemistry through computational mass spectrometry to advance open data reuse and FAIR principles.
+<div class="jeh-prose-2col" markdown="1">
 
 My expertise spans research domains and lifecycles - from marine lipidomics at Woods Hole Oceanographic Institution (including co-lead authorship in _Science_) and regulated, commercial bioanalytical chemistry at LGC, through to data science-driven curation and informatics infrastructure development.
 
 Grounded in an MChem, a Ph. D. in phytoplankton lipidomics and a certification in Python Data Science I work at the intersection of metabolomics domain knowledge, analytical chemistry, and computational approaches. I am particularly focused on metabolomics data standards and scientific database development.
-<br><br>
 
-<table class="link-table" style="margin-left: auto; margin-right: auto;">
-  <tr>
-    <td style="text-align: center; padding: 15px 30px;"><a href="https://ebi.ac.uk"><img class="only-light" src="assets/img/link_images/embl-ebi-light.png" width="194" height="60"><img class="only-dark" src="assets/img/link_images/embl-ebi.png" width="194" height="60"></a></td>
-    <td style="text-align: center; padding: 15px 30px;"><a href="https://www.ebi.ac.uk/metabolights/"><img class="only-light" src="assets/img/link_images/mtbls-light.png" width="267" height="60"><img class="only-dark" src="assets/img/link_images/mtbls.png" width="267" height="60"></a></td>
-  </tr>
-  <tr>
-    <td style="text-align: center; padding: 15px 30px;"><a href="https://www.metabolomicshub.org/"><img class="only-light" src="assets/img/link_images/mhub-light.png" width="263" height="60"><img class="only-dark" src="assets/img/link_images/mhub.png" width="263" height="60"></a></td>
-    <td style="text-align: center; padding: 15px 30px;"><a href="https://psidev.info"><img src="assets/img/link_images/psi-ms.png" width="105" height="60"></a><a href="https://edamontology.org/"><img src="assets/img/link_images/EDAM-logo-square.svg" width="63" height="60" style="margin-left: 25px;"></a></td>
-  </tr>
-</table>
-<br>
+</div>
+
+<div class="jeh-logo-grid">
+  <a href="https://ebi.ac.uk" class="logo-cell">
+    <img class="only-light" src="assets/img/link_images/embl-ebi-light.png" alt="EMBL-EBI">
+    <img class="only-dark" src="assets/img/link_images/embl-ebi.png" alt="EMBL-EBI">
+  </a>
+  <a href="https://www.ebi.ac.uk/metabolights/" class="logo-cell">
+    <img class="only-light" src="assets/img/link_images/mtbls-light.png" alt="MetaboLights">
+    <img class="only-dark" src="assets/img/link_images/mtbls.png" alt="MetaboLights">
+  </a>
+  <a href="https://www.metabolomicshub.org/" class="logo-cell">
+    <img class="only-light" src="assets/img/link_images/mhub-light.png" alt="MetabolomicsHub">
+    <img class="only-dark" src="assets/img/link_images/mhub.png" alt="MetabolomicsHub">
+  </a>
+  <a href="https://psidev.info" class="logo-cell">
+    <img src="assets/img/link_images/psi-ms.png" alt="HUPO-PSI">
+  </a>
+  <a href="https://edamontology.org/" class="logo-cell">
+    <img src="assets/img/link_images/EDAM-logo-square.svg" alt="EDAM Ontology">
+  </a>
+</div>

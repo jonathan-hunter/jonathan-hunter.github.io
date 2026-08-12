@@ -1,0 +1,46 @@
+{% comment %}
+  Citation summary strip for the publications page. Derived from
+  _data/citations.yml (refreshed by the Google Scholar updater) so the numbers
+  track the data file rather than being hand-entered.
+
+  h-index: counts are zero-padded to five digits so Liquid's lexical `sort`
+  orders them numerically, then the largest rank r where the r-th paper still
+  has >= r citations is the index.
+{% endcomment %}
+
+{% assign papers = site.data.citations.papers %}
+{% if papers %}
+  {% assign total_citations = 0 %}
+  {% assign padded = '' %}
+  {% for p in papers %}
+    {% assign total_citations = total_citations | plus: p[1].citations %}
+    {% assign c = p[1].citations | prepend: '00000' | slice: -5, 5 %}
+    {% assign padded = padded | append: c | append: ',' %}
+  {% endfor %}
+
+  {% assign ranked = padded | split: ',' | sort | reverse %}
+  {% assign h_index = 0 %}
+  {% for c in ranked %}
+    {% assign n = c | plus: 0 %}
+    {% if n >= forloop.index %}
+      {% assign h_index = forloop.index %}
+    {% endif %}
+  {% endfor %}
+
+  <div class="jeh-scholar-stats">
+    <div class="jeh-scholar-stats__stat">
+      <span class="jeh-scholar-stats__value">{{ total_citations }}</span>
+      <span class="jeh-scholar-stats__label">Citations</span>
+    </div>
+    <div class="jeh-scholar-stats__stat">
+      <span class="jeh-scholar-stats__value">{{ h_index }}</span>
+      <span class="jeh-scholar-stats__label">h-index</span>
+    </div>
+    <p class="jeh-scholar-stats__note">
+      As of {{ site.data.citations.metadata.last_updated | date: '%b. %Y' }}, per
+      <a href="https://scholar.google.com/citations?user={{ site.data.socials.scholar_userid }}&hl=en&oi=sra" class="social-link">
+        <i class="ai ai-google-scholar" aria-hidden="true"></i>Google Scholar</a
+      >
+    </p>
+  </div>
+{% endif %}

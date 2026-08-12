@@ -1,0 +1,50 @@
+{% comment %}
+  Icon + label contact rail. Used in the about hero and the site footer.
+  Reads identities from _data/socials.yml so it stays in step with al-folio's
+  own {% social_links %} tag, which renders bare icons and has no label form.
+
+  Params:
+    class   — wrapper class (defaults to the hero rail)
+    compact — short labels and no CV link, for the footer
+{% endcomment %}
+
+{% assign s = site.data.socials %}
+
+<div class="{{ include.class | default: 'jeh-hero__links' }}">
+  {% if s.email %}
+    <a href="mailto:{{ s.email }}" class="social-link">
+      <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+      {% if include.compact %}Email{% else %}{{ s.email }}{% endif %}
+    </a>
+  {% endif %}
+  {% if s.scholar_userid %}
+    <a href="https://scholar.google.com/citations?user={{ s.scholar_userid }}&hl=en&oi=sra" class="social-link">
+      <i class="ai ai-google-scholar" aria-hidden="true"></i>
+      {% if include.compact %}Scholar{% else %}Google Scholar{% endif %}
+    </a>
+  {% endif %}
+  {% if s.orcid_id %}
+    <a href="https://orcid.org/{{ s.orcid_id }}" class="social-link">
+      <i class="ai ai-orcid" aria-hidden="true"></i>
+      ORCID
+    </a>
+  {% endif %}
+  {% if s.github_username %}
+    <a href="https://github.com/{{ s.github_username }}" class="social-link">
+      <i class="fa-brands fa-github" aria-hidden="true"></i>
+      GitHub
+    </a>
+  {% endif %}
+  {% if s.linkedin_username %}
+    <a href="https://www.linkedin.com/in/{{ s.linkedin_username }}" class="social-link">
+      <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+      LinkedIn
+    </a>
+  {% endif %}
+  {% if s.cv_pdf and include.compact != true %}
+    <a href="{{ s.cv_pdf | relative_url }}" class="social-link">
+      <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
+      CV (PDF)
+    </a>
+  {% endif %}
+</div>

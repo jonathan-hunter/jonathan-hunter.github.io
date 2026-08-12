@@ -1,0 +1,11 @@
+{% comment %}
+  Attribution line for posts that reproduce something published elsewhere.
+  Driven by the `source` / `source_url` front matter.
+{% endcomment %}
+
+{% if page.source and page.source_url %}
+  <p class="post-source">
+    Reproduced from
+    <a href="{{ page.source_url }}" rel="noopener noreferrer" target="_blank">the original {{ page.source }} post</a>.
+  </p>
+{% endif %}

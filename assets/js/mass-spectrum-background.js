@@ -16,20 +16,21 @@
   // Read the active theme's page background. Used to fill the canvas so the
   // spectrum sits flush against the page in both light and dark modes.
   function readBgColor() {
-    const value = getComputedStyle(document.documentElement)
-      .getPropertyValue("--global-bg-color")
-      .trim();
+    const value = getComputedStyle(document.documentElement).getPropertyValue("--global-bg-color").trim();
     return value || "#1c1c1d";
   }
 
   // Read the site's max content width (set by SCSS from _config.yml). Falls
   // back to a sensible default if the var isn't defined as a CSS custom prop.
   function readContentWidth() {
-    const value = getComputedStyle(document.documentElement)
-      .getPropertyValue("--max-content-width")
-      .trim();
+    const value = getComputedStyle(document.documentElement).getPropertyValue("--max-content-width").trim();
     const parsed = parseFloat(value);
     return Number.isFinite(parsed) && parsed > 0 ? parsed : DEFAULT_CONTENT_WIDTH;
+  }
+
+  function readVar(name, fallback) {
+    const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    return value || fallback;
   }
 
   // Configuration constants - centralized for easy tuning
@@ -54,15 +55,15 @@
     MOUSE_SMOOTHING: 0.02, // Very smooth mouse tracking (lower = smoother)
 
     // Visual
-    TOP_MARGIN: 20,
+    TOP_MARGIN: 34,
     BOTTOM_MARGIN: 40,
     PEAK_WIDTH_MULTIPLIER: 0.5,
     FWHM_TO_SIGMA: 2.355,
 
-    // Static colors
-    STROKE_COLOR: "#2698ba",
-    FILL_COLOR: "hsla(240, 80%, 60%, 0.12)",
-    SHADOW_COLOR: "hsla(195, 65%, 44%, 0.25)",
+    // Colours are read per-theme from CSS custom properties at resize time.
+    STROKE_COLOR: "#0E6C74",
+    FILL_COLOR: "rgba(14, 108, 116, 0.10)",
+    SHADOW_COLOR: "rgba(14, 108, 116, 0.22)",
 
     // Oscillation
     OSCILLATION_SPEED: 0.0008, // Radians per millisecond (slow)
@@ -71,6 +72,19 @@
     // Performance
     GAUSSIAN_CUTOFF: 0.002, // Slightly higher for performance
   };
+
+  // Named peaks. Each becomes a real isotope cluster at a fixed m/z, annotated
+  // with a leader line and label so the spectrum reads as the subject matter
+  // rather than generic motion. Kept inside 120-880 so the edge-fade envelope
+  // never attenuates a labelled peak.
+  const LABELLED_PEAKS = [
+    { mz: 148, text: "Data Science" },
+    { mz: 316, text: "Informatics" },
+    { mz: 502, text: "Metabolomics" },
+    { mz: 664, text: "Analytical Chemistry" },
+    { mz: 838, text: "Life Sciences" },
+  ];
+  const LABEL_MIN_ZONE_WIDTH = 640; // below this the labels are omitted
 
   // Pre-computed intensity thresholds for random distribution
   const INTENSITY_THRESHOLDS = [
@@ -112,13 +126,116 @@
     }));
   }
 
+  // Presentation variants. "hero" is the full banner; "divider" is a compact,
+  // unlabelled rule-height version for use between page sections.
+  const VARIANTS = {
+    hero: {
+      topMargin: 14,
+      bottomMargin: 40,
+      intensityScale: 0.01,
+      lineWidth: 2,
+      showFill: true,
+      showLabels: true,
+      glow: 8,
+      mode: "trace",
+      opaque: true,
+      labelBand: 26,
+    },
+    // Hero as a background layer behind the masthead: no annotations (the DOM
+    // chips carry those words), transparent so the page background shows through.
+    "hero-bg": {
+      topMargin: 14,
+      bottomMargin: 0,
+      intensityScale: 0.008,
+      lineWidth: 1.5,
+      showFill: true,
+      showLabels: false,
+      glow: 6,
+      mode: "trace",
+      traceAlpha: 0.9,
+    },
+    // Compact hero rule: text-column width, unlabelled, dissolving at both ends.
+    "hero-rule": {
+      topMargin: 8,
+      bottomMargin: 0,
+      intensityScale: 0.022,
+      lineWidth: 1.5,
+      showFill: true,
+      showLabels: false,
+      glow: 5,
+      mode: "trace",
+      edgeFade: true,
+      traceAlpha: 0.95,
+    },
+    // A — continuous trace, flattened right down to a living hairline.
+    divider: {
+      topMargin: 8,
+      bottomMargin: 8,
+      intensityScale: 0.0035,
+      lineWidth: 1,
+      showFill: false,
+      showLabels: false,
+      glow: 0,
+      mode: "trace",
+      traceAlpha: 0.7,
+    },
+    // B — centroid sticks: how a mass spectrum is actually drawn.
+    "divider-stems": {
+      topMargin: 8,
+      bottomMargin: 8,
+      intensityScale: 0.0075,
+      lineWidth: 1,
+      showFill: false,
+      showLabels: false,
+      glow: 0,
+      mode: "stems",
+      stemAlpha: 0.55,
+    },
+    // C — a plain rule, marked only at the five named m/z.
+    "divider-ticks": {
+      topMargin: 8,
+      bottomMargin: 8,
+      intensityScale: 0.006,
+      lineWidth: 1,
+      showFill: false,
+      showLabels: false,
+      glow: 0,
+      mode: "ticks",
+    },
+    // B+D — centroid sticks that dissolve to nothing at both ends.
+    "divider-stems-fade": {
+      topMargin: 8,
+      bottomMargin: 8,
+      intensityScale: 0.0075,
+      lineWidth: 1,
+      showFill: false,
+      showLabels: false,
+      glow: 0,
+      mode: "stems",
+      stemAlpha: 0.6,
+      edgeFade: true,
+      static: true,
+    },
+    // D — trace that dissolves into a flat rule toward both edges.
+    "divider-fade": {
+      topMargin: 8,
+      bottomMargin: 8,
+      intensityScale: 0.004,
+      lineWidth: 1.25,
+      showFill: true,
+      showLabels: false,
+      glow: 0,
+      mode: "trace",
+      edgeFade: true,
+      traceAlpha: 0.85,
+    },
+  };
+
   class MassSpectrumBackground {
-    constructor(canvasElement) {
+    constructor(canvasElement, variantName) {
       this.canvas = canvasElement;
-      this.ctx = this.canvas.getContext("2d", {
-        alpha: false,
-        desynchronized: true, // Allows browser to optimize rendering
-      });
+      this.variant = VARIANTS[variantName || canvasElement.dataset.variant] || VARIANTS.hero;
+      this.ctx = this.canvas.getContext("2d", { alpha: !this.variant.opaque });
       this.dpr = Math.min(window.devicePixelRatio || 1, 2);
 
       // Mouse state - direct, no smoothing
@@ -144,6 +261,7 @@
 
       // Generate peaks and pre-calculate spatial data
       this.peaks = this.generatePeaks();
+      this.labels = this.peaks.map((peak, index) => (peak.label ? { text: peak.label, mz: peak.mz, index } : null)).filter(Boolean);
       this.peakIntensities = new Float32Array(this.peaks.length);
       this.noiseData = this.generateNoise();
 
@@ -189,6 +307,14 @@
         () => CONFIG.HIGH_MZ_CLUSTERS.RANGE_START + Math.random() * (CONFIG.HIGH_MZ_CLUSTERS.RANGE_END - CONFIG.HIGH_MZ_CLUSTERS.RANGE_START)
       );
 
+      // Named peaks: a strong, stable base intensity so they stay legible,
+      // tagged so the renderer can find each cluster's apex later.
+      LABELLED_PEAKS.forEach((label) => {
+        const cluster = createIsotopeCluster(label.mz, 62, 1.4);
+        cluster[0].label = label.text;
+        peaks.push(...cluster);
+      });
+
       return peaks.sort((a, b) => a.mz - b.mz);
     }
 
@@ -232,22 +358,33 @@
       this.width = rect.width;
       this.height = rect.height;
 
-      this.canvas.width = this.width * this.dpr;
-      this.canvas.height = this.height * this.dpr;
+      this.canvas.width = Math.round(this.width * this.dpr);
+      this.canvas.height = Math.round(this.height * this.dpr);
 
-      this.ctx = this.canvas.getContext("2d", {
-        alpha: false,
-        desynchronized: true,
-      });
+      this.ctx = this.canvas.getContext("2d", { alpha: !this.variant.opaque });
       this.ctx.scale(this.dpr, this.dpr);
 
       // Cache derived values
-      this.plotHeight = this.height - CONFIG.TOP_MARGIN - CONFIG.BOTTOM_MARGIN;
-      this.baselineY = this.height - CONFIG.BOTTOM_MARGIN;
+      this.plotHeight = this.height - this.variant.topMargin - this.variant.bottomMargin;
+      this.baselineY = this.height - this.variant.bottomMargin;
+      // Tallest a peak may draw. The label band is headroom reserved above the
+      // highest possible apex so an annotation always has clean space to sit in.
+      this.peakCeiling = Math.max(12, this.plotHeight - (this.variant.labelBand || 0));
+      this.peakKnee = this.peakCeiling * 0.8;
+      if (this.labels)
+        this.labels.forEach((l) => {
+          l.width = null;
+        });
+      this.peakHeadroom = this.peakCeiling - this.peakKnee;
 
       // Cache the page background colour from the active theme so light mode
       // doesn't leave a dark slab behind the spectrum.
       this.bgColor = readBgColor();
+      this.strokeColor = readVar("--spectrum-stroke", CONFIG.STROKE_COLOR);
+      this.fillColor = readVar("--spectrum-fill", CONFIG.FILL_COLOR);
+      this.shadowColor = readVar("--spectrum-shadow", CONFIG.SHADOW_COLOR);
+      this.axisColor = readVar("--spectrum-axis", "rgba(128,128,128,0.5)");
+      this.labelColor = readVar("--spectrum-label", CONFIG.STROKE_COLOR);
 
       // Spectrum data zone: 1.5× the site's max content width, centred in the
       // full-window canvas. Outside this zone only the baseline line is drawn,
@@ -284,13 +421,18 @@
         }
         this.envelope[i] = env;
       }
+
+      // Setting canvas.width above cleared the backing store, so repaint now
+      // rather than waiting on rAF (throttled in hidden/background frames).
+      this.render(performance.now());
     }
 
     handleMouseMove(e) {
-      // Direct mouse position - no smoothing
-      this.mouse.x = e.clientX / window.innerWidth;
-      this.mouse.y = e.clientY / window.innerHeight;
-      // Animation loop handles rendering
+      // Record where the pointer actually is; the animation loop eases the
+      // rendered position toward it so the trace glides instead of stepping.
+      if (!this.mouseTarget) this.mouseTarget = { x: this.mouse.x, y: this.mouse.y };
+      this.mouseTarget.x = e.clientX / window.innerWidth;
+      this.mouseTarget.y = e.clientY / window.innerHeight;
     }
 
     handleVisibilityChange() {
@@ -304,6 +446,16 @@
      * Calculate peak intensities with oscillation
      */
     updatePeakIntensities(time) {
+      // Critically-damped-ish easing toward the pointer. Frame-rate normalised so
+      // a 120Hz display feels the same as a 60Hz one.
+      if (this.mouseTarget) {
+        const dt = this.lastFrameTime ? Math.min((time - this.lastFrameTime) / 16.67, 3) : 1;
+        const ease = 1 - Math.pow(1 - 0.16, dt);
+        this.mouse.x += (this.mouseTarget.x - this.mouse.x) * ease;
+        this.mouse.y += (this.mouseTarget.y - this.mouse.y) * ease;
+      }
+      this.lastFrameTime = time;
+
       const mouseX = this.mouse.x;
       const mouseInfluence = 1 - this.mouse.y;
       const peaks = this.peaks;
@@ -311,6 +463,11 @@
       const mzScale = 1 / CONFIG.MZ_RANGE;
       const decayFactor = CONFIG.MOUSE_INFLUENCE_DECAY * 2;
       const timeOsc = time * CONFIG.OSCILLATION_SPEED;
+
+      if (this.variant.static) {
+        for (let p = 0; p < peaks.length; p++) intensities[p] = peaks[p].baseIntensity;
+        return;
+      }
 
       for (let p = 0; p < peaks.length; p++) {
         const peak = peaks[p];
@@ -322,8 +479,9 @@
         const influence = Math.exp(-distXSq * decayFactor) * mouseInfluence;
         const mouseBoost = influence * CONFIG.MOUSE_BOOST_FACTOR;
 
-        // Subtle oscillation
-        const oscillation = Math.sin(timeOsc + peak.phase) * CONFIG.OSCILLATION_AMPLITUDE;
+        // Subtle oscillation — suppressed under prefers-reduced-motion, so the
+        // spectrum only moves in response to the pointer.
+        const oscillation = this.reduceMotion ? 0 : Math.sin(timeOsc + peak.phase) * CONFIG.OSCILLATION_AMPLITUDE;
 
         intensities[p] = peak.baseIntensity + mouseBoost + oscillation;
       }
@@ -346,17 +504,41 @@
      * Render the spectrum
      */
     render(time = 0) {
+      // Self-heal: if the element's backing store was reset (React remounting
+      // the canvas, host re-layout), re-size before drawing into a dead buffer.
+      if (this.canvas.width !== Math.round(this.width * this.dpr) || this.canvas.height !== Math.round(this.height * this.dpr)) {
+        const rect = this.canvas.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0) {
+          this.resize();
+          return;
+        }
+      }
+
       const ctx = this.ctx;
       const { width, height, baselineY, plotHeight, mzStep } = this;
 
-      // Clear with the active theme's background colour
-      ctx.fillStyle = this.bgColor || "#1c1c1d";
-      ctx.fillRect(0, 0, width, height);
+      // The hero sits on the page background and is opaque; dividers are
+      // transparent so they composite over whatever surface holds them.
+      if (this.variant.opaque) {
+        ctx.fillStyle = this.bgColor || "#1c1c1d";
+        ctx.fillRect(0, 0, width, height);
+      } else {
+        ctx.clearRect(0, 0, width, height);
+      }
 
       // Draw the baseline across the full canvas width — outside the spectrum
       // data zone this is the only thing drawn, so the baseline appears to
       // continue to the window edges at a constant Y.
-      ctx.strokeStyle = "rgba(128, 128, 128, 0.5)";
+      if (this.variant.edgeFade) {
+        const axisGrad = ctx.createLinearGradient(0, 0, width, 0);
+        axisGrad.addColorStop(0, "transparent");
+        axisGrad.addColorStop(0.14, this.axisColor || "rgba(128,128,128,0.5)");
+        axisGrad.addColorStop(0.86, this.axisColor || "rgba(128,128,128,0.5)");
+        axisGrad.addColorStop(1, "transparent");
+        ctx.strokeStyle = axisGrad;
+      } else {
+        ctx.strokeStyle = this.axisColor || "rgba(128, 128, 128, 0.5)";
+      }
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(0, baselineY);
@@ -365,6 +547,15 @@
 
       // Update peak intensities with oscillation
       this.updatePeakIntensities(time);
+
+      if (this.variant.mode === "stems") {
+        this.renderStems();
+        return;
+      }
+      if (this.variant.mode === "ticks") {
+        this.renderTicks();
+        return;
+      }
 
       const peaks = this.peaks;
       const peakIntensities = this.peakIntensities;
@@ -398,41 +589,58 @@
         }
         this.spectrumIntensity[i] = totalIntensity > 0 ? totalIntensity : 0;
 
-        // Direct Y calculation - no smoothing
-        this.spectrumY[i] = baselineY - this.spectrumIntensity[i] * 0.01 * plotHeight;
+        // Height is linear up to the knee — most peaks are untouched — then
+        // compresses asymptotically into the ceiling, so only the tallest are
+        // held back and the label band always stays clear.
+        const raw = this.spectrumIntensity[i] * this.variant.intensityScale * plotHeight;
+        const knee = this.peakKnee;
+        const h = raw <= knee ? raw : knee + this.peakHeadroom * (1 - Math.exp(-(raw - knee) / this.peakHeadroom));
+        this.spectrumY[i] = baselineY - h;
       }
 
-      // Draw filled area. We start and end on the baseline at the canvas
+      // Draw filled area (hero only). We start and end on the baseline at the canvas
       // edges so the fill (and the line stroke below) flow continuously across
       // the full window width, sitting flush on the axis outside the data zone.
-      ctx.beginPath();
-      ctx.moveTo(0, baselineY);
-      ctx.lineTo(this.spectrumX[0], this.spectrumY[0]);
+      if (this.variant.showFill) {
+        ctx.beginPath();
+        ctx.moveTo(0, baselineY);
+        ctx.lineTo(this.spectrumX[0], this.spectrumY[0]);
 
-      for (let i = 0; i < CONFIG.NUM_SAMPLES; i++) {
-        const midX = (this.spectrumX[i] + this.spectrumX[i + 1]) * 0.5;
-        const midY = (this.spectrumY[i] + this.spectrumY[i + 1]) * 0.5;
-        ctx.quadraticCurveTo(this.spectrumX[i], this.spectrumY[i], midX, midY);
+        for (let i = 0; i < CONFIG.NUM_SAMPLES; i++) {
+          const midX = (this.spectrumX[i] + this.spectrumX[i + 1]) * 0.5;
+          const midY = (this.spectrumY[i] + this.spectrumY[i + 1]) * 0.5;
+          ctx.quadraticCurveTo(this.spectrumX[i], this.spectrumY[i], midX, midY);
+        }
+
+        ctx.lineTo(this.spectrumX[CONFIG.NUM_SAMPLES], this.spectrumY[CONFIG.NUM_SAMPLES]);
+        ctx.lineTo(width, baselineY);
+        ctx.closePath();
+
+        ctx.shadowBlur = this.variant.glow;
+        ctx.shadowColor = this.shadowColor;
+        ctx.fillStyle = this.fillColor;
+        ctx.fill();
+        ctx.shadowBlur = 0;
       }
-
-      ctx.lineTo(this.spectrumX[CONFIG.NUM_SAMPLES], this.spectrumY[CONFIG.NUM_SAMPLES]);
-      ctx.lineTo(width, baselineY);
-      ctx.closePath();
-
-      ctx.shadowBlur = 8;
-      ctx.shadowColor = CONFIG.SHADOW_COLOR;
-      ctx.fillStyle = CONFIG.FILL_COLOR;
-      ctx.fill();
-      ctx.shadowBlur = 0;
 
       // Draw stroke. Bookend the curve with flat segments along the baseline
       // so the spectrum signal runs edge-to-edge at the axis level.
-      ctx.lineWidth = 2;
+      ctx.lineWidth = this.variant.lineWidth;
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
-      ctx.strokeStyle = CONFIG.STROKE_COLOR;
-      ctx.shadowBlur = 8;
-      ctx.shadowColor = CONFIG.SHADOW_COLOR;
+      ctx.strokeStyle = this.strokeColor;
+      ctx.shadowBlur = this.variant.glow;
+      ctx.shadowColor = this.shadowColor;
+
+      if (this.variant.traceAlpha) ctx.globalAlpha = this.variant.traceAlpha;
+      if (this.variant.edgeFade) {
+        const grad = ctx.createLinearGradient(0, 0, width, 0);
+        grad.addColorStop(0, "transparent");
+        grad.addColorStop(0.18, this.strokeColor);
+        grad.addColorStop(0.82, this.strokeColor);
+        grad.addColorStop(1, "transparent");
+        ctx.strokeStyle = grad;
+      }
 
       ctx.beginPath();
       ctx.moveTo(0, baselineY);
@@ -447,11 +655,158 @@
       ctx.lineTo(width, baselineY);
       ctx.stroke();
 
+      ctx.globalAlpha = 1;
       ctx.shadowBlur = 0;
+
+      this.renderLabels();
+    }
+
+    /**
+     * Centroid sticks — one vertical line per peak, the conventional way a
+     * mass spectrum is plotted. Reads as texture at divider scale.
+     */
+    renderStems() {
+      const ctx = this.ctx;
+      const { baselineY, plotHeight } = this;
+      const scale = this.variant.intensityScale * plotHeight;
+
+      ctx.save();
+      ctx.globalAlpha = this.variant.stemAlpha || 0.6;
+      if (this.variant.edgeFade) {
+        const grad = ctx.createLinearGradient(this.spectrumZoneStart, 0, this.spectrumZoneStart + this.spectrumZoneWidth, 0);
+        grad.addColorStop(0, "transparent");
+        grad.addColorStop(0.22, this.strokeColor);
+        grad.addColorStop(0.78, this.strokeColor);
+        grad.addColorStop(1, "transparent");
+        ctx.strokeStyle = grad;
+      } else {
+        ctx.strokeStyle = this.strokeColor;
+      }
+      ctx.lineWidth = this.variant.lineWidth;
+      ctx.lineCap = "butt";
+      ctx.beginPath();
+
+      for (let p = 0; p < this.peaks.length; p++) {
+        const peak = this.peaks[p];
+        const sample = Math.round(peak.mz / this.mzStep);
+        if (sample < 0 || sample > CONFIG.NUM_SAMPLES) continue;
+        const h = this.peakIntensities[p] * this.envelope[sample] * scale;
+        if (h < 0.6) continue;
+        const x = Math.round(this.spectrumX[sample]) + 0.5;
+        ctx.moveTo(x, baselineY);
+        ctx.lineTo(x, baselineY - h);
+      }
+
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+      ctx.restore();
+    }
+
+    /**
+     * A plain rule, marked only at the five named m/z — the quietest option.
+     */
+    renderTicks() {
+      const ctx = this.ctx;
+      const { baselineY, plotHeight } = this;
+      const scale = this.variant.intensityScale * plotHeight;
+      const mzScale = 1 / CONFIG.MZ_RANGE;
+
+      ctx.save();
+      ctx.strokeStyle = this.strokeColor;
+      ctx.lineWidth = this.variant.lineWidth;
+      ctx.lineCap = "butt";
+
+      for (const label of this.labels || []) {
+        const sample = Math.round(label.mz / this.mzStep);
+        if (sample < 0 || sample > CONFIG.NUM_SAMPLES) continue;
+        const dist = Math.abs(this.mouse.x - label.mz * mzScale);
+        const near = Math.exp(-dist * dist * 90);
+        const h = Math.max(4, this.peakIntensities[label.index] * scale);
+        const x = Math.round(this.spectrumX[sample]) + 0.5;
+
+        ctx.globalAlpha = 0.35 + near * 0.55;
+        ctx.beginPath();
+        ctx.moveTo(x, baselineY);
+        ctx.lineTo(x, baselineY - h);
+        ctx.stroke();
+      }
+
+      ctx.globalAlpha = 1;
+      ctx.restore();
+    }
+
+    /**
+     * Annotate the named peaks: a leader line from just above each apex up to
+     * a mono label. Opacity rises as the mouse nears the peak, so pointing at
+     * a region both boosts it and brings its name forward.
+     */
+    renderLabels() {
+      if (!this.variant.showLabels) return;
+      if (!this.labels || !this.labels.length) return;
+      if (this.spectrumZoneWidth < LABEL_MIN_ZONE_WIDTH) return;
+
+      const ctx = this.ctx;
+      const mzScale = 1 / CONFIG.MZ_RANGE;
+
+      ctx.save();
+      const uiSans = getComputedStyle(document.documentElement).getPropertyValue("--sans").trim() || "system-ui, sans-serif";
+      ctx.font = "500 11.5px " + uiSans;
+      if ("letterSpacing" in ctx) ctx.letterSpacing = "0.11em";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "alphabetic";
+
+      for (const label of this.labels) {
+        const sample = Math.round(label.mz / this.mzStep);
+        if (sample < 0 || sample > CONFIG.NUM_SAMPLES) continue;
+
+        const x = this.spectrumX[sample];
+        const apexY = this.spectrumY[sample];
+
+        // The label must clear everything under its text, not just the peak it
+        // names — a neighbouring cluster can easily be taller within that span.
+        label.width = ctx.measureText(label.text).width;
+        const halfSpan = label.width / 2 + 6;
+        const sampleStep = this.spectrumZoneWidth / CONFIG.NUM_SAMPLES;
+        const reach = Math.ceil(halfSpan / sampleStep);
+        let spanTop = apexY;
+        for (let k = -reach; k <= reach; k++) {
+          const j = sample + k;
+          if (j < 0 || j > CONFIG.NUM_SAMPLES) continue;
+          if (this.spectrumY[j] < spanTop) spanTop = this.spectrumY[j];
+        }
+
+        // Proximity of the pointer to this peak, 0..1.
+        const dist = Math.abs(this.mouse.x - label.mz * mzScale);
+        const near = Math.exp(-dist * dist * 90);
+        const alpha = 0.42 + near * 0.58;
+
+        const labelY = Math.max(this.variant.topMargin + 11, spanTop - 26);
+        // The call-out stops at the top of whatever sits under the label — never
+        // reaching down into a neighbouring cluster — and stays a short stub.
+        const tickBottom = spanTop - 5;
+        const tickTop = Math.max(labelY + 6, tickBottom - 20);
+
+        if (tickBottom - tickTop >= 5) {
+          ctx.globalAlpha = alpha * 0.5;
+          ctx.strokeStyle = this.labelColor || this.strokeColor;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(x, tickTop);
+          ctx.lineTo(x, tickBottom);
+          ctx.stroke();
+        }
+
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = this.labelColor || this.strokeColor;
+        ctx.fillText(label.text, x, labelY);
+      }
+
+      ctx.globalAlpha = 1;
+      ctx.restore();
     }
 
     init() {
-      this.resize();
+      this.resize(); // paints synchronously
 
       // Debounced resize handler
       let resizeTimeout;
@@ -464,7 +819,7 @@
       let lastMouseTime = 0;
       this.mouseMoveHandler = (e) => {
         const now = performance.now();
-        if (now - lastMouseTime > 16) {
+        if (now - lastMouseTime > 8) {
           // ~60fps throttle
           this.handleMouseMove(e);
           lastMouseTime = now;
@@ -477,6 +832,11 @@
       // theme.js flips `data-theme` on <html>; we watch that attribute.
       this.themeObserver = new MutationObserver(() => {
         this.bgColor = readBgColor();
+        this.strokeColor = readVar("--spectrum-stroke", CONFIG.STROKE_COLOR);
+        this.fillColor = readVar("--spectrum-fill", CONFIG.FILL_COLOR);
+        this.shadowColor = readVar("--spectrum-shadow", CONFIG.SHADOW_COLOR);
+        this.axisColor = readVar("--spectrum-axis", "rgba(128,128,128,0.5)");
+        this.labelColor = readVar("--spectrum-label", CONFIG.STROKE_COLOR);
       });
       this.themeObserver.observe(document.documentElement, {
         attributes: true,
@@ -484,6 +844,14 @@
       });
 
       window.addEventListener("resize", this.resizeHandler, { passive: true });
+
+      // Static variants paint once per layout — no rAF loop, no pointer work.
+      if (this.variant.static) return;
+
+      // Reduced motion suppresses the ambient drift, but pointer response is a
+      // direct answer to the reader's own gesture, so it stays.
+      this.reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
       document.addEventListener("mousemove", this.mouseMoveHandler, { passive: true });
       document.addEventListener("visibilitychange", this.visibilityHandler);
 
@@ -499,6 +867,10 @@
         this.themeObserver.disconnect();
         this.themeObserver = null;
       }
+      if (this._ro) {
+        this._ro.disconnect();
+        this._ro = null;
+      }
       if (this.animationId) {
         cancelAnimationFrame(this.animationId);
         this.animationId = null;
@@ -508,12 +880,25 @@
 
   // Initialize on DOM ready
   function initMassSpectrum() {
-    const canvas = document.getElementById("mass-spectrum-canvas");
-    if (canvas) {
-      // Store instance for potential cleanup
-      canvas._massSpectrum = new MassSpectrumBackground(canvas);
-    }
+    document.querySelectorAll("canvas.mass-spectrum-canvas, #mass-spectrum-canvas").forEach((canvas) => {
+      if (!canvas._massSpectrum) canvas._massSpectrum = new MassSpectrumBackground(canvas);
+    });
   }
+  window.initMassSpectrum = initMassSpectrum;
+  window.createMassSpectrum = function (canvas) {
+    if (!canvas) return null;
+    if (canvas._massSpectrum) {
+      canvas._massSpectrum.destroy();
+      canvas._massSpectrum = null;
+    }
+    const inst = new MassSpectrumBackground(canvas, canvas.dataset.variant);
+    canvas._massSpectrum = inst;
+    if (typeof ResizeObserver !== "undefined") {
+      inst._ro = new ResizeObserver(() => inst.resize());
+      inst._ro.observe(canvas.parentElement || canvas);
+    }
+    return inst;
+  };
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initMassSpectrum);

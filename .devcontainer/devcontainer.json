@@ -1,63 +1,112 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/jekyll
 {
-  "name": "Jekyll",
-  // Using a Dockerfile to fix the broken Yarn repository. See issue #3487.
+  "name": "jonathan-hunter.github.io (dev-env)",
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "../../dev-env/.devcontainer/python/Dockerfile",
+    "context": "../../dev-env/.devcontainer",
+    "args": {
+      "TZ": "${localEnv:TZ:Europe/London}",
+      "INCLUDE_PLAYWRIGHT": "true",
+      "INCLUDE_GRAPHIFY": "false"
+    }
   },
-
-  // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-      "packages": "build-essential,imagemagick,inotify-tools,jupyter-nbconvert,procps,ruby-full,zlib1g-dev"
+      "packages": "build-essential,imagemagick,inotify-tools,libffi-dev,libgmp-dev,libreadline-dev,libssl-dev,libyaml-dev,pkg-config,zlib1g-dev"
     },
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "lts"
-    },
-    "ghcr.io/devcontainers-extra/features/prettier:1.0.2": {}
+    "ghcr.io/devcontainers/features/ruby:1": {
+      "version": "3.4"
+    }
   },
-
-  // Install Claude Code CLI + Playwright browsers, then fetch the plugins
-  // listed below from the anthropics/claude-plugins-official marketplace.
-  // Plugin names are positional args to the inline bash script so they
-  // read line-by-line like the vscode extensions array.
-  "postCreateCommand": [
-    "bash",
-    "-c",
-    "set -e; npm install -g @anthropic-ai/claude-code @playwright/test; npx --yes playwright install --with-deps chromium firefox webkit; (claude plugin marketplace add anthropics/claude-plugins-official --scope user || true); for p in \"$@\"; do claude plugin install \"$p@claude-plugins-official\" --scope user && claude plugin enable \"$p@claude-plugins-official\" --scope user || true; done",
-    "claude-plugins",
-    "frontend-design",
-    "code-simplifier",
-    "github",
-    "playwright",
-    "superpowers",
-    "code-review",
-    "feature-dev",
-    "claude-md-management",
-    "context7"
+  "overrideFeatureInstallOrder": [
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages",
+    "ghcr.io/devcontainers/features/ruby"
   ],
-
-  // Optionally: run jekyll serve automatically on container entering using the Docker entrypoint
-  "postAttachCommand": "./bin/entry_point.sh",
-
+  "runArgs": [
+    "--cap-add=NET_ADMIN",
+    "--cap-add=NET_RAW",
+    "--memory=8g",
+    "--memory-swap=8g",
+    "--init",
+    "--shm-size=2g"
+  ],
+  "hostRequirements": {
+    "gpu": "optional"
+  },
+  "forwardPorts": [8080, 35729],
+  "portsAttributes": {
+    "8080": {
+      "label": "Jekyll site",
+      "onAutoForward": "notify"
+    },
+    "35729": {
+      "label": "Jekyll LiveReload",
+      "onAutoForward": "silent"
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": [
-        "esbenp.prettier-vscode",
-        "sissel.shopify-liquid",
-        "yzhang.markdown-all-in-one",
         "anthropic.claude-code",
-        "ms-playwright.playwright"
+        "charliermarsh.ruff",
+        "marp-team.marp-vscode",
+        "hediet.vscode-drawio"
       ],
       "settings": {
-        // use prettier code formatter as default formatter
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "prettier.configPath": ".prettierrc",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.ruff": "explicit",
+          "source.organizeImports.ruff": "explicit"
+        },
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "workbench.colorCustomizations": {
+          "titleBar.activeBackground": "#5FD2D2",
+          "titleBar.activeForeground": "#102B2B",
+          "titleBar.inactiveBackground": "#5FD2D299",
+          "titleBar.inactiveForeground": "#102B2B99",
+          "titleBar.border": "#3FBFBF",
+          "activityBar.background": "#5FD2D2",
+          "activityBar.foreground": "#102B2B",
+          "activityBar.inactiveForeground": "#102B2B99",
+          "activityBarBadge.background": "#1F6F6F",
+          "activityBarBadge.foreground": "#E8FBFB",
+          "statusBar.background": "#3FBFBF",
+          "statusBar.foreground": "#102B2B",
+          "statusBarItem.hoverBackground": "#35A9A9",
+          "statusBarItem.remoteBackground": "#5FD2D2",
+          "statusBarItem.remoteForeground": "#102B2B"
+        }
       }
     }
   },
-
-  "remoteUser": "vscode"
+  "remoteUser": "node",
+  "mounts": [
+    "source=claude-code-bashhistory-${devcontainerId},target=/commandhistory,type=volume",
+    "source=claude-code-config-${devcontainerId},target=/home/node/.claude,type=volume",
+    "source=${localWorkspaceFolder}/.devcontainer,target=/workspace/.devcontainer,type=bind,readonly",
+    "source=${localWorkspaceFolder}/../dev-env/.claude,target=/workspace/.claude,type=bind,readonly",
+    "source=${localWorkspaceFolder}/.claude/worktrees,target=/workspace/.claude/worktrees,type=bind",
+    "source=${localEnv:HOME}/.gitignore_global,target=/home/node/.gitignore_global,type=bind,readonly",
+    "source=${localWorkspaceFolder}/../dev-env/.devcontainer/python/claude-settings.local.json,target=/workspace/.claude/settings.local.json,type=bind,readonly"
+  ],
+  "containerEnv": {
+    "NODE_OPTIONS": "--max-old-space-size=4096",
+    "CLAUDE_CONFIG_DIR": "/home/node/.claude",
+    "CLAUDE_CODE_SUBPROCESS_ENV_SCRUB": "0",
+    "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
+    "DISABLE_ERROR_REPORTING": "1",
+    "DISABLE_FEEDBACK_COMMAND": "1",
+    "PLAYWRIGHT_BROWSERS_PATH": "/ms-playwright",
+    "GEM_HOME": "/home/node/.gem",
+    "BUNDLE_PATH": "/home/node/.gem"
+  },
+  "remoteEnv": {
+    "PATH": "/usr/local/rvm/rubies/default/bin:/usr/local/rvm/wrappers/default:/home/node/.gem/bin:/home/node/.venvs/jupyter/bin:${containerEnv:PATH}"
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
+  "workspaceFolder": "/workspace",
+  "initializeCommand": "touch \"${localEnv:HOME}/.gitignore_global\" && mkdir -p \"${localWorkspaceFolder}/.claude/worktrees\"",
+  "postCreateCommand": "/usr/local/bin/post-create.sh && mkdir -p /home/node/.gem && gem install --no-document --conservative bundler && uv venv /home/node/.venvs/jupyter && uv pip install --python /home/node/.venvs/jupyter/bin/python 'nbconvert>=7.16,<8'",
+  "postStartCommand": "sudo /usr/local/bin/init-firewall.sh --skip-if-active",
+  "waitFor": "postStartCommand"
 }
