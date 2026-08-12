@@ -584,13 +584,11 @@ html[data-theme="dark"] .logo-cell:hover {
     gap: 16px;
   }
 
-  // Long venue abbreviations must wrap inside the narrow rail rather than
-  // spilling over the entry body.
+  // Wrapping is handled on the shared rule; the rail here is narrower still,
+  // so the label steps down a size.
   .abbr abbr {
     font-size: 10px;
     padding: 4px 6px;
-    white-space: normal;
-    overflow-wrap: anywhere;
     line-height: 1.35;
   }
 
@@ -692,9 +690,11 @@ html[data-theme="dark"] .logo-cell:hover {
     gap: 32px;
   }
 
+  // Stacked under the text rather than beside it, the portrait reads as its
+  // own band, so it centres instead of hugging either edge.
   .jeh-hero__portrait {
     margin-top: 0;
-    justify-self: start;
+    justify-self: center;
   }
 }
 
@@ -784,6 +784,10 @@ html[data-theme="dark"] .logo-cell:hover {
         margin: 0;
         text-shadow: none;
         box-shadow: none;
+        // .badge is nowrap, so a long venue ("Environ. Sci. Technol.") shoots
+        // out of the rail and across the entry body once the rail narrows.
+        white-space: normal;
+        overflow-wrap: anywhere;
 
         a {
           color: var(--global-theme-color);
