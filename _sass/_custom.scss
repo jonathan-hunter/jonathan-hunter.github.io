@@ -1344,6 +1344,11 @@ html[data-theme="dark"] .github-summary-stats {
 }
 
 .cv-body {
+  // The CV hides the standard .post-header and supplies its own masthead, so
+  // it has to restate that header's top padding or it rides up under the
+  // fixed navbar. Keep in step with .post-header's padding-top.
+  padding-top: 72px;
+
   h1 {
     font-family: var(--serif);
     font-weight: 400;

@@ -2,18 +2,23 @@
   <!-- Nav Bar -->
   <nav id="navbar" class="navbar navbar-light navbar-expand-sm {% if site.navbar_fixed %}fixed-top{% else %}sticky-top{% endif %}" role="navigation">
     <div class="container">
-      <!-- Wordmark. Shown on every page including the about page, per the design. -->
-      <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl }}/">
-        {% if site.title == 'blank' %}
-          {%- comment -%}The wordmark is one uniform weight: no part is emphasised.{%- endcomment -%}
-          {%- if site.first_name %}{{ site.first_name }}{% endif -%}
-          {%- if site.middle_name %} {{ site.middle_name }}{% endif -%}
-          {%- if site.last_name %} {{ site.last_name }}{% endif -%}
-          {%- if site.name_suffix %}, {{ site.name_suffix }}{% endif -%}
-        {% else %}
-          {{- site.title -}}
-        {% endif %}
-      </a>
+      <!--
+        Wordmark. The about page states the name in its own hero, so it is
+        left out of the bar there rather than said twice.
+      -->
+      {% if page.permalink != '/' %}
+        <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl }}/">
+          {% if site.title == 'blank' %}
+            {%- comment -%}The wordmark is one uniform weight: no part is emphasised.{%- endcomment -%}
+            {%- if site.first_name %}{{ site.first_name }}{% endif -%}
+            {%- if site.middle_name %} {{ site.middle_name }}{% endif -%}
+            {%- if site.last_name %} {{ site.last_name }}{% endif -%}
+            {%- if site.name_suffix %}, {{ site.name_suffix }}{% endif -%}
+          {% else %}
+            {{- site.title -}}
+          {% endif %}
+        </a>
+      {% endif %}
       {% if page.permalink == '/' and site.enable_navbar_social %}
         <!-- Social Icons -->
         <div class="navbar-brand social">{% social_links %}</div>
