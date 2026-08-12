@@ -38,3 +38,39 @@
     height: 200px;
   }
 }
+
+// Keyword chips. The banner annotates its own peaks when it has the width for
+// it; below that threshold the JS unhides these and the words live here
+// instead. Hidden by default so nothing flashes before the first measure.
+.spectrum-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 20px;
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+// Outlined by default with one filled chip, as the design brief sets out for
+// the keyword line. --label rather than a mono: this build's type system
+// replaced the brief's IBM Plex pairing, and no mono face is loaded.
+.spectrum-chip {
+  font-family: var(--label);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--global-text-color-light);
+  background: transparent;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 3px;
+  padding: 4px 8px;
+  line-height: 1.2;
+
+  &--accent {
+    color: var(--global-theme-color);
+    background: var(--jeh-accent-soft);
+    border-color: transparent;
+  }
+}

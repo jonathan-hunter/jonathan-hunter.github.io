@@ -77,14 +77,22 @@
   // with a leader line and label so the spectrum reads as the subject matter
   // rather than generic motion. Kept inside 120-880 so the edge-fade envelope
   // never attenuates a labelled peak.
+  // `accent` marks the one filled chip in the keyword row — Metabolomics, per
+  // the design brief — when these words fall back to DOM chips.
   const LABELLED_PEAKS = [
     { mz: 148, text: "Data Science" },
     { mz: 316, text: "Informatics" },
-    { mz: 502, text: "Metabolomics" },
+    { mz: 502, text: "Metabolomics", accent: true },
     { mz: 664, text: "Analytical Chemistry" },
     { mz: 838, text: "Life Sciences" },
   ];
   const LABEL_MIN_ZONE_WIDTH = 640; // below this the labels are omitted
+  // Below that same width the banner is short as well as narrow, so the trace
+  // is thinned to keep it a background texture rather than a heavy stroke.
+  const NARROW_LINE_SCALE = 0.6;
+  // Where the peak names go when they cannot be drawn on the canvas. Populated
+  // from LABELLED_PEAKS so the words have a single source of truth.
+  const CHIP_HOST_SELECTOR = ".spectrum-chips";
 
   // Pre-computed intensity thresholds for random distribution
   const INTENSITY_THRESHOLDS = [
@@ -393,6 +401,11 @@
       this.spectrumZoneWidth = Math.min(this.width, contentWidth * SPECTRUM_WIDTH_FACTOR);
       this.spectrumZoneStart = (this.width - this.spectrumZoneWidth) / 2;
 
+      // The single decision behind three behaviours: no drawn annotations, a
+      // thinner trace, and the DOM chips taking the words instead.
+      this.labelsSuppressed = !!this.variant.showLabels && this.spectrumZoneWidth < LABEL_MIN_ZONE_WIDTH;
+      this.syncLabelChips();
+
       // Pre-calculate x positions (mapped into the spectrum data zone)
       const step = this.spectrumZoneWidth / CONFIG.NUM_SAMPLES;
       for (let i = 0; i <= CONFIG.NUM_SAMPLES; i++) {
@@ -625,7 +638,7 @@
 
       // Draw stroke. Bookend the curve with flat segments along the baseline
       // so the spectrum signal runs edge-to-edge at the axis level.
-      ctx.lineWidth = this.variant.lineWidth;
+      ctx.lineWidth = this.labelsSuppressed ? this.variant.lineWidth * NARROW_LINE_SCALE : this.variant.lineWidth;
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
       ctx.strokeStyle = this.strokeColor;
@@ -740,10 +753,30 @@
      * a mono label. Opacity rises as the mouse nears the peak, so pointing at
      * a region both boosts it and brings its name forward.
      */
-    renderLabels() {
+    /**
+     * Keyword fallback. When the banner is too narrow to annotate its own
+     * peaks, the same words appear as chips beneath the hero so the reader
+     * still gets them. Built once, then shown or hidden per resize.
+     */
+    syncLabelChips() {
       if (!this.variant.showLabels) return;
+      const host = document.querySelector(CHIP_HOST_SELECTOR);
+      if (!host) return;
+
+      if (!host.childElementCount) {
+        for (const peak of LABELLED_PEAKS) {
+          const chip = document.createElement("span");
+          chip.className = peak.accent ? "spectrum-chip spectrum-chip--accent" : "spectrum-chip";
+          chip.textContent = peak.text;
+          host.appendChild(chip);
+        }
+      }
+      host.hidden = !this.labelsSuppressed;
+    }
+
+    renderLabels() {
+      if (!this.variant.showLabels || this.labelsSuppressed) return;
       if (!this.labels || !this.labels.length) return;
-      if (this.spectrumZoneWidth < LABEL_MIN_ZONE_WIDTH) return;
 
       const ctx = this.ctx;
       const mzScale = 1 / CONFIG.MZ_RANGE;

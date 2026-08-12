@@ -30,6 +30,11 @@ layout: default
       {% if page.lede %}
         <p class="jeh-hero__lede">{{ page.lede }}</p>
       {% endif %}
+      <!--
+        Keyword chips. Filled and unhidden by mass-spectrum-background.js
+        only when the banner is too narrow to label its own peaks.
+      -->
+      <div class="spectrum-chips" hidden></div>
       {% include jeh_contact_links.liquid %}
     </div>
 
