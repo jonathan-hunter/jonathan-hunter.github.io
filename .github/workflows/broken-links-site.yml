@@ -44,4 +44,9 @@ jobs:
         with:
           fail: true
           # only check local links
-          args: --offline --remap '_site(/?.*)/assets/(.*) _site/assets/$2' --verbose --no-progress '_site/**/*.html'
+          # The remap resolves `assets/...` links written relative to a nested
+          # page against the site's shared asset root. It is restricted to the
+          # real subdirectories of _site/assets so that a self-contained page
+          # carrying its own `assets/` folder (the HUPO-PSI poster) keeps its
+          # correct relative paths instead of being rewritten to the root.
+          args: --offline --remap '_site(/?.*)/assets/(audio|bibliography|css|fonts|html|img|js|json|jupyter|libs|pdf|plotly|rendercv|video|webfonts)/(.*) _site/assets/$2/$3' --verbose --no-progress '_site/**/*.html'
