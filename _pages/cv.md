@@ -124,12 +124,15 @@ _"Synthesis of Metallocenes"_
 
 ---
 
+{% comment %}Assigned up here: a `|` inside a table cell would start a new column.{% endcomment %}
+{% assign sutl_url = '/assets/pdf/SUTL.pdf' | relative_url %}
+
 | Certification                                                                                                                                           |             Date |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------: |
 | **Linux Commands & Shell Scripting** [Certification](https://courses.edx.org/certificates/b44142cb8a714ab3ab8d590b0eba6a17), _IBM via EdX_              |        Oct. 2024 |
 | **Certified Cloud Practitioner** [Certification](https://cp.certmetrics.com/amazon/en/public/verify/credential/adbe971b6d0e4f64ae251bc190e9f6d7), _AWS_ |        Jun. 2024 |
 | **Professional Data Scientist (Python)** [Certification](https://www.datacamp.com/certificate/DS0025230650482), _DataCamp_                              | Jan. – May. 2024 |
-| **Stepping up to Leadership** [Certification](https://hunter.phd/assets/pdf/SUTL.pdf), _Bespoke Training and Development_                               | Jan. – May. 2022 |
+| **Stepping up to Leadership** [Certification]({{ sutl_url }}), _Bespoke Training and Development_                                                       | Jan. – May. 2022 |
 
 <sub>\*See [DataCamp Portfolio](https://www.datacamp.com/portfolio/jonhunter) for a full course list.</sub>
 

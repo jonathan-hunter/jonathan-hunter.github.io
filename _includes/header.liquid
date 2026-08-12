@@ -5,11 +5,8 @@
       <!-- Wordmark. Shown on every page including the about page, per the design. -->
       <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl }}/">
         {% if site.title == 'blank' %}
-          {% if site.first_name %}
-            <span class="font-weight-bold">
-              {{- site.first_name -}}
-            </span>
-          {% endif %}
+          {%- comment -%}The wordmark is one uniform weight: no part is emphasised.{%- endcomment -%}
+          {%- if site.first_name %}{{ site.first_name }}{% endif -%}
           {%- if site.middle_name %} {{ site.middle_name }}{% endif -%}
           {%- if site.last_name %} {{ site.last_name }}{% endif -%}
           {%- if site.name_suffix %}, {{ site.name_suffix }}{% endif -%}

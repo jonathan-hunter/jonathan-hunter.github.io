@@ -221,10 +221,6 @@ blockquote:not(.block-tip):not(.block-warning):not(.block-danger) {
     white-space: nowrap;
     padding: 0;
     margin: 0;
-
-    .font-weight-bold {
-      font-weight: 500; // the design sets the whole wordmark in one weight
-    }
   }
 
   .navbar-nav {
