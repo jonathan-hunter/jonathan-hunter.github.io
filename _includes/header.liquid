@@ -2,23 +2,39 @@
   <!-- Nav Bar -->
   <nav id="navbar" class="navbar navbar-light navbar-expand-sm {% if site.navbar_fixed %}fixed-top{% else %}sticky-top{% endif %}" role="navigation">
     <div class="container">
+      {%- comment -%}
+        The name, for the wordmark and for the mark's accessible label.
+      {%- endcomment -%}
+      {%- capture brand_name -%}
+        {%- if site.title == 'blank' -%}
+          {%- if site.first_name %}{{ site.first_name }}{% endif -%}
+          {%- if site.middle_name %} {{ site.middle_name }}{% endif -%}
+          {%- if site.last_name %} {{ site.last_name }}{% endif -%}
+          {%- if site.name_suffix %}, {{ site.name_suffix }}{% endif -%}
+        {%- else -%}
+          {{- site.title -}}
+        {%- endif -%}
+      {%- endcapture -%}
+
       <!--
-        Wordmark. The about page states the name in its own hero, so it is
-        left out of the bar there rather than said twice.
+        The site mark, and beside it the wordmark in one uniform weight. The
+        about page states the name in its own hero, so the mark stands alone
+        there rather than saying it twice.
       -->
-      {% if page.permalink != '/' %}
-        <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl }}/">
-          {% if site.title == 'blank' %}
-            {%- comment -%}The wordmark is one uniform weight: no part is emphasised.{%- endcomment -%}
-            {%- if site.first_name %}{{ site.first_name }}{% endif -%}
-            {%- if site.middle_name %} {{ site.middle_name }}{% endif -%}
-            {%- if site.last_name %} {{ site.last_name }}{% endif -%}
-            {%- if site.name_suffix %}, {{ site.name_suffix }}{% endif -%}
-          {% else %}
-            {{- site.title -}}
-          {% endif %}
-        </a>
-      {% endif %}
+      <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl }}/">
+        <img
+          class="navbar-mark"
+          src="{{ '/assets/img/favicon-192.png' | relative_url | bust_file_cache }}"
+          alt=""
+          width="26"
+          height="26"
+        >
+        {%- if page.permalink == '/' -%}
+          <span class="sr-only">{{ brand_name | strip }}</span>
+        {%- else -%}
+          <span>{{ brand_name | strip }}</span>
+        {%- endif -%}
+      </a>
       {% if page.permalink == '/' and site.enable_navbar_social %}
         <!-- Social Icons -->
         <div class="navbar-brand social">{% social_links %}</div>

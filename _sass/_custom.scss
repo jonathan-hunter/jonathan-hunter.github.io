@@ -213,6 +213,9 @@ blockquote:not(.block-tip):not(.block-warning):not(.block-danger) {
 
 .navbar.navbar-light {
   .navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
     font-family: var(--serif);
     font-size: 19px;
     font-weight: 500;
@@ -221,6 +224,15 @@ blockquote:not(.block-tip):not(.block-warning):not(.block-danger) {
     white-space: nowrap;
     padding: 0;
     margin: 0;
+  }
+
+  // The site mark. Its rounded corners are baked into the PNG, and the 192px
+  // source keeps it crisp on hi-dpi at this size.
+  .navbar-mark {
+    display: block;
+    width: 26px;
+    height: 26px;
+    flex: none;
   }
 
   .navbar-nav {
