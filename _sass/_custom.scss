@@ -599,7 +599,17 @@ html[data-theme="dark"] .social-link {
     font-size: 13px;
   }
 
-  .links,
+  // Of al-folio's action row the home column keeps only the DOI button — the
+  // rest (Abs, Bib, PDF, ...) stay on the publications page. The DOI anchor
+  // carries no class of its own upstream, so it is matched by its href.
+  .links {
+    margin-top: 10px;
+
+    a:not([href^="https://doi.org/"]) {
+      display: none;
+    }
+  }
+
   .badges {
     display: none;
   }
@@ -622,8 +632,12 @@ html[data-theme="dark"] .social-link {
     gap: 0;
   }
 
+  // No fixed box here: the lead figure is a wide multi-panel diagram and a
+  // cover-crop would cut its outer panels off. Keeping the natural ratio
+  // scales it down vertically instead, so the full width stays visible.
   .preview {
-    aspect-ratio: 16 / 7;
+    aspect-ratio: auto;
+    object-fit: contain;
     margin-bottom: 18px;
   }
 
