@@ -787,10 +787,10 @@
       ctx.save();
       const uiSans = getComputedStyle(document.documentElement).getPropertyValue("--sans").trim() || "system-ui, sans-serif";
       // The accented keyword is set bold, matching the filled chip it becomes
-      // once the banner is too narrow to annotate itself. 600 is the heaviest
-      // weight loaded for the sans (see google_fonts in _config.yml).
+      // once the banner is too narrow to annotate itself. 700 is loaded for the
+      // sans purely for this (see google_fonts in _config.yml).
       const baseFont = "500 11.5px " + uiSans;
-      const accentFont = "600 11.5px " + uiSans;
+      const accentFont = "700 11.5px " + uiSans;
       ctx.font = baseFont;
       if ("letterSpacing" in ctx) ctx.letterSpacing = "0.11em";
       ctx.textAlign = "center";
@@ -823,7 +823,9 @@
         // Proximity of the pointer to this peak, 0..1.
         const dist = Math.abs(this.mouse.x - label.mz * mzScale);
         const near = Math.exp(-dist * dist * 90);
-        const alpha = 0.42 + near * 0.58;
+        // The others sit back at 0.42 until pointed at; the accented keyword
+        // stays near full strength so it reads as the foreground one.
+        const alpha = label.accent ? 0.88 + near * 0.12 : 0.42 + near * 0.58;
 
         const labelY = Math.max(this.variant.topMargin + 11, spanTop - 26);
         // The call-out stops at the top of whatever sits under the label — never
