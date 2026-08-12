@@ -621,6 +621,13 @@ html[data-theme="dark"] .social-link {
 .jeh-home-cols .publications ol.bibliography > li:first-child {
   padding: 20px 0 26px;
 
+  // Restates the hover nudge from the base entry rule: same specificity,
+  // and this block's padding shorthand comes later, so it would otherwise
+  // reset padding-left and the hero alone would sit still on hover.
+  &:hover {
+    padding-left: 14px;
+  }
+
   > .row {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
