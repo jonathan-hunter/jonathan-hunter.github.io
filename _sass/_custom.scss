@@ -1263,8 +1263,12 @@ html[data-theme="dark"] .logo-cell:hover {
 }
 
 /*******************************************************************************
- * Repositories — stats in a padded panel, pin cards in an auto-fit grid
+ * Repositories — every artifact (stats card, trophy, pin cards) shares one
+ * width and is centred so the page reads as a single aligned column.
  ******************************************************************************/
+
+// Shared width for all repositories-page artifacts.
+$repo-artifact-width: 480px;
 
 .github-summary-stats {
   display: block;
@@ -1272,9 +1276,23 @@ html[data-theme="dark"] .logo-cell:hover {
   border-radius: 6px;
   background: var(--global-card-bg-color);
   padding: 18px 22px;
-  max-width: 100%;
+  width: 100%;
+  max-width: $repo-artifact-width;
   // Centre the stats card in the content column.
   margin-inline: auto;
+}
+
+// Trophy card: same width as the other artifacts (overrides the .repo 50%
+// cap used by the multi-column repo grid) and centred.
+.repositories .repo {
+  width: 100%;
+  max-width: $repo-artifact-width;
+  margin-inline: auto;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
 }
 
 // Repo pin cards stack vertically (card 2 under card 1) and centre.
@@ -1288,7 +1306,7 @@ html[data-theme="dark"] .logo-cell:hover {
   a {
     flex: none;
     width: 100%;
-    max-width: 460px;
+    max-width: $repo-artifact-width;
     display: block;
   }
 
