@@ -1281,10 +1281,12 @@ html[data-theme="dark"] .logo-cell:hover {
     border-radius: 6px;
     // The pin SVGs ship with a transparent background and no border, so the
     // card frame and per-theme surface come from here — matching the stats
-    // panel above (light: white, dark: #212529).
+    // panel above (light: white, dark: #212529). The roomy padding lets the
+    // light border read as a framed card like .github-summary-stats rather
+    // than a tight outline hugging the artwork.
     border: 1px solid var(--global-divider-color);
     background: var(--global-card-bg-color);
-    padding: 4px 6px;
+    padding: 14px 18px;
     transition:
       transform 0.2s ease,
       border-color 0.18s ease,
