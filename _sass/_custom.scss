@@ -1252,7 +1252,7 @@ html[data-theme="dark"] .logo-cell:hover {
 }
 
 /*******************************************************************************
- * Repositories — stats in a padded panel, OG previews in an auto-fit grid
+ * Repositories — stats in a padded panel, pin cards in an auto-fit grid
  ******************************************************************************/
 
 .github-summary-stats {
@@ -1263,7 +1263,7 @@ html[data-theme="dark"] .logo-cell:hover {
   max-width: 100%;
 }
 
-.repo-og-cards {
+.repo-pin-cards {
   display: grid !important;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 18px;
@@ -1279,7 +1279,12 @@ html[data-theme="dark"] .logo-cell:hover {
     width: 100%;
     height: auto;
     border-radius: 6px;
+    // The pin SVGs ship with a transparent background and no border, so the
+    // card frame and per-theme surface come from here — matching the stats
+    // panel above (light: white, dark: #212529).
     border: 1px solid var(--global-divider-color);
+    background: var(--global-card-bg-color);
+    padding: 4px 6px;
     transition:
       transform 0.2s ease,
       border-color 0.18s ease,
@@ -1291,15 +1296,6 @@ html[data-theme="dark"] .logo-cell:hover {
     border-color: var(--global-theme-color);
     box-shadow: var(--jeh-shadow);
   }
-}
-
-// Tone the OG cards' bright-white background down in dark mode so they sit
-// less jarringly on the dark page. Avoids inverting logo colours.
-// (The stats card is excluded — it ships a dedicated dark-themed variant
-// with a transparent background, so no filtering is needed.)
-html[data-theme="dark"] .repo-og-cards img {
-  filter: brightness(0.85) contrast(1.05);
-  opacity: 0.92;
 }
 
 /*******************************************************************************

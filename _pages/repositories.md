@@ -45,11 +45,13 @@ nav_order: 4
 </div>
 {% endif %}
 
-<div class="repo-og-cards d-flex flex-wrap justify-content-start align-items-center">
+<div class="repo-pin-cards d-flex flex-wrap justify-content-start align-items-center">
   <a href="https://github.com/jonathan-hunter/Metabolomics-Pipeline" target="_blank" rel="noopener noreferrer">
-    <img src="https://opengraph.githubassets.com/1/jonathan-hunter/Metabolomics-Pipeline" alt="jonathan-hunter/Metabolomics-Pipeline">
+    <img class="only-light" src="https://raw.githubusercontent.com/jonathan-hunter/jonathan-hunter/main/profile/pin-metabolomics-pipeline-light.svg" alt="jonathan-hunter/Metabolomics-Pipeline">
+    <img class="only-dark" src="https://raw.githubusercontent.com/jonathan-hunter/jonathan-hunter/main/profile/pin-metabolomics-pipeline-dark.svg" alt="jonathan-hunter/Metabolomics-Pipeline">
   </a>
   <a href="https://github.com/HUPO-PSI/psi-ms-CV" target="_blank" rel="noopener noreferrer">
-    <img src="https://opengraph.githubassets.com/1/HUPO-PSI/psi-ms-CV" alt="HUPO-PSI/psi-ms-CV">
+    <img class="only-light" src="https://raw.githubusercontent.com/jonathan-hunter/jonathan-hunter/main/profile/pin-psi-ms-cv-light.svg" alt="HUPO-PSI/psi-ms-CV">
+    <img class="only-dark" src="https://raw.githubusercontent.com/jonathan-hunter/jonathan-hunter/main/profile/pin-psi-ms-cv-dark.svg" alt="HUPO-PSI/psi-ms-CV">
   </a>
 </div>
