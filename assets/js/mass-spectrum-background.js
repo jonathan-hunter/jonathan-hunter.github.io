@@ -149,9 +149,11 @@
       opaque: true,
       labelBand: 26,
       // On first paint the whole trace grows up from the baseline over 2s,
-      // then behaves normally (oscillation + pointer response).
+      // then behaves normally (oscillation + pointer response). The peak
+      // labels stay hidden until the trace is at full height, then fade in.
       introScaleIn: true,
       introDuration: 2000,
+      labelFadeDuration: 600,
     },
     // Hero as a background layer behind the masthead: no annotations (the DOM
     // chips carry those words), transparent so the page background shows through.
@@ -262,6 +264,8 @@
       this.reduceMotion = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
       this.introStart = null;
       this.introScale = 1;
+      // Labels stay hidden while the peaks scale up, then fade in (0..1).
+      this.labelIntro = 1;
 
       // Pre-allocate typed arrays to avoid GC pressure
       const numSamples = CONFIG.NUM_SAMPLES + 1;
@@ -590,12 +594,20 @@
       // first paint (hero only), eased out, then hold at full height. Suppressed
       // under reduced motion. introStart is stamped once and survives resizes.
       let introScale = 1;
+      let labelIntro = 1;
       if (this.variant.introScaleIn && !this.reduceMotion) {
         if (this.introStart === null) this.introStart = time;
-        const t = Math.min((time - this.introStart) / (this.variant.introDuration || 2000), 1);
+        const elapsed = time - this.introStart;
+        const introDuration = this.variant.introDuration || 2000;
+        const t = Math.min(elapsed / introDuration, 1);
         introScale = 1 - Math.pow(1 - t, 3); // easeOutCubic — decelerates into full height
+        // Labels hold hidden until the peaks reach full height, then fade in.
+        const fadeDuration = this.variant.labelFadeDuration || 600;
+        const lt = Math.min(Math.max((elapsed - introDuration) / fadeDuration, 0), 1);
+        labelIntro = lt * lt * (3 - 2 * lt); // smoothstep
       }
       this.introScale = introScale;
+      this.labelIntro = labelIntro;
 
       if (this.variant.mode === "stems") {
         this.renderStems();
@@ -814,6 +826,8 @@
     renderLabels() {
       if (!this.variant.showLabels || this.labelsSuppressed) return;
       if (!this.labels || !this.labels.length) return;
+      // Held hidden during the peak scale-up; nothing to draw yet.
+      if (this.labelIntro <= 0) return;
 
       const ctx = this.ctx;
       const mzScale = 1 / CONFIG.MZ_RANGE;
@@ -868,7 +882,7 @@
         const tickTop = Math.max(labelY + 6, tickBottom - 20);
 
         if (tickBottom - tickTop >= 5) {
-          ctx.globalAlpha = alpha * 0.5;
+          ctx.globalAlpha = alpha * 0.5 * this.labelIntro;
           ctx.strokeStyle = this.labelColor || this.strokeColor;
           ctx.lineWidth = 1;
           ctx.beginPath();
@@ -877,7 +891,7 @@
           ctx.stroke();
         }
 
-        ctx.globalAlpha = alpha;
+        ctx.globalAlpha = alpha * this.labelIntro;
         ctx.fillStyle = this.labelColor || this.strokeColor;
         ctx.fillText(label.text, x, labelY);
       }
