@@ -15,7 +15,8 @@ nav_order: 4
   {% endfor %}
 </div> -->
 
-<img class="github-summary-stats" src="https://raw.githubusercontent.com/jonathan-hunter/jonathan-hunter/main/profile/stats.svg" alt="GitHub Stats" />
+<img class="github-summary-stats only-light" src="https://raw.githubusercontent.com/jonathan-hunter/jonathan-hunter/main/profile/stats-light.svg" alt="GitHub Stats" />
+<img class="github-summary-stats only-dark" src="https://raw.githubusercontent.com/jonathan-hunter/jonathan-hunter/main/profile/stats-dark.svg" alt="GitHub Stats" />
 
 ---
 

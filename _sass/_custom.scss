@@ -1295,8 +1295,9 @@ html[data-theme="dark"] .logo-cell:hover {
 
 // Tone the OG cards' bright-white background down in dark mode so they sit
 // less jarringly on the dark page. Avoids inverting logo colours.
-html[data-theme="dark"] .repo-og-cards img,
-html[data-theme="dark"] .github-summary-stats {
+// (The stats card is excluded — it ships a dedicated dark-themed variant
+// with a transparent background, so no filtering is needed.)
+html[data-theme="dark"] .repo-og-cards img {
   filter: brightness(0.85) contrast(1.05);
   opacity: 0.92;
 }
