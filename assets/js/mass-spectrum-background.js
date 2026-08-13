@@ -148,6 +148,10 @@
       mode: "trace",
       opaque: true,
       labelBand: 26,
+      // On first paint the whole trace grows up from the baseline over 2s,
+      // then behaves normally (oscillation + pointer response).
+      introScaleIn: true,
+      introDuration: 2000,
     },
     // Hero as a background layer behind the masthead: no annotations (the DOM
     // chips carry those words), transparent so the page background shows through.
@@ -250,6 +254,14 @@
       this.mouse = { x: 0.5, y: 0.5 };
       this.isVisible = true;
       this.animationId = null;
+
+      // Load-in animation: 0..1 factor the peak heights are multiplied by, so
+      // the trace scales up vertically from the baseline. Timestamp is stamped
+      // on the first render and never reset (a resize mid-intro must not
+      // restart it). Known here so the very first paint already respects it.
+      this.reduceMotion = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+      this.introStart = null;
+      this.introScale = 1;
 
       // Pre-allocate typed arrays to avoid GC pressure
       const numSamples = CONFIG.NUM_SAMPLES + 1;
@@ -396,6 +408,12 @@
       this.shadowColor = readVar("--spectrum-shadow", CONFIG.SHADOW_COLOR);
       this.axisColor = readVar("--spectrum-axis", "rgba(128,128,128,0.5)");
       this.labelColor = readVar("--spectrum-label", CONFIG.STROKE_COLOR);
+      // Divider-only colours (stems + baseline), so the section rule can be
+      // boosted in light mode without touching the hero.
+      this.dividerStroke = readVar("--spectrum-divider-stroke", this.strokeColor);
+      this.dividerAxis = readVar("--spectrum-divider-axis", this.axisColor);
+      const dividerAlpha = parseFloat(readVar("--spectrum-divider-alpha", ""));
+      this.dividerAlpha = Number.isFinite(dividerAlpha) ? dividerAlpha : null;
 
       // Spectrum data zone: 1.5× the site's max content width, centred in the
       // full-window canvas. Outside this zone only the baseline line is drawn,
@@ -545,15 +563,19 @@
       // Draw the baseline across the full canvas width — outside the spectrum
       // data zone this is the only thing drawn, so the baseline appears to
       // continue to the window edges at a constant Y.
+      // Dividers use their own (light-boosted) baseline colour; the hero keeps
+      // the faint axis it was tuned with.
+      const isDivider = this.variant.mode === "stems" || this.variant.mode === "ticks";
+      const axisColor = (isDivider ? this.dividerAxis : this.axisColor) || "rgba(128,128,128,0.5)";
       if (this.variant.edgeFade) {
         const axisGrad = ctx.createLinearGradient(0, 0, width, 0);
         axisGrad.addColorStop(0, "transparent");
-        axisGrad.addColorStop(0.14, this.axisColor || "rgba(128,128,128,0.5)");
-        axisGrad.addColorStop(0.86, this.axisColor || "rgba(128,128,128,0.5)");
+        axisGrad.addColorStop(0.14, axisColor);
+        axisGrad.addColorStop(0.86, axisColor);
         axisGrad.addColorStop(1, "transparent");
         ctx.strokeStyle = axisGrad;
       } else {
-        ctx.strokeStyle = this.axisColor || "rgba(128, 128, 128, 0.5)";
+        ctx.strokeStyle = axisColor;
       }
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -563,6 +585,17 @@
 
       // Update peak intensities with oscillation
       this.updatePeakIntensities(time);
+
+      // Load-in: scale peak heights up from the baseline over introDuration on
+      // first paint (hero only), eased out, then hold at full height. Suppressed
+      // under reduced motion. introStart is stamped once and survives resizes.
+      let introScale = 1;
+      if (this.variant.introScaleIn && !this.reduceMotion) {
+        if (this.introStart === null) this.introStart = time;
+        const t = Math.min((time - this.introStart) / (this.variant.introDuration || 2000), 1);
+        introScale = 1 - Math.pow(1 - t, 3); // easeOutCubic — decelerates into full height
+      }
+      this.introScale = introScale;
 
       if (this.variant.mode === "stems") {
         this.renderStems();
@@ -611,7 +644,7 @@
         const raw = this.spectrumIntensity[i] * this.variant.intensityScale * plotHeight;
         const knee = this.peakKnee;
         const h = raw <= knee ? raw : knee + this.peakHeadroom * (1 - Math.exp(-(raw - knee) / this.peakHeadroom));
-        this.spectrumY[i] = baselineY - h;
+        this.spectrumY[i] = baselineY - h * this.introScale;
       }
 
       // Draw filled area (hero only). We start and end on the baseline at the canvas
@@ -687,16 +720,17 @@
       const scale = this.variant.intensityScale * plotHeight;
 
       ctx.save();
-      ctx.globalAlpha = this.variant.stemAlpha || 0.6;
+      ctx.globalAlpha = this.dividerAlpha != null ? this.dividerAlpha : this.variant.stemAlpha || 0.6;
+      const stemColor = this.dividerStroke || this.strokeColor;
       if (this.variant.edgeFade) {
         const grad = ctx.createLinearGradient(this.spectrumZoneStart, 0, this.spectrumZoneStart + this.spectrumZoneWidth, 0);
         grad.addColorStop(0, "transparent");
-        grad.addColorStop(0.22, this.strokeColor);
-        grad.addColorStop(0.78, this.strokeColor);
+        grad.addColorStop(0.22, stemColor);
+        grad.addColorStop(0.78, stemColor);
         grad.addColorStop(1, "transparent");
         ctx.strokeStyle = grad;
       } else {
-        ctx.strokeStyle = this.strokeColor;
+        ctx.strokeStyle = stemColor;
       }
       ctx.lineWidth = this.variant.lineWidth;
       ctx.lineCap = "butt";
@@ -728,7 +762,7 @@
       const mzScale = 1 / CONFIG.MZ_RANGE;
 
       ctx.save();
-      ctx.strokeStyle = this.strokeColor;
+      ctx.strokeStyle = this.dividerStroke || this.strokeColor;
       ctx.lineWidth = this.variant.lineWidth;
       ctx.lineCap = "butt";
 
@@ -884,6 +918,10 @@
         this.shadowColor = readVar("--spectrum-shadow", CONFIG.SHADOW_COLOR);
         this.axisColor = readVar("--spectrum-axis", "rgba(128,128,128,0.5)");
         this.labelColor = readVar("--spectrum-label", CONFIG.STROKE_COLOR);
+        this.dividerStroke = readVar("--spectrum-divider-stroke", this.strokeColor);
+        this.dividerAxis = readVar("--spectrum-divider-axis", this.axisColor);
+        const da = parseFloat(readVar("--spectrum-divider-alpha", ""));
+        this.dividerAlpha = Number.isFinite(da) ? da : null;
       });
       this.themeObserver.observe(document.documentElement, {
         attributes: true,

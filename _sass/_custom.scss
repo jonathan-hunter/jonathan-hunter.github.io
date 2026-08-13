@@ -50,6 +50,12 @@
   --spectrum-shadow: rgba(14, 108, 116, 0.2);
   --spectrum-axis: rgba(21, 24, 27, 0.18);
   --spectrum-label: #0e6c74;
+  // Section-divider spectrum, tuned separately from the hero so it reads
+  // clearly in light mode without darkening the banner. A near-opaque stem
+  // and a firmer baseline give the rule the contrast the faint hero axis lacks.
+  --spectrum-divider-stroke: #0e6c74;
+  --spectrum-divider-axis: rgba(21, 24, 27, 0.34);
+  --spectrum-divider-alpha: 0.95;
 }
 
 html[data-theme="dark"] {
@@ -77,6 +83,11 @@ html[data-theme="dark"] {
   --spectrum-shadow: rgba(95, 210, 210, 0.22);
   --spectrum-axis: rgba(233, 234, 230, 0.16);
   --spectrum-label: #8fe3e3;
+  // Dark mode already has ample contrast, so the divider keeps the hero's
+  // values (cyan stem at 0.6, current axis).
+  --spectrum-divider-stroke: #5fd2d2;
+  --spectrum-divider-axis: rgba(233, 234, 230, 0.16);
+  --spectrum-divider-alpha: 0.6;
 }
 
 /*******************************************************************************
@@ -1256,22 +1267,28 @@ html[data-theme="dark"] .logo-cell:hover {
  ******************************************************************************/
 
 .github-summary-stats {
+  display: block;
   border: 1px solid var(--global-divider-color);
   border-radius: 6px;
   background: var(--global-card-bg-color);
   padding: 18px 22px;
   max-width: 100%;
+  // Centre the stats card in the content column.
+  margin-inline: auto;
 }
 
+// Repo pin cards stack vertically (card 2 under card 1) and centre.
 .repo-pin-cards {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 18px;
-  margin-top: 1.5rem;
+  margin: 1.5rem auto 0;
 
   a {
     flex: none;
-    max-width: 100%;
+    width: 100%;
+    max-width: 460px;
     display: block;
   }
 

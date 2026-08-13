@@ -26,7 +26,7 @@ nav_order: 4
 
   <h4>{{ user }}</h4>
   {% endif %}
-  <div class="repositories d-flex flex-wrap flex-md-row flex-column justify-content-between align-items-center">
+  <div class="repositories d-flex flex-wrap flex-md-row flex-column justify-content-center align-items-center">
   {% include repository/repo_trophies.liquid username=user %}
   </div>
 
@@ -45,7 +45,7 @@ nav_order: 4
 </div>
 {% endif %}
 
-<div class="repo-pin-cards d-flex flex-wrap justify-content-start align-items-center">
+<div class="repo-pin-cards d-flex flex-column align-items-center">
   <a href="https://github.com/jonathan-hunter/Metabolomics-Pipeline" target="_blank" rel="noopener noreferrer">
     <img class="only-light" src="https://raw.githubusercontent.com/jonathan-hunter/jonathan-hunter/main/profile/pin-metabolomics-pipeline-light.svg" alt="jonathan-hunter/Metabolomics-Pipeline">
     <img class="only-dark" src="https://raw.githubusercontent.com/jonathan-hunter/jonathan-hunter/main/profile/pin-metabolomics-pipeline-dark.svg" alt="jonathan-hunter/Metabolomics-Pipeline">
