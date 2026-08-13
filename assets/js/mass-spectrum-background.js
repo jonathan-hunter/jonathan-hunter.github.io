@@ -534,6 +534,14 @@
         return;
       }
 
+      // Anchor the load-in to the first real animation frame rather than the
+      // earlier synchronous paint, so the grow-in is actually seen even when
+      // layout, web fonts or other scripts delayed the first frame past the
+      // intro's duration.
+      if (this.variant.introScaleIn && this.introStart === null && !this.reduceMotion) {
+        this.introStart = currentTime;
+      }
+
       this.render(currentTime);
       this.animationId = requestAnimationFrame((t) => this.animate(t));
     }
@@ -596,15 +604,22 @@
       let introScale = 1;
       let labelIntro = 1;
       if (this.variant.introScaleIn && !this.reduceMotion) {
-        if (this.introStart === null) this.introStart = time;
-        const elapsed = time - this.introStart;
-        const introDuration = this.variant.introDuration || 2000;
-        const t = Math.min(elapsed / introDuration, 1);
-        introScale = 1 - Math.pow(1 - t, 3); // easeOutCubic — decelerates into full height
-        // Labels hold hidden until the peaks reach full height, then fade in.
-        const fadeDuration = this.variant.labelFadeDuration || 600;
-        const lt = Math.min(Math.max((elapsed - introDuration) / fadeDuration, 0), 1);
-        labelIntro = lt * lt * (3 - 2 * lt); // smoothstep
+        if (this.introStart === null) {
+          // First synchronous paint, before the rAF loop has stamped the start:
+          // hold flat at the baseline with no labels so the grow-in has somewhere
+          // to grow from.
+          introScale = 0;
+          labelIntro = 0;
+        } else {
+          const elapsed = time - this.introStart;
+          const introDuration = this.variant.introDuration || 2000;
+          const t = Math.min(elapsed / introDuration, 1);
+          introScale = 1 - Math.pow(1 - t, 3); // easeOutCubic — decelerates into full height
+          // Labels hold hidden until the peaks reach full height, then fade in.
+          const fadeDuration = this.variant.labelFadeDuration || 600;
+          const lt = Math.min(Math.max((elapsed - introDuration) / fadeDuration, 0), 1);
+          labelIntro = lt * lt * (3 - 2 * lt); // smoothstep
+        }
       }
       this.introScale = introScale;
       this.labelIntro = labelIntro;
