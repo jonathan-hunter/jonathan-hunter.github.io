@@ -20,7 +20,7 @@ During the ELIXIR meeting, I presented an update on my work with the Proteomics 
 
 Then, during the AIBIO-UK x MetaboLights meeting, I presented a brief overview of our thinking regarding AI integrations for the MetaboLights repository, to seed discussion in the following open session (slides below).
 
-<swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
+<swiper-container style="margin-bottom: 1.5rem" keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true">
   <swiper-slide><img src="{{ '/assets/img/2026-10-hinxton/slide-1.webp' | relative_url }}" alt="Title slide: MetaboLights × AI. How might AI shape open data in metabolomics? A starting point. AIBIO-MetaboLights Workshop, 2026-10-23." class="img-fluid rounded z-depth-1" loading="eager" width="1600" height="900"></swiper-slide>
   <swiper-slide><img src="{{ '/assets/img/2026-10-hinxton/slide-2.webp' | relative_url }}" alt="The tension we live with: 19 support requests per week and 1.5 to 3.0 person-days per week answering them. Rich, AI-ready metadata pulls against quick, low-effort submission, with submitters, reusers and curators each affected." class="img-fluid rounded z-depth-1" loading="lazy" width="1600" height="900"></swiper-slide>
   <swiper-slide><img src="{{ '/assets/img/2026-10-hinxton/slide-3.webp' | relative_url }}" alt="Three relationships between MetaboLights and AI: AI for dataset submission and operations; the repository as a substrate for AI reuse; the repository as training and evaluation data." class="img-fluid rounded z-depth-1" loading="lazy" width="1600" height="900"></swiper-slide>
