@@ -1,100 +1,140 @@
-# Merge Notes — keep upstream al-folio merges painless
+# Merge Notes — what differs from upstream al-folio
 
-This site started from a clean upstream `alshedivat/al-folio` checkout and was
-overlaid with personal content from the prior `jonathan-hunter.github.io` fork.
-The customizations below are deliberately structured so that future merges from
-upstream rarely touch theme machinery.
-
-## Files that are **user-owned** (safe to keep, never overwritten by upstream)
-
-| Path                                                                                                                | Notes                                                                                     |
-| ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `_pages/about.md` `_pages/cv.md` `_pages/news.md` `_pages/publications.md` `_pages/repositories.md` `_pages/404.md` | Personal page content. The mass-spectrum banner HTML + `<script>` tag live in `about.md`. |
-| `_news/announcement_*.md`                                                                                           | Personal announcements.                                                                   |
-| `_bibliography/papers.bib`                                                                                          | Personal BibTeX.                                                                          |
-| `_data/socials.yml` `_data/coauthors.yml` `_data/repositories.yml` `_data/venues.yml` `_data/cv_header.yml`         | Personal data.                                                                            |
-| `assets/img/`, `assets/pdf/`, `assets/json/`                                                                        | Personal images, PDFs (CV, thesis), JSON-resume.                                          |
-| `_sass/_custom.scss`                                                                                                | All custom global CSS overrides.                                                          |
-| `_sass/_mass-spectrum-styles.scss`                                                                                  | Styles for the about-page spectrum banner.                                                |
-| `assets/js/mass-spectrum-background.js`                                                                             | Spectrum animation.                                                                       |
-
-## Files that **must stay in sync with upstream** (do not edit directly)
-
-`_layouts/`, `_includes/`, `_plugins/`, `_sass/_*` (other than the two
-user-owned ones above), `assets/css/main.scss` (one user-added block, see
-below), `assets/js/*` (other than `mass-spectrum-background.js`), `Gemfile`,
-`Dockerfile`, `docker-compose*.yml`, `.github/workflows/`, `bin/`,
-`purgecss.config.js`, `package.json`.
-
-If a personal tweak ever feels like it requires editing one of those files,
-first ask whether it can live in `_sass/_custom.scss`, `_pages/*.md`, or a new
-file under `assets/`.
-
-## The one deliberate edit in a theme-owned file
-
-`assets/css/main.scss` ends with:
-
-```scss
-// User-owned overrides (keep last so they win over theme styles).
-@use "custom";
-@use "mass-spectrum-styles";
-```
-
-If upstream rewrites `main.scss`, just re-append those three lines after
-merging.
-
-## `_config.yml` — narrow set of personal overrides
-
-Only these fields differ from upstream defaults:
-
-- `first_name`, `middle_name`, `last_name`
-- `description`, `footer_text` (Unsplash credit removed)
-- `url`, `baseurl`
-- `scholar.last_name`, `scholar.first_name`
-- `external_sources:` commented out (was upstream example data)
-
-Everything else (plugins, library versions, feature flags, collections) is left
-as upstream ships it. When pulling upstream, accept their `_config.yml`
-wholesale, then re-apply just the fields above.
-
-## Pulling future upstream updates
-
-Recommended flow (run from this repo, not from the old fork):
+This site is a fork of `alshedivat/al-folio`, last synced at upstream commit
+`afee5a7` (2026-05-01, the v0.16.x line). Every file list below was checked
+with:
 
 ```bash
-git remote add upstream https://github.com/alshedivat/al-folio.git    # one-time
-git fetch upstream
-git checkout -b sync/upstream-$(date +%Y-%m-%d)
-git merge upstream/main
-# Resolve any conflicts — they should be concentrated in _config.yml; reapply
-# the ~6 fields listed above, then accept upstream for everything else.
-bundle exec jekyll build      # sanity check
+git fetch https://github.com/alshedivat/al-folio.git main:refs/remotes/upstream/main
+git diff --stat afee5a7 HEAD
 ```
 
-If the merge touches `assets/css/main.scss`, re-add the `@use "custom"` /
-`@use "mass-spectrum-styles"` lines at the bottom.
+Run the same command after any change to theme files, and update this file
+from what it shows.
 
-## What was intentionally **dropped** from the previous fork
+## Upstream has moved to v1.x — `git merge upstream/main` no longer works
 
-These customizations were folded back into the upstream defaults to remove
-ongoing merge friction:
+Upstream commit `ac7add4` ("Upgrade al-folio to v1.0", 2026-05-25) turned the
+repo into a starter kit. Layouts, includes, Sass, plugins and theme JS now
+ship as gems (`al_folio_core`, `al_folio_cv`, `al_search`, `al_analytics`, …),
+and `_layouts/`, `_includes/`, `_sass/`, `_plugins/` and most of `assets/js/`
+were deleted from the repo (see upstream `docs/BOUNDARIES.md`).
 
-- **Forced dark mode** (`display: none` on the toggle): removed. Light/dark
-  switching is now restored.
-- **Custom `_includes/social.liquid`** that replaced the `jekyll-socials`
-  plugin: removed. We use upstream's `{% social_links %}` plugin tag again.
-- **Custom `_plugins/cache-bust.rb`**: removed. Upstream supplies the
-  `jekyll-cache-bust` gem.
-- **Modified `_layouts/about.liquid`** (one-line social tag swap): reverted.
-- **Modified `_layouts/default.liquid` and `_includes/scripts.liquid`** that
-  embedded the mass-spectrum banner: reverted. The banner now lives in
-  `_pages/about.md` (HTML block + `<script>` tag), so no theme file is edited.
+A plain merge would therefore delete or conflict with every customised theme
+file listed below. A move to v1 is a migration, not a sync:
 
-## Quick verification after a future merge
+1. Start from a fresh v1 checkout, or run upstream's `al_folio_upgrade` audit
+   against this repo.
+2. Re-home each customisation below as a local override of the gem-provided
+   layout or include (Jekyll prefers a site file over a theme-gem file of the
+   same path).
+3. Rewrite `_config.yml` against the v1 config contract. Cloudflare analytics
+   may then come from `al_analytics` rather than the hand-added block in
+   `scripts.liquid`.
+
+Until that happens, treat `afee5a7` as the base. Only cherry-pick individual
+upstream fixes into the existing files.
+
+## User-owned files (no upstream counterpart)
+
+| Path                                                                                                                 | Notes                                                                                                                                   |
+| -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `_pages/about.md` `_pages/blog.md` `_pages/cv.md` `_pages/news.md` `_pages/publications.md` `_pages/repositories.md` | Personal page content. `cv.md` is a hand-written Markdown CV (see the CV section below).                                                |
+| `_posts/2026-*.md`                                                                                                   | Personal posts. Every upstream demo post has been deleted.                                                                              |
+| `_news/announcement_*.md`                                                                                            | Personal announcements.                                                                                                                 |
+| `_bibliography/papers.bib`                                                                                           | Personal BibTeX.                                                                                                                        |
+| `_data/socials.yml` `coauthors.yml` `repositories.yml` `venues.yml` `cv_header.yml`                                  | Personal data. `socials.yml` also holds `scholar_userid`, which `bib.liquid` and the citations updater read.                            |
+| `_data/citations.yml`                                                                                                | Generated by `.github/workflows/update-citations.yml`; do not hand-edit.                                                                |
+| `_includes/jeh_contact_links.liquid`                                                                                 | Contact rail: hero (`about.liquid`) and footer (`compact=true`).                                                                        |
+| `_includes/jeh_feed.liquid`                                                                                          | News and posts merged into one feed sorted by date, for the about page.                                                                 |
+| `_includes/jeh_scholar_stats.liquid`                                                                                 | Citation count / h-index panel computed from `_data/citations.yml`; used by `publications.md`.                                          |
+| `_includes/post_source.liquid`                                                                                       | "Reproduced from" line, driven by `source` / `source_url` front matter.                                                                 |
+| `_sass/_custom.scss`                                                                                                 | All custom global CSS (the `jeh-*` component classes, typography, repo cards, footer).                                                  |
+| `_sass/_mass-spectrum-styles.scss`                                                                                   | Styles for the spectrum hero and dividers.                                                                                              |
+| `assets/js/mass-spectrum-background.js`                                                                              | Draws every `canvas.mass-spectrum-canvas` (`data-variant="hero"` or `"divider-stems-fade"`).                                            |
+| `assets/img/` (favicons, `icons_png/`, `link_images/`, portrait), `assets/pdf/`, `assets/json/`                      | Personal assets.                                                                                                                        |
+| `assets/html/mhub-hupo-psi-2026/`                                                                                    | Self-contained poster page with its own `assets/` folder (see the link-checker change below).                                           |
+| `.devcontainer/`, `.mcp.json`                                                                                        | Dev container and MCP config for agent sessions. `.devcontainer/` is mounted read-only in the container, so it is in `.prettierignore`. |
+
+Naming convention: custom includes and CSS classes use the `jeh` / `jeh-`
+prefix, so `grep -rn jeh _layouts _includes` finds every place a theme file
+is wired to custom code.
+
+## Theme-owned files that are edited
+
+These are the files that need re-applying (or re-homing as v1 overrides) on
+any upstream update. They are listed from most to least invasive.
+
+| File                                        | Change                                                                                                                                                                                                                                                                                                                                     |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `_layouts/about.liquid`                     | **Rewritten.** Adds the spectrum hero canvas and a `jeh-hero` block (front matter `eyebrow` / `lede`, keyword chips, `jeh_contact_links`, portrait), a divider, and two columns (`jeh-home-cols`): selected papers, plus `jeh_feed` in place of upstream's separate news and latest-posts lists. Upstream's social-icons block is removed. |
+| `_layouts/cv.liquid`                        | Restored to the pre-#3462 JSON Resume layout, with the `_includes/resume/*.liquid` partials re-added. **Not used**: no page has `layout: cv` (see the CV section).                                                                                                                                                                         |
+| `_includes/news.liquid`                     | **Rewritten.** A timeline (`jeh-news`) grouped under year headings, sorted by `date`; non-inline items show title and full body.                                                                                                                                                                                                           |
+| `_includes/header.liquid`                   | The brand shows `favicon-192.png` as a site mark plus the name with `site.name_suffix`. On `/` the name is screen-reader only, because the hero already shows it.                                                                                                                                                                          |
+| `_includes/repository/repo_trophies.liquid` | The three responsive trophy-service images are replaced by light/dark SVGs pre-rendered in `jonathan-hunter/jonathan-hunter/profile/`. The URLs are hard-coded, so `site.external_services.github_profile_trophy_url` is ignored.                                                                                                          |
+| `_includes/scripts.liquid`                  | (1) Loads `mass-spectrum-background.js` site-wide. (2) Loads the Altmetric/Dimensions badge scripts only when the page contains a badge placeholder. (3) Adds a Cloudflare Web Analytics beacon (`enable_cloudflare_analytics` / `cloudflare_analytics`), gated by cookie consent.                                                         |
+| `_layouts/page.liquid`                      | Adds `hide_header` front matter and a spectrum-divider canvas under every page header.                                                                                                                                                                                                                                                     |
+| `_includes/head.liquid`                     | Adds 16/32/192 px PNG favicons and an `apple-touch-icon`.                                                                                                                                                                                                                                                                                  |
+| `_includes/footer.liquid`                   | Wraps the footer in `jeh-footer` and adds the compact contact links.                                                                                                                                                                                                                                                                       |
+| `_layouts/bib.liquid`                       | Builds the citation key from `site.data.socials.scholar_userid` instead of `site.scholar_userid`, which is unset (an upstream bug at `afee5a7`). Plus one Prettier indentation change.                                                                                                                                                     |
+| `assets/css/main.scss`                      | Appends `@use "custom";` and `@use "mass-spectrum-styles";` (keep these last).                                                                                                                                                                                                                                                             |
+| `.github/workflows/broken-links-site.yml`   | The lychee `--remap` is restricted to the real `_site/assets/*` subdirectories, so the poster's own relative `assets/` links are not rewritten to the site root.                                                                                                                                                                           |
+| `.gitignore`, `.prettierignore`             | Ignore `.claude/` and `.devcontainer/` respectively.                                                                                                                                                                                                                                                                                       |
+| `package.json`                              | Prettier `^3.9.6`, `@shopify/prettier-plugin-liquid` `^1.11.0`.                                                                                                                                                                                                                                                                            |
+
+Everything else under `_layouts/`, `_includes/`, `_plugins/`, `_sass/`,
+`_scripts/`, `assets/js/`, `Gemfile`, `Dockerfile`, `docker-compose*.yml`,
+`bin/`, `purgecss.config.js` and the other workflows is unchanged from
+`afee5a7`.
+
+## `_config.yml` overrides
+
+- **Identity:** `first_name`, `middle_name`, `last_name`, the new `name_suffix` (read by `header.liquid`), a blanked `contact_note`, `description`, and `footer_text` with the Unsplash credit removed.
+- **Site:** `icon: favicon-32.png`, `url`, and an empty `baseurl`.
+- **Layout:** `footer_fixed: false` and `max_width: 1060px`.
+- **GitHub stats:** `external_services.github_readme_stats_url` points to a pre-rendered `stats.svg` in `jonathan-hunter/jonathan-hunter`.
+- **Analytics:** the new keys `cloudflare_analytics` (beacon token) and `enable_cloudflare_analytics: true`.
+- **Comments and external sources:** `disqus_shortname` is blanked, and the `external_sources` example is commented out.
+- **`exclude:`** adds `MERGE_NOTES.md`, `"2026-05 MHub Poster HUPO-PSI/"` and `.jonathan-hunter.github.io/`. The last two paths are not in the repo; they guard local working copies.
+- **Scholar:** `scholar.last_name` / `first_name`.
+- **Fonts:** `third_party_libraries.google_fonts.url.fonts` is switched to EB Garamond and Libre Franklin.
+
+## Upstream content removed
+
+Demo content is deleted:
+
+- **Posts:** all of `_posts/2015-*` to `2025-*`.
+- **Collections:** `_projects/`, `_teachings/`, `_books/`.
+- **Pages:** `about_einstein.md`, `books.md`, `dropdown.md`, `profiles.md`, `projects.md`, `teaching.md`.
+- **Other:** `.gemini/settings.json`.
+
+On a sync, refuse upstream re-additions of these files.
+
+## CV: what is actually live
+
+- **The live page:** `/cv/` is rendered from `_pages/cv.md`, a hand-written Markdown page using `layout: page` with `hide_header: true`.
+- **Unused CV code:** `_layouts/cv.liquid`, `_includes/resume/*.liquid` and `_includes/cv/*.liquid` are not used by any page.
+- **Placeholder data:** `_data/cv.yml` still holds upstream's Albert Einstein example data. It is read only by the unused layout and by `.github/workflows/render-cv.yml` (RenderCV).
+- **PDF download:** the PDF linked from the page is `assets/pdf/JEH-CV.pdf`.
+
+Either fill `_data/cv.yml` in and switch to the data-driven layout, or revert
+`cv.liquid` and `resume/` to upstream and drop the RenderCV workflow. As it
+stands, the edits add merge friction for no rendered output.
+
+## Previously dropped customisations (still dropped)
+
+- Forced dark mode: removed; light/dark switching works.
+- Custom `_includes/social.liquid`: removed; upstream's `{% social_links %}` is used (the navbar only; the about page uses `jeh_contact_links`).
+- Custom `_plugins/cache-bust.rb`: removed; the `jekyll-cache-bust` gem is used.
+
+## Quick verification after touching theme files
 
 ```bash
-bundle exec jekyll build                              # should complete clean
-grep -c "toggle-container" _site/index.html           # >0 = dark-mode toggle visible
-grep -c "mass-spectrum"  _site/index.html             # >0 = spectrum banner present
-grep -c "prof_pic_color" _site/index.html             # >0 = profile pic wired
+bundle exec jekyll build
+grep -c "toggle-container"        _site/index.html   # >0 = dark-mode toggle present
+grep -c "mass-spectrum-canvas"    _site/index.html   # >0 = hero banner present
+grep -c "jeh-hero"                _site/index.html   # >0 = custom about layout active
+grep -c "prof_pic_color"          _site/index.html   # >0 = portrait wired
+grep -c "jeh-scholar"             _site/publications/index.html
+grep -c "cloudflareinsights"      _site/index.html   # >0 = analytics beacon present
 ```
