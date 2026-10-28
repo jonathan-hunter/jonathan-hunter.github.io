@@ -44,7 +44,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-metabolights-and-aibio-uk-workshop",
+        },{id: "post-metabolomics-data-and-ai-meetings-at-embl-ebi-hinxton",
+        
+          title: "Metabolomics Data and AI Meetings at EMBL-EBI, Hinxton",
+        
+        description: "Reflections on a week of metabolomics data and AI meetings at EMBL-EBI, and the questions I am leaving with.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/metabolomics-data-ai-meetings-embl-ebi/";
+          
+        },
+      },{id: "post-metabolights-and-aibio-uk-workshop",
         
           title: "MetaboLights and AIBIO-UK workshop",
         
