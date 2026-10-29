@@ -50,6 +50,10 @@ Grounded in an MChem, a Ph. D. in phytoplankton lipidomics and a certification i
     <img class="only-light" src="assets/img/link_images/mhub-light.png" alt="MetabolomicsHub">
     <img class="only-dark" src="assets/img/link_images/mhub.png" alt="MetabolomicsHub">
   </a>
+  <a href="https://elixir-europe.org/communities/metabolomics" class="logo-cell" style="--logo-accent: #f47d20">
+    <img class="only-light" src="assets/img/link_images/elixir-light.svg" alt="ELIXIR Metabolomics Community">
+    <img class="only-dark" src="assets/img/link_images/elixir.svg" alt="ELIXIR Metabolomics Community">
+  </a>
   <a href="https://psidev.info" class="logo-cell" style="--logo-accent: #b83056">
     <img src="assets/img/link_images/psi-ms.png" alt="HUPO-PSI">
   </a>
