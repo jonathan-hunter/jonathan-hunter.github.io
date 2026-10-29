@@ -46,7 +46,7 @@ Grounded in an MChem, a Ph. D. in phytoplankton lipidomics and a certification i
     <img class="only-light" src="assets/img/link_images/mtbls-light.png" alt="MetaboLights">
     <img class="only-dark" src="assets/img/link_images/mtbls.png" alt="MetaboLights">
   </a>
-  <a href="https://www.metabolomicshub.org/" class="logo-cell" style="--logo-accent: #15aeb3">
+  <a href="https://www.metabolomicshub.org/" class="logo-cell" style="--logo-accent: #c45898">
     <img class="only-light" src="assets/img/link_images/mhub-light.png" alt="MetabolomicsHub">
     <img class="only-dark" src="assets/img/link_images/mhub.png" alt="MetabolomicsHub">
   </a>
