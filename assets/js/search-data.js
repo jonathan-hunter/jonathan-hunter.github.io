@@ -44,7 +44,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-metabolomics-data-and-ai-meetings-at-embl-ebi-hinxton",
+        },{id: "post-metabolights-in-2027-public-metabolomics-data-at-scale",
+        
+          title: "MetaboLights in 2027: public metabolomics data at scale",
+        
+        description: "Our MetaboLights update paper is out in the Nucleic Acids Research database issue",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/metabolights-in-2027-nar/";
+          
+        },
+      },{id: "post-metabolomics-data-and-ai-meetings-at-embl-ebi-hinxton",
         
           title: "Metabolomics Data and AI Meetings at EMBL-EBI, Hinxton",
         
